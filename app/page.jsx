@@ -5,6 +5,18 @@ import { motion, AnimatePresence } from "framer-motion";
 
 const WHATSAPP_URL = "https://wa.me/526692291474";
 
+// ─── Imágenes ────────────────────────────────────────────────────────────────
+// Cambia el nombre del archivo si es diferente al que subiste
+const IMAGES = {
+  sol1:     "/IMAGES/1.jpg",      // Solución — Ordena tu negocio
+  sol2:     "/IMAGES/2.jpg",      // Solución — Ahorra tiempo
+  sol3:     "/IMAGES/3.jpg",      // Solución — Trabaja más inteligente
+  sol4:     null,                  // Solución — Haz que te encuentren (pendiente)
+  contact:  null,                  // Foto contacto (pendiente)
+  heroBg:   null,                  // Hero fondo decorativo (pendiente)
+  ctaBg:    null,                  // CTA Banner fondo (pendiente)
+};
+
 const fadeUp = {
   initial: { opacity: 0, y: 32 },
   whileInView: { opacity: 1, y: 0 },
@@ -63,10 +75,10 @@ const faqs = [
 ];
 
 const solutions = [
-  { title: "Ordena tu negocio", text: "Creamos herramientas para controlar ingresos y gastos, gestionar clientes y organizar pedidos o servicios en un solo lugar, sin depender de Excel o notas sueltas.", icon: "layers", img: "https://picsum.photos/seed/bizorder/700/450", accent: "#7C3AED", bg: "#F5F0FF" },
-  { title: "Ahorra tiempo", text: "Configuramos automatizaciones simples como recordatorios, respuestas y procesos básicos para reducir trabajo manual y evitar errores en tu operación diaria.", icon: "clock", img: "https://picsum.photos/seed/timesave/700/450", accent: "#059669", bg: "#ECFDF5" },
-  { title: "Trabaja más inteligente", text: "Implementamos herramientas con IA que te ayudan a generar mensajes, textos y documentos, además de darte soporte práctico para resolver tareas más rápido.", icon: "cpu", img: "https://picsum.photos/seed/aitools/700/450", accent: "#2563EB", bg: "#EFF6FF" },
-  { title: "Haz que te encuentren", text: "Desarrollamos páginas web simples y efectivas con contacto directo por WhatsApp, para que tu negocio se vea profesional y sea fácil de contactar.", icon: "globe", img: "https://picsum.photos/seed/webpres/700/450", accent: "#EA580C", bg: "#FFF7ED" },
+  { title: "Ordena tu negocio", text: "Creamos herramientas para controlar ingresos y gastos, gestionar clientes y organizar pedidos o servicios en un solo lugar, sin depender de Excel o notas sueltas.", icon: "layers", img: IMAGES.sol1, accent: "#7C3AED", bg: "#F5F0FF", placeholderColor: "#EDE9FE" },
+  { title: "Ahorra tiempo", text: "Configuramos automatizaciones simples como recordatorios, respuestas y procesos básicos para reducir trabajo manual y evitar errores en tu operación diaria.", icon: "clock", img: IMAGES.sol2, accent: "#059669", bg: "#ECFDF5", placeholderColor: "#D1FAE5" },
+  { title: "Trabaja más inteligente", text: "Implementamos herramientas con IA que te ayudan a generar mensajes, textos y documentos, además de darte soporte práctico para resolver tareas más rápido.", icon: "cpu", img: IMAGES.sol3, accent: "#2563EB", bg: "#EFF6FF", placeholderColor: "#DBEAFE" },
+  { title: "Haz que te encuentren", text: "Desarrollamos páginas web simples y efectivas con contacto directo por WhatsApp, para que tu negocio se vea profesional y sea fácil de contactar.", icon: "globe", img: IMAGES.sol4, accent: "#EA580C", bg: "#FFF7ED", placeholderColor: "#FED7AA" },
 ];
 
 const problems = [
@@ -88,41 +100,50 @@ const WAVE_CSS = `
 .dw5{height:46%;top:-32%;background:rgba(167,139,250,0.13);animation:waveA 12s ease-in-out infinite}
 `;
 
-function Icon({ name, size = 22, className = "" }) {
-  const p = { width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 1.8, strokeLinecap: "round", strokeLinejoin: "round", className, "aria-hidden": "true" };
+// ─── Placeholder elegante cuando no hay imagen ───────────────────────────────
+function ImagePlaceholder({ color, icon, accent }) {
+  return (
+    <div className="flex h-full w-full items-center justify-center" style={{ background: color }}>
+      <div className="grid h-20 w-20 place-items-center rounded-[24px] bg-white/60">
+        <Icon name={icon} size={36} className="opacity-40" style={{ color: accent }} />
+      </div>
+    </div>
+  );
+}
+
+function Icon({ name, size = 22, className = "", style }) {
+  const p = { width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 1.8, strokeLinecap: "round", strokeLinejoin: "round", className, style, "aria-hidden": "true" };
   const icons = {
-    arrow:      <svg {...p}><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>,
-    arrowUp:    <svg {...p}><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>,
-    check:      <svg {...p}><path d="M20 6 9 17l-5-5"/></svg>,
-    globe:      <svg {...p}><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z"/></svg>,
-    refresh:    <svg {...p}><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>,
-    chevron:    <svg {...p}><path d="m6 9 6 6 6-6"/></svg>,
-    x:          <svg {...p}><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>,
-    menu:       <svg {...p}><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg>,
-    layers:     <svg {...p}><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>,
-    users:      <svg {...p}><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>,
-    trending:   <svg {...p}><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>,
-    zap:        <svg {...p}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>,
-    cpu:        <svg {...p}><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>,
-    edit:       <svg {...p}><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>,
-    whatsapp:   <svg {...p} fill="currentColor" stroke="none"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>,
-    clock:      <svg {...p}><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>,
-    mail:       <svg {...p}><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>,
-    phone:      <svg {...p}><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.55 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 17z"/></svg>,
+    arrow:    <svg {...p}><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>,
+    arrowUp:  <svg {...p}><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>,
+    check:    <svg {...p}><path d="M20 6 9 17l-5-5"/></svg>,
+    globe:    <svg {...p}><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10Z"/></svg>,
+    refresh:  <svg {...p}><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>,
+    chevron:  <svg {...p}><path d="m6 9 6 6 6-6"/></svg>,
+    x:        <svg {...p}><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>,
+    menu:     <svg {...p}><path d="M4 6h16"/><path d="M4 12h16"/><path d="M4 18h16"/></svg>,
+    layers:   <svg {...p}><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>,
+    users:    <svg {...p}><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>,
+    trending: <svg {...p}><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg>,
+    zap:      <svg {...p}><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>,
+    cpu:      <svg {...p}><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><line x1="9" y1="1" x2="9" y2="4"/><line x1="15" y1="1" x2="15" y2="4"/><line x1="9" y1="20" x2="9" y2="23"/><line x1="15" y1="20" x2="15" y2="23"/><line x1="20" y1="9" x2="23" y2="9"/><line x1="20" y1="14" x2="23" y2="14"/><line x1="1" y1="9" x2="4" y2="9"/><line x1="1" y1="14" x2="4" y2="14"/></svg>,
+    edit:     <svg {...p}><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>,
+    clock:    <svg {...p}><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>,
+    mail:     <svg {...p}><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>,
+    phone:    <svg {...p}><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.55 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 17z"/></svg>,
+    whatsapp: <svg {...p} fill="currentColor" stroke="none"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>,
   };
   return icons[name] || null;
 }
 
+// ─── Logo con PNG real ────────────────────────────────────────────────────────
 function Logo() {
   return (
     <a href="#home" className="flex items-center gap-3 cursor-pointer" aria-label="DG Solutions">
+      <img src="/IMAGES/LOGO1.png" alt="DG Solutions" className="h-10 w-10 object-contain md:h-12 md:w-12" />
       <div className="leading-none">
         <p className="text-[20px] font-black tracking-[-0.08em] text-[#5F24D6] md:text-[24px]">DG SOLUTIONS</p>
         <p className="mt-[3px] text-[7.5px] font-bold tracking-[0.12em] uppercase text-[#7C3AED]/60 md:text-[8.5px]">Hazlo Simple. Hazlo Inteligente.</p>
-      </div>
-      <div className="relative h-12 w-12 md:h-16 md:w-16 shrink-0">
-        <div className="absolute inset-2 rotate-45 rounded-md border-[8px] border-[#6B21A8] border-l-transparent" />
-        <div className="absolute left-[18px] top-[18px] h-6 w-6 rotate-45 rounded-sm border-[6px] border-[#8B5CF6] border-r-transparent md:left-[22px] md:top-[22px]" />
       </div>
     </a>
   );
@@ -136,7 +157,12 @@ function Header() {
     window.addEventListener("scroll", fn);
     return () => window.removeEventListener("scroll", fn);
   }, []);
-  const links = [{ href: "#home", label: "Home" }, { href: "#soluciones", label: "Soluciones" }, { href: "#pricing", label: "Precios" }, { href: "#contact", label: "Contacto" }];
+  const links = [
+    { href: "#home", label: "Home" },
+    { href: "#soluciones", label: "Soluciones" },
+    { href: "/precios", label: "Precios" },
+    { href: "#contact", label: "Contacto" },
+  ];
   return (
     <header className={`fixed left-0 top-0 z-50 w-full transition-all duration-300 ${scrolled ? "bg-white/97 shadow-[0_1px_20px_rgba(0,0,0,.07)] backdrop-blur-md" : "bg-white/80 backdrop-blur-sm"}`}>
       <div className="mx-auto flex max-w-[1500px] items-center justify-between px-6 py-4 md:px-12 lg:px-20">
@@ -148,7 +174,7 @@ function Header() {
         </nav>
         <div className="hidden md:flex">
           <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 rounded-full bg-[#6B21A8] px-7 py-3.5 text-[14px] font-black text-white transition-all hover:bg-[#5B1A9A] hover:shadow-[0_8px_24px_rgba(107,33,168,.3)] cursor-pointer">
+            className="inline-flex items-center gap-3 rounded-full bg-[#6B21A8] px-7 py-3.5 text-[14px] font-black text-white transition-all hover:bg-[#5B1A9A] hover:scale-[1.03] hover:shadow-[0_8px_24px_rgba(107,33,168,.3)] cursor-pointer">
             <Icon name="whatsapp" size={16} /> WhatsApp
           </a>
         </div>
@@ -183,6 +209,12 @@ function Hero() {
         <div className="dw dw4" /><div className="dw dw5" />
         <div className="dw dw3" /><div className="dw dw2" /><div className="dw dw1" />
       </div>
+      {/* Imagen de fondo decorativa (6) — cuando la tengas, aparece aquí */}
+      {IMAGES.heroBg && (
+        <div className="absolute inset-0 opacity-10">
+          <img src={IMAGES.heroBg} alt="" className="w-full h-full object-cover" />
+        </div>
+      )}
       <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 30% 55%,rgba(255,255,255,.28) 0%,transparent 55%),radial-gradient(ellipse at 80% 20%,rgba(196,181,253,.35) 0%,transparent 45%)" }} />
       <div className="relative z-10 mx-auto max-w-[1500px] px-6 md:px-12 lg:px-20 pt-28 pb-20 text-center">
         <motion.div {...fadeUp}>
@@ -197,10 +229,12 @@ function Hero() {
             Creamos herramientas simples y personalizadas para que tengas claridad, control y más clientes — sin complicaciones técnicas.
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <a href="#contact" className="inline-flex items-center gap-3 rounded-full bg-[#6B21A8] px-9 py-[1.1rem] text-[16px] font-black text-white transition-all hover:bg-[#5B1A9A] hover:shadow-[0_12px_32px_rgba(107,33,168,.4)] cursor-pointer">
+            <a href="#contact"
+              className="inline-flex items-center gap-3 rounded-full bg-[#6B21A8] px-9 py-[1.1rem] text-[16px] font-black text-white transition-all hover:bg-[#5B1A9A] hover:scale-[1.03] hover:shadow-[0_12px_32px_rgba(107,33,168,.4)] cursor-pointer">
               Solicitar Diagnóstico <Icon name="arrow" size={17} />
             </a>
-            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2.5 rounded-full border border-[#6B21A8]/30 bg-white/60 px-8 py-[1.1rem] text-[16px] font-bold text-[#6B21A8] backdrop-blur-sm transition-all hover:bg-white cursor-pointer">
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"
+              className="inline-flex items-center gap-2.5 rounded-full border border-[#6B21A8]/30 bg-white/60 px-8 py-[1.1rem] text-[16px] font-bold text-[#6B21A8] backdrop-blur-sm transition-all hover:bg-white hover:scale-[1.03] cursor-pointer">
               <Icon name="whatsapp" size={17} /> WhatsApp
             </a>
           </div>
@@ -231,9 +265,9 @@ function ProblemSection() {
         <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {problems.map(({ icon, title, desc, color, bg }, i) => (
             <motion.div key={title} {...fadeUp} transition={{ duration: 0.65, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-              className="group rounded-[22px] border border-transparent p-7 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_48px_rgba(107,33,168,.1)]"
+              className="group rounded-[22px] border border-transparent p-7 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_56px_rgba(107,33,168,.14)]"
               style={{ background: bg + "55", borderColor: bg }}>
-              <div className="mb-5 grid h-12 w-12 place-items-center rounded-[14px]" style={{ background: bg, color }}>
+              <div className="mb-5 grid h-12 w-12 place-items-center rounded-[14px] transition-transform duration-300 group-hover:scale-110" style={{ background: bg, color }}>
                 <Icon name={icon} size={22} />
               </div>
               <h3 className="text-[17px] font-black text-[#111318]">{title}</h3>
@@ -252,12 +286,18 @@ function CTABanner() {
       <motion.div {...fadeUp} className="relative mx-auto max-w-[1350px] overflow-hidden rounded-[32px] px-8 py-20 text-center md:px-16"
         style={{ background: "linear-gradient(135deg,#4c1d95 0%,#1e40af 100%)" }}>
         <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 20% 50%,rgba(139,92,246,.6) 0%,transparent 50%),radial-gradient(ellipse at 85% 30%,rgba(59,130,246,.4) 0%,transparent 40%)" }} />
+        {/* Imagen de fondo CTA (7) — cuando la tengas, aparece aquí */}
+        {IMAGES.ctaBg && (
+          <div className="absolute inset-0 opacity-10 mix-blend-luminosity">
+            <img src={IMAGES.ctaBg} alt="" className="w-full h-full object-cover" />
+          </div>
+        )}
         <div className="relative z-10 mx-auto max-w-[720px]">
           <p className="mb-4 text-[12px] font-black uppercase tracking-[0.22em] text-[#c4b5fd]">Sin costo, sin compromiso</p>
           <h2 className="text-[38px] font-black leading-[1.05] tracking-[-0.055em] text-white md:text-[56px]">Primera Consultoría Gratis</h2>
           <p className="mx-auto mt-5 max-w-[580px] text-[18px] leading-[1.65] text-white/75">Revisamos tu caso, detectamos el desorden y te orientamos sobre el siguiente paso más útil para tu negocio.</p>
           <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"
-            className="mt-9 inline-flex items-center gap-3 rounded-full border border-white/30 bg-white/15 px-9 py-[1.1rem] text-[15px] font-black text-white transition-all hover:bg-white hover:text-[#4c1d95] cursor-pointer">
+            className="mt-9 inline-flex items-center gap-3 rounded-full border border-white/30 bg-white/15 px-9 py-[1.1rem] text-[15px] font-black text-white transition-all hover:bg-white hover:text-[#4c1d95] hover:scale-[1.03] cursor-pointer">
             Agendar ahora <Icon name="arrow" size={17} />
           </a>
         </div>
@@ -276,12 +316,16 @@ function SolutionsSection() {
           <p className="mt-5 text-[19px] text-[#6B7280]">Soluciones simples para organizarte, ahorrar tiempo y vender más.</p>
         </motion.div>
         <div className="space-y-24">
-          {solutions.map(({ title, text, icon, img, accent, bg }, i) => (
+          {solutions.map(({ title, text, icon, img, accent, bg, placeholderColor }, i) => (
             <motion.div key={title} {...fadeUp} transition={{ duration: 0.7, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
               className={`grid items-center gap-14 lg:grid-cols-2 ${i % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""}`}>
               <div className="relative overflow-hidden rounded-[28px] shadow-[0_24px_64px_rgba(0,0,0,.1)]" style={{ aspectRatio: "16/10" }}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={img} alt={title} className="w-full h-full object-cover" loading="lazy" />
+                {img ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img src={img} alt={title} className="w-full h-full object-cover" loading="lazy" />
+                ) : (
+                  <ImagePlaceholder color={placeholderColor} icon={icon} accent={accent} />
+                )}
                 <div className="absolute inset-0 rounded-[28px]" style={{ background: `linear-gradient(135deg,${accent}25 0%,transparent 55%)` }} />
               </div>
               <div>
@@ -290,7 +334,9 @@ function SolutionsSection() {
                 </div>
                 <h3 className="text-[32px] font-black tracking-[-0.04em] text-[#111318] md:text-[40px]">{title}</h3>
                 <p className="mt-4 text-[18px] leading-[1.75] text-[#6B7280]">{text}</p>
-                <a href="#contact" className="mt-8 inline-flex items-center gap-3 rounded-full px-7 py-3.5 text-[14px] font-black text-white transition-all hover:opacity-90 cursor-pointer" style={{ background: accent }}>
+                <a href="#contact"
+                  className="mt-8 inline-flex items-center gap-3 rounded-full px-7 py-3.5 text-[14px] font-black text-white transition-all hover:opacity-90 hover:scale-[1.03] cursor-pointer"
+                  style={{ background: accent }}>
                   Saber más <Icon name="arrow" size={15} />
                 </a>
               </div>
@@ -305,8 +351,8 @@ function SolutionsSection() {
 function PricingCard({ plan, index }) {
   const g = plan.gradient;
   return (
-    <motion.div {...fadeUp} transition={{ duration: 0.65, delay: index * 0.09, ease: [0.22, 1, 0.36, 1] }} whileHover={{ y: -5 }}
-      className={`relative flex flex-col rounded-[28px] border p-9 transition-all duration-300 ${g ? "border-transparent shadow-[0_28px_70px_rgba(107,33,168,.25)]" : "border-[#EDE9FE] bg-[#FDFCFF] hover:border-[#DDD6FE] hover:shadow-[0_16px_48px_rgba(107,33,168,.08)]"}`}
+    <motion.div {...fadeUp} transition={{ duration: 0.65, delay: index * 0.09, ease: [0.22, 1, 0.36, 1] }} whileHover={{ y: -6, scale: 1.01 }}
+      className={`relative flex flex-col rounded-[28px] border p-9 transition-all duration-300 ${g ? "border-transparent shadow-[0_28px_70px_rgba(107,33,168,.25)]" : "border-[#EDE9FE] bg-[#FDFCFF] hover:border-[#DDD6FE] hover:shadow-[0_20px_56px_rgba(107,33,168,.12)]"}`}
       style={g ? { background: "linear-gradient(135deg,#7C3AED 0%,#4f46e5 100%)" } : {}}>
       {plan.popular && <span className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#FFC533] px-6 py-2.5 text-[13px] font-black text-[#111318]">★ Popular</span>}
       <h3 className={`text-[26px] font-black leading-[1.2] tracking-[-0.04em] ${g ? "text-white" : "text-[#111318]"}`}>{plan.title}</h3>
@@ -327,9 +373,10 @@ function PricingCard({ plan, index }) {
           </div>
         ))}
       </div>
-      <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"
-        className={`mt-9 inline-flex w-full items-center justify-center gap-3 rounded-full py-4 text-[14px] font-black transition-all cursor-pointer ${g ? "bg-white text-[#6B21A8] hover:bg-white/90" : "bg-[#6B21A8] text-white hover:bg-[#5B1A9A] hover:shadow-[0_8px_24px_rgba(107,33,168,.3)]"}`}>
-        Ver Planes <Icon name="arrow" size={15} />
+      {/* Botón → /precios (no WhatsApp) */}
+      <a href="/precios"
+        className={`mt-9 inline-flex w-full items-center justify-center gap-3 rounded-full py-4 text-[14px] font-black transition-all hover:scale-[1.02] cursor-pointer ${g ? "bg-white text-[#6B21A8] hover:bg-white/90" : "bg-[#6B21A8] text-white hover:bg-[#5B1A9A] hover:shadow-[0_8px_24px_rgba(107,33,168,.3)]"}`}>
+        Ver detalle <Icon name="arrow" size={15} />
       </a>
     </motion.div>
   );
@@ -366,7 +413,7 @@ function FAQ() {
         </div>
         <div className="space-y-3">
           {faqs.map(({ q, a }, i) => (
-            <div key={q} className={`rounded-[20px] border transition-all duration-200 ${openIndex === i ? "border-[#DDD6FE] bg-[#FDFCFF] shadow-[0_8px_32px_rgba(107,33,168,.08)]" : "border-[#EBEBEB] bg-white"}`}>
+            <div key={q} className={`rounded-[20px] border transition-all duration-200 ${openIndex === i ? "border-[#DDD6FE] bg-[#FDFCFF] shadow-[0_8px_32px_rgba(107,33,168,.08)]" : "border-[#EBEBEB] bg-white hover:border-[#DDD6FE] hover:shadow-[0_4px_16px_rgba(107,33,168,.06)]"}`}>
               <button onClick={() => setOpenIndex(openIndex === i ? null : i)} className="flex w-full items-center justify-between gap-6 px-7 py-5 text-left cursor-pointer">
                 <span className="text-[16px] font-bold text-[#111318]">{q}</span>
                 <span className={`grid h-8 w-8 shrink-0 place-items-center rounded-full transition-all duration-200 ${openIndex === i ? "bg-[#6B21A8] text-white rotate-180" : "bg-[#F5F0FF] text-[#6B21A8]"}`}>
@@ -406,9 +453,20 @@ function ContactForm() {
           <h2 className="mt-4 text-[38px] font-black leading-[1.08] tracking-[-0.055em] text-[#111318] md:text-[52px]">Cuéntanos sobre tu negocio</h2>
           <p className="mt-5 max-w-[520px] text-[18px] leading-[1.7] text-[#6B7280]">Te ayudamos a entender qué necesitas y cómo organizar tu negocio de forma simple. La primera asesoría es gratis y sin compromiso.</p>
           <div className="mt-8 overflow-hidden rounded-[24px] shadow-[0_20px_60px_rgba(107,33,168,.12)]" style={{ aspectRatio: "16/9" }}>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="https://picsum.photos/seed/dgteam/700/394" alt="Equipo DG Solutions" className="w-full h-full object-cover" loading="lazy"
-              style={{ filter: "saturate(0.8) hue-rotate(220deg) brightness(1.05)" }} />
+            {IMAGES.contact ? (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img src={IMAGES.contact} alt="Equipo DG Solutions" className="w-full h-full object-cover" loading="lazy"
+                style={{ filter: "saturate(0.8) hue-rotate(220deg) brightness(1.05)" }} />
+            ) : (
+              <div className="flex h-full w-full items-center justify-center bg-[#EDE9FE]">
+                <div className="text-center">
+                  <div className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-[#DDD6FE]">
+                    <Icon name="users" size={28} className="text-[#7C3AED]" />
+                  </div>
+                  <p className="mt-3 text-[13px] font-semibold text-[#9CA3AF]">Foto del equipo próximamente</p>
+                </div>
+              </div>
+            )}
           </div>
           <div className="mt-8 space-y-5">
             {contactItems.map(({ icon, label, value }) => (
@@ -422,7 +480,7 @@ function ContactForm() {
             ))}
           </div>
           <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"
-            className="mt-8 inline-flex items-center gap-3 rounded-full bg-[#25D366] px-8 py-4 text-[14px] font-black text-white transition-all hover:bg-[#20B859] hover:shadow-[0_8px_24px_rgba(37,211,102,.35)] cursor-pointer">
+            className="mt-8 inline-flex items-center gap-3 rounded-full bg-[#25D366] px-8 py-4 text-[14px] font-black text-white transition-all hover:bg-[#20B859] hover:scale-[1.03] hover:shadow-[0_8px_24px_rgba(37,211,102,.35)] cursor-pointer">
             <Icon name="whatsapp" size={17} /> Escríbenos por WhatsApp
           </a>
         </div>
@@ -440,16 +498,16 @@ function ContactForm() {
                 <div key={id} className="mb-5">
                   <label className="mb-1.5 block text-[13px] font-black text-[#111318]" htmlFor={id}>{label}</label>
                   <input id={id} type={type} required value={form[id]} onChange={handleChange} placeholder={placeholder}
-                    className="w-full rounded-2xl border border-[#EDE9FE] bg-[#FDFCFF] px-5 py-3.5 text-[15px] text-[#111318] outline-none transition-all focus:border-[#7C3AED] focus:shadow-[0_0_0_3px_rgba(124,58,237,.12)]" />
+                    className="w-full rounded-2xl border border-[#EDE9FE] bg-[#FDFCFF] px-5 py-3.5 text-[15px] text-[#111318] outline-none transition-all duration-200 focus:border-[#7C3AED] focus:shadow-[0_0_0_4px_rgba(124,58,237,.12)] focus:bg-white placeholder:text-[#C4C9D4]" />
                 </div>
               ))}
               <div className="mb-6">
                 <label className="mb-1.5 block text-[13px] font-black text-[#111318]" htmlFor="message">Mensaje</label>
                 <textarea id="message" required value={form.message} onChange={handleChange} rows={5} placeholder="Cuéntanos qué necesitas o cómo funciona tu negocio"
-                  className="w-full rounded-2xl border border-[#EDE9FE] bg-[#FDFCFF] px-5 py-3.5 text-[15px] text-[#111318] outline-none transition-all focus:border-[#7C3AED] focus:shadow-[0_0_0_3px_rgba(124,58,237,.12)] resize-none" />
+                  className="w-full rounded-2xl border border-[#EDE9FE] bg-[#FDFCFF] px-5 py-3.5 text-[15px] text-[#111318] outline-none transition-all duration-200 focus:border-[#7C3AED] focus:shadow-[0_0_0_4px_rgba(124,58,237,.12)] focus:bg-white placeholder:text-[#C4C9D4] resize-none" />
               </div>
               <button type="submit" disabled={status === "sending"}
-                className="inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#6B21A8] px-8 py-4 text-[15px] font-black text-white transition-all hover:bg-[#5B1A9A] hover:shadow-[0_8px_24px_rgba(107,33,168,.3)] disabled:opacity-60 cursor-pointer">
+                className="inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#6B21A8] px-8 py-4 text-[15px] font-black text-white transition-all hover:bg-[#5B1A9A] hover:scale-[1.02] hover:shadow-[0_8px_24px_rgba(107,33,168,.3)] disabled:opacity-60 cursor-pointer">
                 {status === "sending" ? "Enviando..." : <><span>Enviar mensaje</span><Icon name="arrow" size={16} /></>}
               </button>
             </form>
@@ -461,7 +519,12 @@ function ContactForm() {
 }
 
 function Footer() {
-  const links = [{ href: "#home", label: "Home" }, { href: "#soluciones", label: "Soluciones" }, { href: "#pricing", label: "Precios" }, { href: "#contact", label: "Contacto" }];
+  const links = [
+    { href: "#home", label: "Home" },
+    { href: "#soluciones", label: "Soluciones" },
+    { href: "/precios", label: "Precios" },
+    { href: "#contact", label: "Contacto" },
+  ];
   return (
     <footer className="border-t border-[#EDE9FE] bg-white px-6 py-10 md:px-12 lg:px-20">
       <div className="mx-auto flex max-w-[1500px] flex-col items-center justify-between gap-8 md:flex-row">
@@ -489,7 +552,7 @@ function ScrollToTop() {
       {visible && (
         <motion.button initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }}
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="fixed bottom-8 right-8 z-50 grid h-12 w-12 place-items-center rounded-full bg-[#6B21A8] text-white shadow-[0_8px_24px_rgba(107,33,168,.35)] hover:bg-[#5B1A9A] cursor-pointer"
+          className="fixed bottom-8 right-8 z-50 grid h-12 w-12 place-items-center rounded-full bg-[#6B21A8] text-white shadow-[0_8px_24px_rgba(107,33,168,.35)] hover:bg-[#5B1A9A] hover:scale-[1.08] transition-all cursor-pointer"
           aria-label="Volver arriba">
           <Icon name="arrowUp" size={18} />
         </motion.button>
