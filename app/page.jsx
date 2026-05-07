@@ -292,14 +292,14 @@ function Hero() {
 
       <div className="relative z-10 mx-auto max-w-[1500px] px-6 md:px-12 lg:px-20 pt-28 pb-20 text-center">
         <motion.div {...fadeUp}>
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/50 bg-white/40 px-5 py-2.5 text-[12px] font-bold text-[#4c1d95] backdrop-blur-sm">
-            <Icon name="zap" size={13} className="text-[#6B21A8]" />
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/50 bg-white/40 px-5 py-2.5 text-[12px] font-bold text-[var(--color-primary-dark)] backdrop-blur-sm">
+            <Icon name="zap" size={13} className="text-[var(--color-primary)]" />
             Herramientas digitales para negocios reales
           </div>
-          <h1 className="mx-auto max-w-[780px] text-[52px] font-black leading-[.92] tracking-[-0.06em] text-[#1e1b4b] md:text-[76px] lg:text-[96px]">
+          <h1 className="mx-auto max-w-[780px] text-[52px] font-black leading-[.92] tracking-[-0.06em] text-[var(--color-text-main)] md:text-[76px] lg:text-[96px]">
             Organiza tu negocio y vende más fácil
           </h1>
-          <p className="mx-auto mt-7 max-w-[560px] text-[18px] leading-[1.7] text-[#3730a3]/80">
+          <p className="mx-auto mt-7 max-w-[560px] text-[18px] leading-[1.7] text-[var(--color-text-body)]/80">
             Creamos herramientas simples y personalizadas para que tengas claridad, control y más clientes — sin complicaciones técnicas.
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
@@ -367,7 +367,7 @@ function IntegrationsStrip() {
         <div className="flex">
           <div className="marquee-track flex shrink-0 items-center gap-10 px-6">
             {[...BRAND_NAMES, ...BRAND_NAMES].map((name, i) => (
-              <div key={`${name}-${i}`} className="flex shrink-0 items-center gap-2 text-[#C4C9D4] transition-colors hover:text-[#9CA3AF]">
+              <div key={`${name}-${i}`} className="flex shrink-0 items-center gap-2 text-[var(--color-text-light)] transition-colors hover:text-[var(--color-text-muted)]">
                 <BrandLogo name={name} size={20} />
                 <span className="text-[13px] font-bold">{brandLabels[name]}</span>
               </div>
@@ -386,7 +386,7 @@ function ProblemSection() {
         <motion.div {...fadeUp} className="mx-auto max-w-[760px] text-center">
           <p className="text-[12px] font-black uppercase tracking-[0.22em] text-[var(--color-success)]">El problema real</p>
           <h2 className="mt-4 text-[38px] font-black leading-[1.08] tracking-[-0.055em] text-[var(--color-text-main)] md:text-[56px]">Tu negocio no necesita complicarse para crecer</h2>
-          <p className="mt-5 text-[19px] text-[#6B7280]">La mayoría de los negocios pequeños tienen los mismos puntos de dolor. Nosotros los resolvemos con herramientas simples.</p>
+          <p className="mt-5 text-[19px] text-[var(--color-text-secondary)]">La mayoría de los negocios pequeños tienen los mismos puntos de dolor. Nosotros los resolvemos con herramientas simples.</p>
         </motion.div>
         <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {problems.map(({ icon, title, desc, color, bg }, i) => (
@@ -396,8 +396,8 @@ function ProblemSection() {
               <div className="mb-5 grid h-12 w-12 place-items-center rounded-[14px] transition-transform duration-300 group-hover:scale-110" style={{ background: bg, color }}>
                 <Icon name={icon} size={22} />
               </div>
-              <h3 className="text-[17px] font-black text-[#111318]">{title}</h3>
-              <p className="mt-2 text-[15px] leading-[1.65] text-[#6B7280]">{desc}</p>
+              <h3 className="text-[17px] font-black text-[var(--color-text-main)]">{title}</h3>
+              <p className="mt-2 text-[15px] leading-[1.65] text-[var(--color-text-secondary)]">{desc}</p>
             </motion.div>
           ))}
         </div>
@@ -410,7 +410,7 @@ function CTABanner() {
   return (
     <section className="px-6 py-12 md:px-12 lg:px-20" style={{ background: "linear-gradient(135deg,var(--color-primary-border) 0%,var(--color-blue-border) 100%)" }}>
       <motion.div {...fadeUp} className="relative mx-auto max-w-[1350px] overflow-hidden rounded-[32px] px-8 py-20 text-center md:px-16"
-        style={{ background: "linear-gradient(135deg,var(--color-primary-dark) 0%,#1e40af 100%)" }}>
+        style={{ background: "linear-gradient(135deg,var(--color-primary-dark) 0%,var(--color-blue-accent) 100%)" }}>
         <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 20% 50%,rgba(139,92,246,.6) 0%,transparent 50%),radial-gradient(ellipse at 85% 30%,rgba(59,130,246,.4) 0%,transparent 40%)" }} />
         {IMAGES.ctaBg && (
           <div className="absolute inset-0 opacity-10 mix-blend-luminosity">
@@ -477,7 +477,7 @@ function PricingCard({ plan, index }) {
   return (
     <motion.div {...fadeUp} transition={{ duration: 0.65, delay: index * 0.09, ease: [0.22, 1, 0.36, 1] }} whileHover={{ y: -6, scale: 1.01 }}
       className={`relative flex flex-col rounded-[28px] border p-9 transition-all duration-300 ${g ? "border-transparent shadow-[0_28px_70px_rgba(107,33,168,.25)]" : "border-[var(--color-primary-border)] bg-[var(--color-card-bg)] hover:border-[var(--color-primary-border)] hover:shadow-[0_20px_56px_rgba(107,33,168,.12)]"}`}
-      style={g ? { background: "linear-gradient(135deg,var(--color-primary-accent) 0%,#4f46e5 100%)" } : {}}>
+      style={g ? { background: "linear-gradient(135deg,var(--color-primary-accent) 0%,var(--color-blue-accent) 100%)" } : {}}>
       {plan.popular && <span className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--color-yellow-popular)] px-6 py-2.5 text-[13px] font-black text-[var(--color-text-main)]">★ Popular</span>}
       <h3 className={`text-[26px] font-black leading-[1.2] tracking-[-0.04em] ${g ? "text-white" : "text-[var(--color-text-main)]"}`}>{plan.title}</h3>
       <p className={`mt-2 text-[14px] leading-[1.6] ${g ? "text-white/80" : "text-[var(--color-text-secondary)]"}`}>{plan.desc}</p>
@@ -507,7 +507,7 @@ function PricingCard({ plan, index }) {
 
 function PricingSection() {
   return (
-    <section id="pricing" className="px-6 py-24 md:px-12 lg:px-20" style={{ background: "linear-gradient(180deg,#faf5ff 0%,#eff6ff 100%)" }}>
+    <section id="pricing" className="px-6 py-24 md:px-12 lg:px-20" style={{ background: "linear-gradient(180deg,var(--color-card-bg) 0%,var(--color-blue-bg) 100%)" }}>
       <motion.div {...fadeUp} className="mx-auto max-w-[1500px]">
         <div className="text-center">
           <p className="text-[12px] font-black uppercase tracking-[0.22em] text-[var(--color-success)]">Precios</p>
@@ -517,7 +517,7 @@ function PricingSection() {
         <div className="mx-auto mt-16 grid max-w-[1200px] gap-6 md:grid-cols-3">
           {plans.map((plan, i) => <PricingCard key={plan.title} plan={plan} index={i} />)}
         </div>
-        <p className="mx-auto mt-8 max-w-[880px] text-center text-[13px] leading-[1.8] text-[#9CA3AF]">
+        <p className="mx-auto mt-8 max-w-[880px] text-center text-[13px] leading-[1.8] text-[var(--color-text-muted)]">
           Los precios son referenciales y pueden variar según las necesidades de cada negocio. El alcance, tiempos y entregables se definen después del diagnóstico inicial. La consultoría gratis es informativa y no incluye implementación.
         </p>
       </motion.div>
@@ -536,7 +536,7 @@ function FAQ() {
         </div>
         <div className="space-y-3">
           {faqs.map(({ q, a }, i) => (
-            <div key={q} className={`rounded-[20px] border transition-all duration-200 ${openIndex === i ? "border-[#DDD6FE] bg-[#FDFCFF] shadow-[0_8px_32px_rgba(107,33,168,.08)]" : "border-[#EBEBEB] bg-white hover:border-[#DDD6FE] hover:shadow-[0_4px_16px_rgba(107,33,168,.06)]"}`}>
+            <div key={q} className={`rounded-[20px] border transition-all duration-200 ${openIndex === i ? "border-[var(--color-primary-border)] bg-[var(--color-card-bg)] shadow-[0_8px_32px_rgba(107,33,168,.08)]" : "border-[var(--color-section-border)] bg-white hover:border-[var(--color-primary-border)] hover:shadow-[0_4px_16px_rgba(107,33,168,.06)]"}`}>
               <button onClick={() => setOpenIndex(openIndex === i ? null : i)} className="flex w-full items-center justify-between gap-6 px-7 py-5 text-left cursor-pointer">
                 <span className="text-[16px] font-bold text-[var(--color-text-main)]">{q}</span>
                 <span className={`grid h-8 w-8 shrink-0 place-items-center rounded-full transition-all duration-200 ${openIndex === i ? "bg-[var(--color-primary)] text-white rotate-180" : "bg-[var(--color-primary-muted)] text-[var(--color-primary)]"}`}>
@@ -569,7 +569,7 @@ function ContactForm() {
     { icon: "globe", label: "Cobertura", value: "Todo México — atendemos en línea" },
   ];
   return (
-    <section id="contact" className="px-6 py-24 md:px-12 lg:px-20" style={{ background: "linear-gradient(135deg,#faf5ff 0%,#eff6ff 100%)" }}>
+    <section id="contact" className="px-6 py-24 md:px-12 lg:px-20" style={{ background: "linear-gradient(135deg,var(--color-card-bg) 0%,var(--color-blue-bg) 100%)" }}>
       <motion.div {...fadeUp} className="mx-auto grid max-w-[1200px] gap-16 lg:grid-cols-2">
         <div>
           <p className="text-[12px] font-black uppercase tracking-[0.22em] text-[var(--color-success)]">Contacto</p>
@@ -600,7 +600,7 @@ function ContactForm() {
             ))}
           </div>
           <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"
-            className="mt-8 inline-flex items-center gap-3 rounded-full bg-[#25D366] px-8 py-4 text-[14px] font-black text-white transition-all hover:bg-[#20B859] hover:scale-[1.03] hover:shadow-[0_8px_24px_rgba(37,211,102,.35)] cursor-pointer">
+            className="mt-8 inline-flex items-center gap-3 rounded-full bg-[var(--color-success)] px-8 py-4 text-[14px] font-black text-white transition-all hover:bg-[var(--color-success)]/90 hover:scale-[1.03] hover:shadow-[0_8px_24px_rgba(37,211,102,.35)] cursor-pointer">
             <Icon name="whatsapp" size={17} /> Escríbenos por WhatsApp
           </a>
         </div>
