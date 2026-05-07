@@ -7,14 +7,16 @@ import Image from "next/image";
 
 const WHATSAPP_URL = "https://wa.me/526692291474";
 
+// ─── Imágenes ────────────────────────────────────────────────────────────────
+// Cambia el nombre del archivo si es diferente al que subiste
 const IMAGES = {
-  sol1:    "/IMAGES/1.png",
-  sol2:    "/IMAGES/2.png",
-  sol3:    "/IMAGES/3.png",
-  sol4:    null,
-  contact: null,
-  heroBg:  null,
-  ctaBg:   null,
+  sol1:     "/IMAGES/1.png",      // Solución — Ordena tu negocio
+  sol2:     "/IMAGES/2.png",      // Solución — Ahorra tiempo
+  sol3:     "/IMAGES/3.png",      // Solución — Trabaja más inteligente
+  sol4:     null,                  // Solución — Haz que te encuentren (pendiente)
+  contact:  null,                  // Foto contacto (pendiente)
+  heroBg:   null,                  // Hero fondo decorativo (pendiente)
+  ctaBg:    null,                  // CTA Banner fondo (pendiente)
 };
 
 const fadeUp = {
@@ -88,33 +90,19 @@ const problems = [
   { icon: "globe", title: "Sin presencia digital", desc: "Tus clientes no te encuentran en línea, y los que llegan no saben cómo contactarte.", color: "#EA580C", bg: "#FFF7ED" },
 ];
 
-const steps = [
-  { n: "01", label: "Diagnóstico gratis", icon: "target" },
-  { n: "02", label: "Diseñamos tu solución", icon: "edit" },
-  { n: "03", label: "Lo automatizamos", icon: "zap" },
-  { n: "04", label: "Tu negocio escala", icon: "trending" },
-];
-
-const BRAND_NAMES = ["whatsapp", "openai", "google", "notion", "meta", "stripe", "zapier", "airtable"];
-
 const WAVE_CSS = `
 @keyframes waveA{0%,100%{transform:translateX(0) scaleY(1)}50%{transform:translateX(-5%) scaleY(1.07)}}
 @keyframes waveB{0%,100%{transform:translateX(0) scaleY(1)}50%{transform:translateX(5%) scaleY(0.94)}}
 @keyframes waveC{0%,100%{transform:translateX(0) scaleY(1)}50%{transform:translateX(-3%) scaleY(1.03)}}
-@keyframes floatA{0%,100%{transform:translateY(0px)}50%{transform:translateY(-10px)}}
-@keyframes floatB{0%,100%{transform:translateY(0px)}50%{transform:translateY(-7px)}}
-@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 .dw{position:absolute;width:210%;left:-55%;border-radius:50%;pointer-events:none}
 .dw1{height:68%;bottom:-34%;background:rgba(167,139,250,0.42);animation:waveA 8s ease-in-out infinite}
 .dw2{height:64%;bottom:-38%;background:rgba(147,197,253,0.32);animation:waveB 11s ease-in-out infinite}
 .dw3{height:58%;bottom:-42%;background:rgba(196,181,253,0.22);animation:waveC 14s ease-in-out infinite}
 .dw4{height:52%;top:-28%;background:rgba(186,230,253,0.18);animation:waveB 9s ease-in-out infinite}
 .dw5{height:46%;top:-32%;background:rgba(167,139,250,0.13);animation:waveA 12s ease-in-out infinite}
-.float-a{animation:floatA 6s ease-in-out infinite}
-.float-b{animation:floatB 8s ease-in-out infinite}
-.marquee-track{animation:marquee 28s linear infinite}
 `;
 
+// ─── Placeholder elegante cuando no hay imagen ───────────────────────────────
 function ImagePlaceholder({ color, icon, accent }) {
   return (
     <div className="flex h-full w-full items-center justify-center" style={{ background: color }}>
@@ -123,20 +111,6 @@ function ImagePlaceholder({ color, icon, accent }) {
       </div>
     </div>
   );
-}
-
-function BrandLogo({ name, size = 24 }) {
-  const logos = {
-    whatsapp: <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>,
-    openai:   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor"><path d="M22.282 9.821a5.985 5.985 0 0 0-.516-4.91 6.046 6.046 0 0 0-6.51-2.9A6.065 6.065 0 0 0 4.981 4.18a5.985 5.985 0 0 0-3.998 2.9 6.046 6.046 0 0 0 .743 7.097 5.98 5.98 0 0 0 .51 4.911 6.051 6.051 0 0 0 6.515 2.9A5.985 5.985 0 0 0 13.26 24a6.056 6.056 0 0 0 5.772-4.206 5.99 5.99 0 0 0 3.997-2.9 6.056 6.056 0 0 0-.747-7.073zM13.26 22.43a4.476 4.476 0 0 1-2.876-1.04l.141-.081 4.779-2.758a.795.795 0 0 0 .392-.681v-6.737l2.02 1.168a.071.071 0 0 1 .038.052v5.583a4.504 4.504 0 0 1-4.494 4.494zM3.6 18.304a4.47 4.47 0 0 1-.535-3.014l.142.085 4.783 2.759a.771.771 0 0 0 .78 0l5.843-3.369v2.332a.08.08 0 0 1-.033.062L9.74 19.95a4.5 4.5 0 0 1-6.14-1.646zM2.34 7.896a4.485 4.485 0 0 1 2.366-1.973V11.6a.766.766 0 0 0 .388.676l5.815 3.355-2.02 1.168a.076.076 0 0 1-.071 0l-4.83-2.786A4.504 4.504 0 0 1 2.34 7.896zm16.597 3.855l-5.833-3.387L15.119 7.2a.076.076 0 0 1 .071 0l4.83 2.791a4.494 4.494 0 0 1-.676 8.105v-5.678a.79.79 0 0 0-.407-.667zm2.01-3.023l-.141-.085-4.774-2.782a.776.776 0 0 0-.785 0L9.409 9.23V6.897a.066.066 0 0 1 .028-.061l4.83-2.787a4.5 4.5 0 0 1 6.68 4.66zm-12.64 4.135l-2.02-1.164a.08.08 0 0 1-.038-.057V6.075a4.5 4.5 0 0 1 7.375-3.453l-.142.08L8.704 5.46a.795.795 0 0 0-.393.681zm1.097-2.365l2.602-1.5 2.607 1.5v2.999l-2.597 1.5-2.607-1.5z"/></svg>,
-    google:   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor"><path d="M12.48 10.92v3.28h7.84c-.24 1.84-.853 3.187-1.787 4.133-1.147 1.147-2.933 2.4-6.053 2.4-4.827 0-8.6-3.893-8.6-8.72s3.773-8.72 8.6-8.72c2.6 0 4.507 1.027 5.907 2.347l2.307-2.307C18.747 1.44 16.133 0 12.48 0 5.867 0 .307 5.387.307 12s5.56 12 12.173 12c3.573 0 6.267-1.173 8.373-3.36 2.16-2.16 2.84-5.213 2.84-7.667 0-.76-.053-1.467-.173-2.053z"/></svg>,
-    notion:   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor"><path d="M4.459 4.208c.746.606 1.026.56 2.428.466l13.215-.793c.28 0 .047-.28-.046-.326L17.86 1.968c-.42-.326-.981-.7-2.055-.607L3.01 2.295c-.466.046-.56.28-.374.466zm.793 3.08v13.904c0 .747.373 1.027 1.214.98l14.523-.84c.841-.046.935-.56.935-1.167V6.354c0-.606-.233-.933-.748-.887l-15.177.887c-.56.047-.747.327-.747.933zm14.337.745c.093.42 0 .84-.42.888l-.7.14v10.264c-.608.327-1.168.514-1.635.514-.748 0-.935-.234-1.495-.933l-4.577-7.186v6.952L12.21 19s0 .84-1.168.84l-3.222.186c-.093-.186 0-.653.327-.746l.84-.233V9.854L7.822 9.76c-.094-.42.14-1.026.793-1.073l3.456-.233 4.764 7.279v-6.44l-1.215-.139c-.093-.514.28-.887.747-.933zM1.936 1.035l13.31-.98c1.634-.14 2.055-.047 3.082.7l4.249 2.986c.7.513.934.653.934 1.213v16.378c0 1.026-.373 1.634-1.68 1.726l-15.458.934c-.98.047-1.448-.093-1.962-.747l-3.129-4.06c-.56-.747-.793-1.306-.793-1.96V2.667c0-.839.374-1.54 1.447-1.632z"/></svg>,
-    meta:     <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor"><path d="M6.915 4.03c-1.968 0-3.683 1.28-4.871 3.113C.704 9.208 0 11.883 0 14.449c0 .706.07 1.369.21 1.973a6.624 6.624 0 0 0 .265.86 5.297 5.297 0 0 0 .371.761c.696 1.159 1.818 1.927 3.593 1.927 1.497 0 2.633-.671 3.965-2.444.76-1.012 1.144-1.626 2.663-4.32l.756-1.339.186-.325c.061.1.121.196.183.3l2.152 3.595c.724 1.21 1.665 2.556 2.47 3.314 1.046.985 1.992 1.22 3.06 1.22 1.075 0 1.876-.355 2.455-.843a3.743 3.743 0 0 0 .81-.973c.542-.939.861-2.127.861-3.745 0-2.72-.681-5.357-2.084-7.45-1.282-1.912-2.957-2.93-4.716-2.93-1.047 0-2.088.467-2.653.936a7.386 7.386 0 0 0-.466.402 5.768 5.768 0 0 0-.682.2c-.726-.63-1.715-1.074-2.952-1.074zm5.098 3.793c.328-.458.658-.866.99-1.207.5-.519 1.096-.888 1.817-.888.893 0 1.786.63 2.548 1.84 1.181 1.867 1.938 4.512 1.938 7.033 0 1.19-.176 2.003-.49 2.542a1.55 1.55 0 0 1-1.372.77c-.635 0-1.156-.199-1.773-.843-.543-.569-1.15-1.487-1.927-2.782l-2.391-3.999a22.161 22.161 0 0 0-.665-1.02c.1-.153.2-.305.325-.446zm-4.713 2.818c-.507.87-.971 1.667-1.402 2.35-1.273 2.03-1.843 2.696-2.583 3.028-.422.19-.795.274-1.15.274-.936 0-1.58-.495-2.013-1.2a5.57 5.57 0 0 1-.245-.498 5.63 5.63 0 0 1-.198-.7A8.725 8.725 0 0 1 .5 14.45c0-2.3.623-4.705 1.835-6.455C3.34 6.5 4.547 5.53 5.915 5.53c.97 0 1.62.42 2.172.932.428.39.794.873 1.148 1.41z"/></svg>,
-    stripe:   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor"><path d="M13.976 9.15c-2.172-.806-3.356-1.426-3.356-2.409 0-.831.683-1.305 1.901-1.305 2.227 0 4.515.858 6.09 1.631l.89-5.494C18.252.975 15.697 0 12.165 0 9.667 0 7.589.654 6.104 1.872 4.56 3.147 3.757 4.992 3.757 7.218c0 4.039 2.467 5.76 6.476 7.219 2.585.92 3.445 1.574 3.445 2.583 0 .98-.84 1.545-2.354 1.545-1.875 0-4.965-.921-6.99-2.109l-.9 5.555C5.175 22.99 8.385 24 11.714 24c2.641 0 4.843-.624 6.328-1.813 1.664-1.305 2.525-3.236 2.525-5.732 0-4.128-2.524-5.851-6.594-7.305h.003z"/></svg>,
-    zapier:   <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor"><path d="M13.2 12c0 .17-.007.339-.02.505l4.862 2.808a9.173 9.173 0 0 0 .895-3.313H13.2zm-.002-1.008h5.739a9.174 9.174 0 0 0-.891-3.312L13.18 10.49c.012.166.019.334.019.502zM12.507 13.18l-2.806 4.86a9.16 9.16 0 0 0 3.31.896v-5.74a5.62 5.62 0 0 1-.504.02v-.036zm-1.007 0c-.17 0-.34-.007-.505-.02l-2.808 4.862a9.172 9.172 0 0 0 3.313.895V13.18zm-1.005-.484l-4.86 2.806a9.16 9.16 0 0 0 2.392 2.39l2.808-4.862a5.618 5.618 0 0 1-.34-.334zm-.484-1.007a5.619 5.619 0 0 1-.02-.505H4.253a9.173 9.173 0 0 0 .895 3.313l4.862-2.808zm0-1.007c0-.17.007-.34.02-.506L5.168 7.318a9.172 9.172 0 0 0-.895 3.313H10.01zm.484-1.005c.108-.12.22-.231.34-.335L8.04 4.484a9.161 9.161 0 0 0-2.392 2.392l4.862 2.806c.004-.006.007-.011.011-.016h-.003zm1.007-.484c.165-.013.335-.02.504-.02v-5.74a9.173 9.173 0 0 0-3.312.895l2.808 4.865zm1.007 0l2.806-4.86a9.161 9.161 0 0 0-3.312-.895v5.74c.17 0 .34.007.506.015zm1.005.484l4.86-2.806a9.16 9.16 0 0 0-2.392-2.392l-2.808 4.862c.12.108.232.221.34.336zm.484 1.007h5.738a9.172 9.172 0 0 0-.895-3.313l-4.862 2.808c.013.165.02.335.02.505zm-2.506 2.49l2.808 4.862a9.161 9.161 0 0 0 2.392-2.391l-4.862-2.806c-.108.12-.22.232-.338.335z"/></svg>,
-    airtable: <svg width={size} height={size} viewBox="0 0 24 24" fill="currentColor"><path d="M11.955.592L.592 4.137a.55.55 0 0 0-.004 1.041l11.35 3.596a.55.55 0 0 0 .332 0l11.35-3.596a.55.55 0 0 0-.004-1.041L12.627.592a.55.55 0 0 0-.672 0zM.538 9.625l-.002.001a.55.55 0 0 0-.312.494v9.517a.55.55 0 0 0 .55.549.553.553 0 0 0 .177-.029l9.737-3.342a.55.55 0 0 0 .374-.521V6.777a.55.55 0 0 0-.727-.522L.538 9.625zm22.924.001l-9.8-3.371a.55.55 0 0 0-.727.522v9.517a.55.55 0 0 0 .374.52l9.737 3.343a.55.55 0 0 0 .727-.52V10.12a.55.55 0 0 0-.311-.494z"/></svg>,
-  };
-  return logos[name] || null;
 }
 
 function Icon({ name, size = 22, className = "", style }) {
@@ -159,17 +133,16 @@ function Icon({ name, size = 22, className = "", style }) {
     clock:    <svg {...p}><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>,
     mail:     <svg {...p}><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>,
     phone:    <svg {...p}><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.55 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 17z"/></svg>,
-    layout:   <svg {...p}><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18"/><path d="M9 21V9"/></svg>,
-    target:   <svg {...p}><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>,
     whatsapp: <svg {...p} fill="currentColor" stroke="none"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>,
   };
   return icons[name] || null;
 }
 
+// ─── Logo con PNG real ────────────────────────────────────────────────────────
 function Logo() {
   return (
-    <Link href="/#home" className="flex items-center gap-3 cursor-pointer" aria-label="DG Solutions">
-      <Image src="/IMAGES/LOGO1.png" alt="DG Solutions" width={48} height={48} className="object-contain" />
+    <Link href="#home" className="flex items-center gap-3 cursor-pointer" aria-label="DG Solutions">
+      <Image src="/IMAGES/LOGO1.png" alt="DG Solutions" width={48} height={48} className="object-contain md:h-12 md:w-12" />
       <div className="leading-none">
         <p className="text-[20px] font-black tracking-[-0.08em] text-[#5F24D6] md:text-[24px]">DG SOLUTIONS</p>
         <p className="mt-[3px] text-[7.5px] font-bold tracking-[0.12em] uppercase text-[#7C3AED]/60 md:text-[8.5px]">Hazlo Simple. Hazlo Inteligente.</p>
@@ -187,22 +160,19 @@ function Header() {
     return () => window.removeEventListener("scroll", fn);
   }, []);
   const links = [
-    { href: "/#home", label: "Home" },
-    { href: "/#soluciones", label: "Soluciones" },
+    { href: "#home", label: "Home" },
+    { href: "#soluciones", label: "Soluciones" },
     { href: "/precios", label: "Precios" },
-    { href: "/#contact", label: "Contacto" },
+    { href: "#contact", label: "Contacto" },
   ];
   return (
     <header className={`fixed left-0 top-0 z-50 w-full transition-all duration-300 ${scrolled ? "bg-white/97 shadow-[0_1px_20px_rgba(0,0,0,.07)] backdrop-blur-md" : "bg-white/80 backdrop-blur-sm"}`}>
       <div className="mx-auto flex max-w-[1500px] items-center justify-between px-6 py-4 md:px-12 lg:px-20">
         <Logo />
-        <nav className="hidden items-center gap-8 md:flex">
+        <nav className="hidden items-center gap-10 md:flex">
           {links.map(({ href, label }) => (
             <Link key={href} href={href} className="text-[12.5px] font-bold uppercase tracking-[0.1em] text-[#374151] transition-colors hover:text-[#6B21A8] cursor-pointer">{label}</Link>
           ))}
-          <Link href="/plantillas" className="inline-flex items-center gap-1.5 rounded-full border border-[#EDE9FE] bg-[#F5F0FF] px-3.5 py-1.5 text-[11px] font-black uppercase tracking-[0.08em] text-[#7C3AED] transition-all hover:bg-[#EDE9FE] cursor-pointer">
-            <Icon name="layout" size={11} /> Plantillas
-          </Link>
         </nav>
         <div className="hidden md:flex">
           <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"
@@ -221,7 +191,6 @@ function Header() {
               {links.map(({ href, label }) => (
                 <Link key={href} href={href} onClick={() => setOpen(false)} className="rounded-xl px-4 py-3 text-[14px] font-bold text-[#111318] hover:bg-[#F5F0FF] hover:text-[#6B21A8] cursor-pointer">{label}</Link>
               ))}
-              <Link href="/plantillas" onClick={() => setOpen(false)} className="rounded-xl px-4 py-3 text-[14px] font-bold text-[#7C3AED] hover:bg-[#F5F0FF] cursor-pointer">Plantillas →</Link>
               <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center justify-center gap-3 rounded-full bg-[#6B21A8] px-6 py-4 text-[14px] font-black text-white cursor-pointer">
                 <Icon name="whatsapp" size={16} /> WhatsApp
               </a>
@@ -242,54 +211,13 @@ function Hero() {
         <div className="dw dw4" /><div className="dw dw5" />
         <div className="dw dw3" /><div className="dw dw2" /><div className="dw dw1" />
       </div>
+      {/* Imagen de fondo decorativa (6) — cuando la tengas, aparece aquí */}
       {IMAGES.heroBg && (
         <div className="absolute inset-0 opacity-10">
           <Image src={IMAGES.heroBg} alt="" fill className="object-cover" />
         </div>
       )}
       <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 30% 55%,rgba(255,255,255,.28) 0%,transparent 55%),radial-gradient(ellipse at 80% 20%,rgba(196,181,253,.35) 0%,transparent 45%)" }} />
-
-      {/* Floating card izquierda */}
-      <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.8, duration: 0.7 }}
-        className="float-a pointer-events-none absolute left-[2%] top-[30%] hidden w-[190px] select-none rounded-[16px] border border-white/60 bg-white/80 p-4 shadow-[0_8px_32px_rgba(107,33,168,.12)] backdrop-blur-sm lg:block">
-        <p className="text-[10px] font-black uppercase tracking-[0.12em] text-[#9CA3AF]">Pedidos hoy</p>
-        <p className="mt-1 text-[28px] font-black leading-none text-[#6B21A8]">24</p>
-        <div className="mt-2 flex items-center gap-1.5">
-          <span className="h-1.5 w-1.5 rounded-full bg-[#059669]" />
-          <p className="text-[11px] font-semibold text-[#059669]">+12% vs ayer</p>
-        </div>
-        <div className="mt-3 flex items-end gap-1">
-          {[40, 65, 45, 80, 55, 90, 70].map((h, i) => (
-            <div key={i} className="flex-1 rounded-sm bg-[#EDE9FE]" style={{ height: `${h * 0.28}px` }} />
-          ))}
-        </div>
-      </motion.div>
-
-      {/* Floating card derecha */}
-      <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1.0, duration: 0.7 }}
-        className="float-b pointer-events-none absolute right-[2%] top-[34%] hidden w-[188px] select-none rounded-[16px] border border-white/60 bg-white/80 p-4 shadow-[0_8px_32px_rgba(107,33,168,.12)] backdrop-blur-sm lg:block">
-        <div className="flex items-center gap-2.5">
-          <div className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[#EDE9FE] text-[#7C3AED]">
-            <Icon name="users" size={14} />
-          </div>
-          <div>
-            <p className="text-[11px] font-black text-[#111318]">Cliente nuevo</p>
-            <p className="text-[10px] text-[#9CA3AF]">hace 2 min</p>
-          </div>
-        </div>
-        <div className="mt-3 rounded-[10px] bg-[#F5F0FF] px-3 py-2">
-          <p className="text-[11px] font-semibold text-[#6B21A8]">IA respondió automáticamente ✓</p>
-        </div>
-      </motion.div>
-
-      {/* Floating card abajo izquierda */}
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.2, duration: 0.7 }}
-        className="float-a pointer-events-none absolute bottom-[22%] left-[3%] hidden w-[172px] select-none rounded-[16px] border border-white/60 bg-white/80 p-4 shadow-[0_8px_32px_rgba(107,33,168,.12)] backdrop-blur-sm lg:block">
-        <p className="text-[10px] font-black uppercase tracking-[0.12em] text-[#9CA3AF]">Ingresos mes</p>
-        <p className="mt-1 text-[20px] font-black leading-none text-[#111318]">$48,200</p>
-        <p className="mt-1.5 text-[11px] font-semibold text-[#059669]">↑ Todo organizado</p>
-      </motion.div>
-
       <div className="relative z-10 mx-auto max-w-[1500px] px-6 md:px-12 lg:px-20 pt-28 pb-20 text-center">
         <motion.div {...fadeUp}>
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/50 bg-white/40 px-5 py-2.5 text-[12px] font-bold text-[#4c1d95] backdrop-blur-sm">
@@ -303,7 +231,7 @@ function Hero() {
             Creamos herramientas simples y personalizadas para que tengas claridad, control y más clientes — sin complicaciones técnicas.
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <a href="/#contact"
+            <a href="#contact"
               className="inline-flex items-center gap-3 rounded-full bg-[#6B21A8] px-9 py-[1.1rem] text-[16px] font-black text-white transition-all hover:bg-[#5B1A9A] hover:scale-[1.03] hover:shadow-[0_12px_32px_rgba(107,33,168,.4)] cursor-pointer">
               Solicitar Diagnóstico <Icon name="arrow" size={17} />
             </a>
@@ -320,61 +248,9 @@ function Hero() {
               </span>
             ))}
           </div>
-
-          {/* Process steps */}
-          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 0.7 }}
-            className="mx-auto mt-14 flex max-w-[640px] items-center justify-center">
-            {steps.map(({ n, label, icon }, i) => (
-              <React.Fragment key={n}>
-                <div className="flex flex-col items-center gap-2">
-                  <div className="grid h-10 w-10 place-items-center rounded-full border border-white/60 bg-white/50 backdrop-blur-sm text-[#6B21A8]">
-                    <Icon name={icon} size={16} />
-                  </div>
-                  <p className="max-w-[68px] text-center text-[10px] font-black uppercase leading-tight tracking-[0.08em] text-[#4c1d95]">{label}</p>
-                </div>
-                {i < steps.length - 1 && (
-                  <div className="mx-1 mb-7 h-[1px] flex-1 bg-gradient-to-r from-[#6B21A8]/30 to-[#6B21A8]/10" />
-                )}
-              </React.Fragment>
-            ))}
-          </motion.div>
-
-          {/* Plantillas shortcut */}
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8, duration: 0.6 }}
-            className="mt-7 flex items-center justify-center gap-2">
-            <span className="text-[12px] text-[#4c1d95]/70">¿Quieres empezar hoy?</span>
-            <Link href="/plantillas" className="text-[12px] font-black text-[#6B21A8] underline underline-offset-2 hover:text-[#4c1d95] cursor-pointer">
-              Ver plantillas →
-            </Link>
-          </motion.div>
         </motion.div>
       </div>
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent" />
-    </section>
-  );
-}
-
-function IntegrationsStrip() {
-  const brandLabels = { openai: "OpenAI", whatsapp: "WhatsApp", google: "Google", notion: "Notion", meta: "Meta", stripe: "Stripe", zapier: "Zapier", airtable: "Airtable" };
-  return (
-    <section className="border-y border-[#F0EAFB] bg-white py-10 overflow-hidden">
-      <motion.p {...fadeUp} className="mb-7 text-center text-[11px] font-black uppercase tracking-[0.22em] text-[#9CA3AF]">
-        Integra con las herramientas que ya usas
-      </motion.p>
-      <div className="relative">
-        <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-24 bg-gradient-to-r from-white to-transparent" />
-        <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-24 bg-gradient-to-l from-white to-transparent" />
-        <div className="flex">
-          <div className="marquee-track flex shrink-0 items-center gap-10 px-6">
-            {[...BRAND_NAMES, ...BRAND_NAMES].map((name, i) => (
-              <div key={`${name}-${i}`} className="flex shrink-0 items-center gap-2 text-[#C4C9D4] transition-colors hover:text-[#9CA3AF]">
-                <BrandLogo name={name} size={20} />
-                <span className="text-[13px] font-bold">{brandLabels[name]}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
     </section>
   );
 }
@@ -412,6 +288,7 @@ function CTABanner() {
       <motion.div {...fadeUp} className="relative mx-auto max-w-[1350px] overflow-hidden rounded-[32px] px-8 py-20 text-center md:px-16"
         style={{ background: "linear-gradient(135deg,#4c1d95 0%,#1e40af 100%)" }}>
         <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 20% 50%,rgba(139,92,246,.6) 0%,transparent 50%),radial-gradient(ellipse at 85% 30%,rgba(59,130,246,.4) 0%,transparent 40%)" }} />
+        {/* Imagen de fondo CTA (7) — cuando la tengas, aparece aquí */}
         {IMAGES.ctaBg && (
           <div className="absolute inset-0 opacity-10 mix-blend-luminosity">
             <Image src={IMAGES.ctaBg} alt="" fill className="object-cover" />
@@ -497,6 +374,7 @@ function PricingCard({ plan, index }) {
           </div>
         ))}
       </div>
+      {/* Botón → /precios (no WhatsApp) */}
       <Link href="/precios"
         className={`mt-9 inline-flex w-full items-center justify-center gap-3 rounded-full py-4 text-[14px] font-black transition-all hover:scale-[1.02] cursor-pointer ${g ? "bg-white text-[#6B21A8] hover:bg-white/90" : "bg-[#6B21A8] text-white hover:bg-[#5B1A9A] hover:shadow-[0_8px_24px_rgba(107,33,168,.3)]"}`}>
         Ver detalle <Icon name="arrow" size={15} />
@@ -577,14 +455,16 @@ function ContactForm() {
           <p className="mt-5 max-w-[520px] text-[18px] leading-[1.7] text-[#6B7280]">Te ayudamos a entender qué necesitas y cómo organizar tu negocio de forma simple. La primera asesoría es gratis y sin compromiso.</p>
           <div className="mt-8 overflow-hidden rounded-[24px] shadow-[0_20px_60px_rgba(107,33,168,.12)]" style={{ aspectRatio: "16/9" }}>
             {IMAGES.contact ? (
-              <Image src={IMAGES.contact} alt="Equipo DG Solutions" fill className="object-cover"
+              <Image src={IMAGES.contact} alt="Equipo DG Solutions" fill className="object-cover" loading="lazy"
                 style={{ filter: "saturate(0.8) hue-rotate(220deg) brightness(1.05)" }} />
             ) : (
-              <div className="flex h-full w-full flex-col items-center justify-center gap-3 bg-[#EDE9FE]">
-                <div className="grid h-16 w-16 place-items-center rounded-full bg-[#DDD6FE]">
-                  <Icon name="users" size={28} className="text-[#7C3AED]" />
+              <div className="flex h-full w-full items-center justify-center bg-[#EDE9FE]">
+                <div className="text-center">
+                  <div className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-[#DDD6FE]">
+                    <Icon name="users" size={28} className="text-[#7C3AED]" />
+                  </div>
+                  <p className="mt-3 text-[13px] font-semibold text-[#9CA3AF]">Foto del equipo próximamente</p>
                 </div>
-                <p className="text-[13px] font-semibold text-[#9CA3AF]">Foto del equipo próximamente</p>
               </div>
             )}
           </div>
@@ -640,11 +520,10 @@ function ContactForm() {
 
 function Footer() {
   const links = [
-    { href: "/#home", label: "Home" },
-    { href: "/#soluciones", label: "Soluciones" },
+    { href: "#home", label: "Home" },
+    { href: "#soluciones", label: "Soluciones" },
     { href: "/precios", label: "Precios" },
-    { href: "/plantillas", label: "Plantillas" },
-    { href: "/#contact", label: "Contacto" },
+    { href: "#contact", label: "Contacto" },
   ];
   return (
     <footer className="border-t border-[#EDE9FE] bg-white px-6 py-10 md:px-12 lg:px-20">
@@ -655,10 +534,7 @@ function Footer() {
             <Link key={href} href={href} className="text-[13px] font-bold uppercase tracking-[0.08em] text-[#6B7280] hover:text-[#6B21A8] cursor-pointer">{label}</Link>
           ))}
         </nav>
-        <div className="text-center md:text-right">
-          <p className="text-[12px] text-[#9CA3AF]">© 2026 DG Solutions. Todos los derechos reservados.</p>
-          <p className="mt-1 text-[11px] text-[#C4C9D4]">Mazatlán, Sinaloa — Todo México</p>
-        </div>
+        <p className="text-[12px] text-[#9CA3AF]">© 2026 DG Solutions. Todos los derechos reservados.</p>
       </div>
     </footer>
   );
@@ -685,12 +561,11 @@ function ScrollToTop() {
   );
 }
 
-export default function DGSolutionsV4() {
+export default function DGSolutionsV3() {
   return (
     <main className="min-h-screen scroll-smooth bg-white font-sans text-[#111318] antialiased selection:bg-[#6B21A8] selection:text-white">
       <Header />
       <Hero />
-      <IntegrationsStrip />
       <ProblemSection />
       <CTABanner />
       <SolutionsSection />
