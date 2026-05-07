@@ -2,6 +2,8 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
+import Image from "next/image";
 
 const WHATSAPP_URL = "https://wa.me/526692291474";
 
@@ -139,13 +141,13 @@ function Icon({ name, size = 22, className = "", style }) {
 // ─── Logo con PNG real ────────────────────────────────────────────────────────
 function Logo() {
   return (
-    <a href="#home" className="flex items-center gap-3 cursor-pointer" aria-label="DG Solutions">
-      <img src="/IMAGES/LOGO1.png" alt="DG Solutions" className="h-10 w-10 object-contain md:h-12 md:w-12" />
+    <Link href="#home" className="flex items-center gap-3 cursor-pointer" aria-label="DG Solutions">
+      <Image src="/IMAGES/LOGO1.png" alt="DG Solutions" width={48} height={48} className="object-contain md:h-12 md:w-12" />
       <div className="leading-none">
         <p className="text-[20px] font-black tracking-[-0.08em] text-[#5F24D6] md:text-[24px]">DG SOLUTIONS</p>
         <p className="mt-[3px] text-[7.5px] font-bold tracking-[0.12em] uppercase text-[#7C3AED]/60 md:text-[8.5px]">Hazlo Simple. Hazlo Inteligente.</p>
       </div>
-    </a>
+    </Link>
   );
 }
 
@@ -169,7 +171,7 @@ function Header() {
         <Logo />
         <nav className="hidden items-center gap-10 md:flex">
           {links.map(({ href, label }) => (
-            <a key={href} href={href} className="text-[12.5px] font-bold uppercase tracking-[0.1em] text-[#374151] transition-colors hover:text-[#6B21A8] cursor-pointer">{label}</a>
+            <Link key={href} href={href} className="text-[12.5px] font-bold uppercase tracking-[0.1em] text-[#374151] transition-colors hover:text-[#6B21A8] cursor-pointer">{label}</Link>
           ))}
         </nav>
         <div className="hidden md:flex">
@@ -187,7 +189,7 @@ function Header() {
           <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} className="overflow-hidden border-t border-[#F0EAFB] bg-white md:hidden">
             <div className="flex flex-col gap-1 px-6 py-5">
               {links.map(({ href, label }) => (
-                <a key={href} href={href} onClick={() => setOpen(false)} className="rounded-xl px-4 py-3 text-[14px] font-bold text-[#111318] hover:bg-[#F5F0FF] hover:text-[#6B21A8] cursor-pointer">{label}</a>
+                <Link key={href} href={href} onClick={() => setOpen(false)} className="rounded-xl px-4 py-3 text-[14px] font-bold text-[#111318] hover:bg-[#F5F0FF] hover:text-[#6B21A8] cursor-pointer">{label}</Link>
               ))}
               <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center justify-center gap-3 rounded-full bg-[#6B21A8] px-6 py-4 text-[14px] font-black text-white cursor-pointer">
                 <Icon name="whatsapp" size={16} /> WhatsApp
@@ -212,7 +214,7 @@ function Hero() {
       {/* Imagen de fondo decorativa (6) — cuando la tengas, aparece aquí */}
       {IMAGES.heroBg && (
         <div className="absolute inset-0 opacity-10">
-          <img src={IMAGES.heroBg} alt="" className="w-full h-full object-cover" />
+          <Image src={IMAGES.heroBg} alt="" fill className="object-cover" />
         </div>
       )}
       <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 30% 55%,rgba(255,255,255,.28) 0%,transparent 55%),radial-gradient(ellipse at 80% 20%,rgba(196,181,253,.35) 0%,transparent 45%)" }} />
@@ -289,7 +291,7 @@ function CTABanner() {
         {/* Imagen de fondo CTA (7) — cuando la tengas, aparece aquí */}
         {IMAGES.ctaBg && (
           <div className="absolute inset-0 opacity-10 mix-blend-luminosity">
-            <img src={IMAGES.ctaBg} alt="" className="w-full h-full object-cover" />
+            <Image src={IMAGES.ctaBg} alt="" fill className="object-cover" />
           </div>
         )}
         <div className="relative z-10 mx-auto max-w-[720px]">
@@ -321,8 +323,7 @@ function SolutionsSection() {
               className={`grid items-center gap-14 lg:grid-cols-2 ${i % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""}`}>
               <div className="relative overflow-hidden rounded-[28px] shadow-[0_24px_64px_rgba(0,0,0,.1)]" style={{ aspectRatio: "16/10" }}>
                 {img ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img src={img} alt={title} className="w-full h-full object-cover" loading="lazy" />
+                  <Image src={img} alt={title} fill className="object-cover" loading="lazy" />
                 ) : (
                   <ImagePlaceholder color={placeholderColor} icon={icon} accent={accent} />
                 )}
@@ -334,11 +335,11 @@ function SolutionsSection() {
                 </div>
                 <h3 className="text-[32px] font-black tracking-[-0.04em] text-[#111318] md:text-[40px]">{title}</h3>
                 <p className="mt-4 text-[18px] leading-[1.75] text-[#6B7280]">{text}</p>
-                <a href="#contact"
+                <Link href="/#contact"
                   className="mt-8 inline-flex items-center gap-3 rounded-full px-7 py-3.5 text-[14px] font-black text-white transition-all hover:opacity-90 hover:scale-[1.03] cursor-pointer"
                   style={{ background: accent }}>
                   Saber más <Icon name="arrow" size={15} />
-                </a>
+                </Link>
               </div>
             </motion.div>
           ))}
@@ -374,10 +375,10 @@ function PricingCard({ plan, index }) {
         ))}
       </div>
       {/* Botón → /precios (no WhatsApp) */}
-      <a href="/precios"
+      <Link href="/precios"
         className={`mt-9 inline-flex w-full items-center justify-center gap-3 rounded-full py-4 text-[14px] font-black transition-all hover:scale-[1.02] cursor-pointer ${g ? "bg-white text-[#6B21A8] hover:bg-white/90" : "bg-[#6B21A8] text-white hover:bg-[#5B1A9A] hover:shadow-[0_8px_24px_rgba(107,33,168,.3)]"}`}>
         Ver detalle <Icon name="arrow" size={15} />
-      </a>
+      </Link>
     </motion.div>
   );
 }
@@ -454,8 +455,7 @@ function ContactForm() {
           <p className="mt-5 max-w-[520px] text-[18px] leading-[1.7] text-[#6B7280]">Te ayudamos a entender qué necesitas y cómo organizar tu negocio de forma simple. La primera asesoría es gratis y sin compromiso.</p>
           <div className="mt-8 overflow-hidden rounded-[24px] shadow-[0_20px_60px_rgba(107,33,168,.12)]" style={{ aspectRatio: "16/9" }}>
             {IMAGES.contact ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img src={IMAGES.contact} alt="Equipo DG Solutions" className="w-full h-full object-cover" loading="lazy"
+              <Image src={IMAGES.contact} alt="Equipo DG Solutions" fill className="object-cover" loading="lazy"
                 style={{ filter: "saturate(0.8) hue-rotate(220deg) brightness(1.05)" }} />
             ) : (
               <div className="flex h-full w-full items-center justify-center bg-[#EDE9FE]">
@@ -531,7 +531,7 @@ function Footer() {
         <Logo />
         <nav className="flex flex-wrap justify-center gap-8">
           {links.map(({ href, label }) => (
-            <a key={href} href={href} className="text-[13px] font-bold uppercase tracking-[0.08em] text-[#6B7280] hover:text-[#6B21A8] cursor-pointer">{label}</a>
+            <Link key={href} href={href} className="text-[13px] font-bold uppercase tracking-[0.08em] text-[#6B7280] hover:text-[#6B21A8] cursor-pointer">{label}</Link>
           ))}
         </nav>
         <p className="text-[12px] text-[#9CA3AF]">© 2026 DG Solutions. Todos los derechos reservados.</p>

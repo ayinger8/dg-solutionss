@@ -2,6 +2,8 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
+import Image from "next/image";
 
 const WHATSAPP_URL = "https://wa.me/526692291474";
 
@@ -51,13 +53,13 @@ function Icon({ name, size = 22, className = "" }) {
 
 function Logo() {
   return (
-    <a href="/" className="flex items-center gap-3 cursor-pointer" aria-label="DG Solutions">
-      <img src="/IMAGES/LOGO1.png" alt="DG Solutions" className="h-10 w-10 object-contain md:h-12 md:w-12" />
+    <Link href="/" className="flex items-center gap-3 cursor-pointer" aria-label="DG Solutions">
+      <Image src="/IMAGES/LOGO1.png" alt="DG Solutions" width={48} height={48} className="object-contain md:h-12 md:w-12" />
       <div className="leading-none">
         <p className="text-[20px] font-black tracking-[-0.08em] text-[#5F24D6] md:text-[24px]">DG SOLUTIONS</p>
         <p className="mt-[3px] text-[7.5px] font-bold tracking-[0.12em] uppercase text-[#7C3AED]/60 md:text-[8.5px]">Hazlo Simple. Hazlo Inteligente.</p>
       </div>
-    </a>
+    </Link>
   );
 }
 
@@ -75,7 +77,7 @@ function Header() {
         <Logo />
         <nav className="hidden items-center gap-10 md:flex">
           {links.map(({ href, label }) => (
-            <a key={href} href={href} className="text-[12.5px] font-bold uppercase tracking-[0.1em] text-[#374151] transition-colors hover:text-[#6B21A8] cursor-pointer">{label}</a>
+            <Link key={href} href={href} className="text-[12.5px] font-bold uppercase tracking-[0.1em] text-[#374151] transition-colors hover:text-[#6B21A8] cursor-pointer">{label}</Link>
           ))}
         </nav>
         <div className="hidden md:flex">
@@ -93,7 +95,7 @@ function Header() {
           <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} className="overflow-hidden border-t border-[#F0EAFB] bg-white md:hidden">
             <div className="flex flex-col gap-1 px-6 py-5">
               {links.map(({ href, label }) => (
-                <a key={href} href={href} onClick={() => setOpen(false)} className="rounded-xl px-4 py-3 text-[14px] font-bold text-[#111318] hover:bg-[#F5F0FF] hover:text-[#6B21A8] cursor-pointer">{label}</a>
+                <Link key={href} href={href} onClick={() => setOpen(false)} className="rounded-xl px-4 py-3 text-[14px] font-bold text-[#111318] hover:bg-[#F5F0FF] hover:text-[#6B21A8] cursor-pointer">{label}</Link>
               ))}
               <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center justify-center gap-3 rounded-full bg-[#6B21A8] px-6 py-4 text-[14px] font-black text-white cursor-pointer">
                 <Icon name="whatsapp" size={16} /> WhatsApp
@@ -319,9 +321,9 @@ function FinalCTA() {
           <p className="mb-4 text-[12px] font-black uppercase tracking-[0.22em] text-[#c4b5fd]">Sin costo, sin compromiso</p>
           <h2 className="text-[34px] font-black leading-[1.05] tracking-[-0.055em] text-white md:text-[48px]">¿No sabes cuál elegir?</h2>
           <p className="mx-auto mt-5 max-w-[500px] text-[18px] leading-[1.65] text-white/75">Agenda tu diagnóstico gratis y te ayudamos a encontrar la herramienta correcta para tu negocio.</p>
-          <a href="/#contact" className="mt-9 inline-flex items-center gap-3 rounded-full border border-white/30 bg-white/15 px-9 py-[1.1rem] text-[15px] font-black text-white transition-all hover:bg-white hover:text-[#4c1d95] cursor-pointer">
+          <Link href="/#contact" className="mt-9 inline-flex items-center gap-3 rounded-full border border-white/30 bg-white/15 px-9 py-[1.1rem] text-[15px] font-black text-white transition-all hover:bg-white hover:text-[#4c1d95] cursor-pointer">
             Agendar diagnóstico gratis <Icon name="arrow" size={17} />
-          </a>
+          </Link>
         </div>
       </motion.div>
     </section>
@@ -336,7 +338,7 @@ function Footer() {
         <Logo />
         <nav className="flex flex-wrap justify-center gap-8">
           {links.map(({ href, label }) => (
-            <a key={href} href={href} className="text-[13px] font-bold uppercase tracking-[0.08em] text-[#6B7280] hover:text-[#6B21A8] cursor-pointer">{label}</a>
+            <Link key={href} href={href} className="text-[13px] font-bold uppercase tracking-[0.08em] text-[#6B7280] hover:text-[#6B21A8] cursor-pointer">{label}</Link>
           ))}
         </nav>
         <p className="text-[12px] text-[#9CA3AF]">© 2026 DG Solutions. Todos los derechos reservados.</p>
