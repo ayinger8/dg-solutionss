@@ -52,13 +52,10 @@ function Icon({ name, size = 22, className = "" }) {
 function Logo() {
   return (
     <a href="/" className="flex items-center gap-3 cursor-pointer" aria-label="DG Solutions">
+      <img src="/IMAGES/LOGO1.png" alt="DG Solutions" className="h-10 w-10 object-contain md:h-12 md:w-12" />
       <div className="leading-none">
         <p className="text-[20px] font-black tracking-[-0.08em] text-[#5F24D6] md:text-[24px]">DG SOLUTIONS</p>
         <p className="mt-[3px] text-[7.5px] font-bold tracking-[0.12em] uppercase text-[#7C3AED]/60 md:text-[8.5px]">Hazlo Simple. Hazlo Inteligente.</p>
-      </div>
-      <div className="relative h-12 w-12 md:h-16 md:w-16 shrink-0">
-        <div className="absolute inset-2 rotate-45 rounded-md border-[8px] border-[#6B21A8] border-l-transparent" />
-        <div className="absolute left-[18px] top-[18px] h-6 w-6 rotate-45 rounded-sm border-[6px] border-[#8B5CF6] border-r-transparent md:left-[22px] md:top-[22px]" />
       </div>
     </a>
   );

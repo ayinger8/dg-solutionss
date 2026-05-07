@@ -8,9 +8,9 @@ const WHATSAPP_URL = "https://wa.me/526692291474";
 // ─── Imágenes ────────────────────────────────────────────────────────────────
 // Cambia el nombre del archivo si es diferente al que subiste
 const IMAGES = {
-  sol1:     "/IMAGES/1.jpg",      // Solución — Ordena tu negocio
-  sol2:     "/IMAGES/2.jpg",      // Solución — Ahorra tiempo
-  sol3:     "/IMAGES/3.jpg",      // Solución — Trabaja más inteligente
+  sol1:     "/IMAGES/1.png",      // Solución — Ordena tu negocio
+  sol2:     "/IMAGES/2.png",      // Solución — Ahorra tiempo
+  sol3:     "/IMAGES/3.png",      // Solución — Trabaja más inteligente
   sol4:     null,                  // Solución — Haz que te encuentren (pendiente)
   contact:  null,                  // Foto contacto (pendiente)
   heroBg:   null,                  // Hero fondo decorativo (pendiente)
