@@ -56,8 +56,8 @@ function Logo() {
     <Link href="/" className="flex items-center gap-3 cursor-pointer" aria-label="DG Solutions">
       <Image src="/IMAGES/LOGO1.png" alt="DG Solutions" width={48} height={48} className="object-contain md:h-12 md:w-12" />
       <div className="leading-none">
-        <p className="text-[20px] font-black tracking-[-0.08em] text-[#5F24D6] md:text-[24px]">DG SOLUTIONS</p>
-        <p className="mt-[3px] text-[7.5px] font-bold tracking-[0.12em] uppercase text-[#7C3AED]/60 md:text-[8.5px]">Hazlo Simple. Hazlo Inteligente.</p>
+        <p className="text-[20px] font-black tracking-[-0.08em] text-[var(--color-primary-logo)] md:text-[24px]">DG SOLUTIONS</p>
+        <p className="mt-[3px] text-[7.5px] font-bold tracking-[0.12em] uppercase text-[var(--color-primary-accent)]/60 md:text-[8.5px]">Hazlo Simple. Hazlo Inteligente.</p>
       </div>
     </Link>
   );
@@ -77,27 +77,27 @@ function Header() {
         <Logo />
         <nav className="hidden items-center gap-10 md:flex">
           {links.map(({ href, label }) => (
-            <Link key={href} href={href} className="text-[12.5px] font-bold uppercase tracking-[0.1em] text-[#374151] transition-colors hover:text-[#6B21A8] cursor-pointer">{label}</Link>
+            <Link key={href} href={href} className="text-[12.5px] font-bold uppercase tracking-[0.1em] text-[var(--color-text-body)] transition-colors hover:text-[var(--color-primary)] cursor-pointer">{label}</Link>
           ))}
         </nav>
         <div className="hidden md:flex">
           <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 rounded-full bg-[#6B21A8] px-7 py-3.5 text-[14px] font-black text-white transition-all hover:bg-[#5B1A9A] hover:shadow-[0_8px_24px_rgba(107,33,168,.3)] cursor-pointer">
+            className="btn-primary !px-7 !py-3.5 !text-[14px]">
             <Icon name="whatsapp" size={16} /> WhatsApp
           </a>
         </div>
-        <button onClick={() => setOpen(!open)} className="grid h-10 w-10 place-items-center rounded-full bg-[#6B21A8] text-white md:hidden cursor-pointer" aria-label="Menú">
+        <button onClick={() => setOpen(!open)} className="grid h-10 w-10 place-items-center rounded-full bg-[var(--color-primary)] text-white md:hidden cursor-pointer" aria-label="Menú">
           <Icon name={open ? "x" : "menu"} size={18} />
         </button>
       </div>
       <AnimatePresence>
         {open && (
-          <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} className="overflow-hidden border-t border-[#F0EAFB] bg-white md:hidden">
+          <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} className="overflow-hidden border-t border-[var(--color-section-border)] bg-white md:hidden">
             <div className="flex flex-col gap-1 px-6 py-5">
               {links.map(({ href, label }) => (
-                <Link key={href} href={href} onClick={() => setOpen(false)} className="rounded-xl px-4 py-3 text-[14px] font-bold text-[#111318] hover:bg-[#F5F0FF] hover:text-[#6B21A8] cursor-pointer">{label}</Link>
+                <Link key={href} href={href} onClick={() => setOpen(false)} className="rounded-xl px-4 py-3 text-[14px] font-bold text-[var(--color-text-main)] hover:bg-[var(--color-primary-muted)] hover:text-[var(--color-primary)] cursor-pointer">{label}</Link>
               ))}
-              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center justify-center gap-3 rounded-full bg-[#6B21A8] px-6 py-4 text-[14px] font-black text-white cursor-pointer">
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center justify-center gap-3 rounded-full bg-[var(--color-primary)] px-6 py-4 text-[14px] font-black text-white cursor-pointer">
                 <Icon name="whatsapp" size={16} /> WhatsApp
               </a>
             </div>
@@ -111,7 +111,7 @@ function Header() {
 function Hero() {
   return (
     <section className="relative overflow-hidden min-h-[72vh] flex items-center justify-center"
-      style={{ background: "linear-gradient(135deg,#ddd6fe 0%,#bfdbfe 38%,#c7d2fe 65%,#e9d5ff 100%)" }}>
+      style={{ background: "linear-gradient(135deg,var(--gradient-1) 0%,var(--gradient-2) 38%,var(--gradient-3) 65%,var(--gradient-4) 100%)" }}>
       <style>{WAVE_CSS}</style>
       <div className="absolute inset-0 overflow-hidden">
         <div className="dw dw4" /><div className="dw dw5" />
@@ -120,14 +120,14 @@ function Hero() {
       <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 30% 55%,rgba(255,255,255,.28) 0%,transparent 55%),radial-gradient(ellipse at 80% 20%,rgba(196,181,253,.35) 0%,transparent 45%)" }} />
       <div className="relative z-10 mx-auto max-w-[1500px] px-6 md:px-12 lg:px-20 pt-28 pb-20 text-center">
         <motion.div {...fadeUp}>
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/50 bg-white/40 px-5 py-2.5 text-[12px] font-bold text-[#4c1d95] backdrop-blur-sm">
-            <Icon name="package" size={13} className="text-[#6B21A8]" />
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/50 bg-white/40 px-5 py-2.5 text-[12px] font-bold text-[var(--color-primary-dark)] backdrop-blur-sm">
+            <Icon name="package" size={13} className="text-[var(--color-primary)]" />
             Listas para usar desde el primer día
           </div>
-          <h1 className="mx-auto max-w-[760px] text-[46px] font-black leading-[.92] tracking-[-0.06em] text-[#1e1b4b] md:text-[68px] lg:text-[86px]">
+          <h1 className="mx-auto max-w-[760px] text-[46px] font-black leading-[.92] tracking-[-0.06em] text-[var(--color-text-main)] md:text-[68px] lg:text-[86px]">
             Herramientas listas para usar
           </h1>
-          <p className="mx-auto mt-7 max-w-[580px] text-[18px] leading-[1.7] text-[#3730a3]/80">
+          <p className="mx-auto mt-7 max-w-[580px] text-[18px] leading-[1.7] text-[var(--color-text-body)]/80">
             Plantillas diseñadas para negocios reales, listas para implementar desde el primer día.
           </p>
         </motion.div>
@@ -149,9 +149,9 @@ const templates = [
       "Vista rápida de pendientes del día",
     ],
     cta: "Solicitar plantilla",
-    color: "#7C3AED",
-    bg: "#F5F0FF",
-    border: "#DDD6FE",
+    color: "var(--color-primary-accent)",
+    bg: "var(--color-primary-muted)",
+    border: "var(--color-primary-border)",
   },
   {
     icon: "trending",
@@ -164,9 +164,9 @@ const templates = [
       "Indicador simple de rentabilidad",
     ],
     cta: "Solicitar plantilla",
-    color: "#059669",
-    bg: "#ECFDF5",
-    border: "#A7F3D0",
+    color: "var(--color-success)",
+    bg: "var(--color-success-bg)",
+    border: "var(--color-success-border)",
   },
   {
     icon: "users",
@@ -179,9 +179,9 @@ const templates = [
       "Estado de cada relación comercial",
     ],
     cta: "Solicitar plantilla",
-    color: "#2563EB",
-    bg: "#EFF6FF",
-    border: "#BFDBFE",
+    color: "var(--color-blue-accent)",
+    bg: "var(--color-blue-bg)",
+    border: "var(--color-blue-border)",
   },
   {
     icon: "edit",
@@ -194,9 +194,9 @@ const templates = [
       "Seguimiento de publicaciones realizadas",
     ],
     cta: "Solicitar plantilla",
-    color: "#EA580C",
-    bg: "#FFF7ED",
-    border: "#FED7AA",
+    color: "var(--color-orange-accent)",
+    bg: "var(--color-orange-bg)",
+    border: "var(--color-orange-border)",
   },
   {
     icon: "clock",
@@ -209,9 +209,9 @@ const templates = [
       "Vista semanal de ocupación",
     ],
     cta: "Solicitar plantilla",
-    color: "#7C3AED",
-    bg: "#F5F0FF",
-    border: "#DDD6FE",
+    color: "var(--color-primary-accent)",
+    bg: "var(--color-primary-muted)",
+    border: "var(--color-primary-border)",
   },
   {
     icon: "package",
@@ -224,9 +224,9 @@ const templates = [
       "Registro de entradas y salidas",
     ],
     cta: "Solicitar plantilla",
-    color: "#059669",
-    bg: "#ECFDF5",
-    border: "#A7F3D0",
+    color: "var(--color-success)",
+    bg: "var(--color-success-bg)",
+    border: "var(--color-success-border)",
   },
 ];
 
@@ -240,14 +240,14 @@ function TemplateCard({ template, index }) {
       <div className="mb-5 grid h-12 w-12 place-items-center rounded-[14px]" style={{ background: bg, color }}>
         <Icon name={icon} size={22} />
       </div>
-      <h3 className="text-[20px] font-black tracking-[-0.03em] text-[#111318]">{name}</h3>
+      <h3 className="text-[20px] font-black tracking-[-0.03em] text-[var(--color-text-main)]">{name}</h3>
       <p className="mt-1 text-[13px] font-bold uppercase tracking-[0.1em]" style={{ color }}>Para {use}</p>
-      <p className="mt-4 text-[14px] leading-[1.65] text-[#6B7280]">{forWho}</p>
+      <p className="mt-4 text-[14px] leading-[1.65] text-[var(--color-text-secondary)]">{forWho}</p>
       <div className="mt-6 flex-1 space-y-3">
         {features.map((f) => (
-          <div key={f} className="flex items-start gap-3 text-[14px] text-[#374151]">
-            <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-[#EDE9FE]">
-              <Icon name="check" size={11} className="text-[#7C3AED]" />
+          <div key={f} className="flex items-start gap-3 text-[14px] text-[var(--color-text-body)]">
+            <span className="mt-0.5 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-[var(--color-primary-muted)]">
+              <Icon name="check" size={11} className="text-[var(--color-primary-accent)]" />
             </span>
             {f}
           </div>
@@ -268,9 +268,9 @@ function Templates() {
     <section className="bg-white px-6 py-24 md:px-12 lg:px-20">
       <div className="mx-auto max-w-[1500px]">
         <motion.div {...fadeUp} className="mx-auto max-w-[760px] text-center mb-16">
-          <p className="text-[12px] font-black uppercase tracking-[0.22em] text-[#059669]">Plantillas disponibles</p>
-          <h2 className="mt-4 text-[38px] font-black leading-[1.08] tracking-[-0.055em] text-[#111318] md:text-[52px]">Elige la que necesitas</h2>
-          <p className="mt-5 text-[19px] text-[#6B7280]">Herramientas concretas para los problemas más comunes de los negocios pequeños.</p>
+          <p className="text-[12px] font-black uppercase tracking-[0.22em] text-[var(--color-success)]">Plantillas disponibles</p>
+          <h2 className="mt-4 text-[38px] font-black leading-[1.08] tracking-[-0.055em] text-[var(--color-text-main)] md:text-[52px]">Elige la que necesitas</h2>
+          <p className="mt-5 text-[19px] text-[var(--color-text-secondary)]">Herramientas concretas para los problemas más comunes de los negocios pequeños.</p>
         </motion.div>
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {templates.map((t, i) => <TemplateCard key={t.name} template={t} index={i} />)}
@@ -282,16 +282,16 @@ function Templates() {
 
 function DifferentiatorBlock() {
   return (
-    <section className="px-6 py-20 md:px-12 lg:px-20" style={{ background: "linear-gradient(180deg,#faf5ff 0%,#eff6ff 100%)" }}>
-      <motion.div {...fadeUp} className="mx-auto max-w-[900px] rounded-[32px] border border-[#EDE9FE] bg-white px-10 py-14 shadow-[0_16px_48px_rgba(107,33,168,.08)] text-center md:px-16">
-        <div className="mx-auto mb-5 grid h-14 w-14 place-items-center rounded-[16px] bg-[#EDE9FE] text-[#7C3AED]">
+    <section className="px-6 py-20 md:px-12 lg:px-20" style={{ background: "linear-gradient(180deg,var(--color-card-bg) 0%,#eff6ff 100%)" }}>
+      <motion.div {...fadeUp} className="mx-auto max-w-[900px] rounded-[32px] border border-[var(--color-primary-border)] bg-white px-10 py-14 shadow-[0_16px_48px_rgba(107,33,168,.08)] text-center md:px-16">
+        <div className="mx-auto mb-5 grid h-14 w-14 place-items-center rounded-[16px] bg-[var(--color-primary-muted)] text-[var(--color-primary-accent)]">
           <Icon name="refresh" size={26} />
         </div>
-        <p className="text-[12px] font-black uppercase tracking-[0.22em] text-[#059669] mb-3">Pensado para crecer</p>
-        <h3 className="text-[28px] font-black leading-[1.1] tracking-[-0.04em] text-[#111318] md:text-[36px]">
+        <p className="text-[12px] font-black uppercase tracking-[0.22em] text-[var(--color-success)] mb-3">Pensado para crecer</p>
+        <h3 className="text-[28px] font-black leading-[1.1] tracking-[-0.04em] text-[var(--color-text-main)] md:text-[36px]">
           De plantilla a sistema personalizado
         </h3>
-        <p className="mx-auto mt-5 max-w-[600px] text-[18px] leading-[1.7] text-[#6B7280]">
+        <p className="mx-auto mt-5 max-w-[600px] text-[18px] leading-[1.7] text-[var(--color-text-secondary)]">
           Todas las plantillas pueden escalar a un sistema personalizado según el crecimiento de tu negocio.
         </p>
         <div className="mx-auto mt-10 grid max-w-[720px] gap-4 md:grid-cols-3">
@@ -300,9 +300,9 @@ function DifferentiatorBlock() {
             { step: "02", label: "La ajustamos a tu forma de trabajar" },
             { step: "03", label: "Escalamos cuando lo necesitas" },
           ].map(({ step, label }) => (
-            <div key={step} className="rounded-[18px] border border-[#EDE9FE] bg-[#FDFCFF] p-5">
-              <p className="text-[12px] font-black tracking-[0.12em] text-[#9CA3AF] uppercase">Paso {step}</p>
-              <p className="mt-2 text-[15px] font-bold text-[#111318]">{label}</p>
+            <div key={step} className="rounded-[18px] border border-[var(--color-primary-border)] bg-[var(--color-card-bg)] p-5">
+              <p className="text-[12px] font-black tracking-[0.12em] text-[var(--color-text-muted)] uppercase">Paso {step}</p>
+              <p className="mt-2 text-[15px] font-bold text-[var(--color-text-main)]">{label}</p>
             </div>
           ))}
         </div>
@@ -313,15 +313,15 @@ function DifferentiatorBlock() {
 
 function FinalCTA() {
   return (
-    <section className="px-6 py-12 pb-24 md:px-12 lg:px-20" style={{ background: "linear-gradient(135deg,#ede9fe 0%,#dbeafe 100%)" }}>
+    <section className="px-6 py-12 pb-24 md:px-12 lg:px-20" style={{ background: "linear-gradient(135deg,var(--color-primary-border) 0%,var(--color-blue-border) 100%)" }}>
       <motion.div {...fadeUp} className="relative mx-auto max-w-[1350px] overflow-hidden rounded-[32px] px-8 py-20 text-center md:px-16"
-        style={{ background: "linear-gradient(135deg,#4c1d95 0%,#1e40af 100%)" }}>
+        style={{ background: "linear-gradient(135deg,var(--color-primary-dark) 0%,#1e40af 100%)" }}>
         <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 20% 50%,rgba(139,92,246,.6) 0%,transparent 50%),radial-gradient(ellipse at 85% 30%,rgba(59,130,246,.4) 0%,transparent 40%)" }} />
         <div className="relative z-10 mx-auto max-w-[620px]">
-          <p className="mb-4 text-[12px] font-black uppercase tracking-[0.22em] text-[#c4b5fd]">Sin costo, sin compromiso</p>
+          <p className="mb-4 text-[12px] font-black uppercase tracking-[0.22em] text-[var(--color-primary-border)]">Sin costo, sin compromiso</p>
           <h2 className="text-[34px] font-black leading-[1.05] tracking-[-0.055em] text-white md:text-[48px]">¿No sabes cuál elegir?</h2>
           <p className="mx-auto mt-5 max-w-[500px] text-[18px] leading-[1.65] text-white/75">Agenda tu diagnóstico gratis y te ayudamos a encontrar la herramienta correcta para tu negocio.</p>
-          <Link href="/#contact" className="mt-9 inline-flex items-center gap-3 rounded-full border border-white/30 bg-white/15 px-9 py-[1.1rem] text-[15px] font-black text-white transition-all hover:bg-white hover:text-[#4c1d95] cursor-pointer">
+          <Link href="/#contact" className="mt-9 inline-flex items-center gap-3 rounded-full border border-white/30 bg-white/15 px-9 py-[1.1rem] text-[15px] font-black text-white transition-all hover:bg-white hover:text-[var(--color-primary-dark)] cursor-pointer">
             Agendar diagnóstico gratis <Icon name="arrow" size={17} />
           </Link>
         </div>
@@ -333,15 +333,15 @@ function FinalCTA() {
 function Footer() {
   const links = [{ href: "/", label: "Home" }, { href: "/#soluciones", label: "Soluciones" }, { href: "/precios", label: "Precios" }, { href: "/#contact", label: "Contacto" }];
   return (
-    <footer className="border-t border-[#EDE9FE] bg-white px-6 py-10 md:px-12 lg:px-20">
+    <footer className="border-t border-[var(--color-primary-border)] bg-white px-6 py-10 md:px-12 lg:px-20">
       <div className="mx-auto flex max-w-[1500px] flex-col items-center justify-between gap-8 md:flex-row">
         <Logo />
         <nav className="flex flex-wrap justify-center gap-8">
           {links.map(({ href, label }) => (
-            <Link key={href} href={href} className="text-[13px] font-bold uppercase tracking-[0.08em] text-[#6B7280] hover:text-[#6B21A8] cursor-pointer">{label}</Link>
+            <Link key={href} href={href} className="text-[13px] font-bold uppercase tracking-[0.08em] text-[var(--color-text-secondary)] hover:text-[var(--color-primary)] cursor-pointer">{label}</Link>
           ))}
         </nav>
-        <p className="text-[12px] text-[#9CA3AF]">© 2026 DG Solutions. Todos los derechos reservados.</p>
+        <p className="text-[12px] text-[var(--color-text-muted)]">© 2026 DG Solutions. Todos los derechos reservados.</p>
       </div>
     </footer>
   );
@@ -349,7 +349,7 @@ function Footer() {
 
 export default function PlantillasPage() {
   return (
-    <main className="min-h-screen scroll-smooth bg-white font-sans text-[#111318] antialiased selection:bg-[#6B21A8] selection:text-white">
+    <main className="min-h-screen scroll-smooth bg-white font-sans text-[var(--color-text-main)] antialiased selection:bg-[var(--color-primary)] selection:text-white">
       <Header />
       <Hero />
       <Templates />

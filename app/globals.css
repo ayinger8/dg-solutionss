@@ -1,18 +1,69 @@
 @import "tailwindcss";
 
 :root {
+  /* Brand Colors */
+  --color-primary: #6B21A8;
+  --color-primary-hover: #5B1A9A;
+  --color-primary-accent: #7C3AED;
+  --color-primary-dark: #4c1d95;
+  --color-primary-logo: #5F24D6;
+  
+  /* Backgrounds & Borders */
+  --color-primary-muted: #F5F0FF;
+  --color-primary-border: #EDE9FE;
+  --color-section-border: #F0EAFB;
+  
+  /* Status Colors */
+  --color-success: #059669;
+  --color-success-bg: #ECFDF5;
+  --color-success-border: #D1FAE5;
+  
+  /* Text Colors */
+  --color-text-main: #111318;
+  --color-text-body: #374151;
+  --color-text-muted: #9CA3AF;
+  --color-text-secondary: #6B7280;
+  --color-text-light: #C4C9D4;
+  
+  /* Other Accents */
+  --color-blue-accent: #2563EB;
+  --color-blue-bg: #EFF6FF;
+  --color-blue-border: #DBEAFE;
+  --color-orange-accent: #EA580C;
+  --color-orange-bg: #FFF7ED;
+  --color-orange-border: #FED7AA;
+  --color-yellow-popular: #FFC533;
+  
+  /* Gradients */
+  --gradient-1: #ddd6fe;
+  --gradient-2: #bfdbfe;
+  --gradient-3: #c7d2fe;
+  --gradient-4: #e9d5ff;
+
+  /* Global Settings */
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: var(--color-text-main);
 }
 
 @theme {
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-}
+  --font-poppins: var(--font-poppins), sans-serif;
+  --font-jakarta: var(--font-jakarta), sans-serif;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Extend Tailwind with our variables */
+  --color-primary: var(--color-primary);
+  --color-primary-hover: var(--color-primary-hover);
+  --color-primary-accent: var(--color-primary-accent);
+  --color-primary-muted: var(--color-primary-muted);
+  --color-primary-border: var(--color-primary-border);
+  
+  --color-success: var(--color-success);
+  --color-success-bg: var(--color-success-bg);
+  
+  --color-text-main: var(--color-text-main);
+  --color-text-body: var(--color-text-body);
+  --color-text-muted: var(--color-text-muted);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -25,7 +76,22 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Base Utility Classes */
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center gap-3 rounded-full bg-primary px-7 py-3.5 text-[14px] font-black text-white transition-all hover:bg-primary-hover hover:scale-[1.03] hover:shadow-[0_8px_24px_rgba(107,33,168,.3)] cursor-pointer;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center gap-2.5 rounded-full border border-primary/30 bg-white/60 px-8 py-[1.1rem] text-[16px] font-bold text-primary backdrop-blur-sm transition-all hover:bg-white hover:scale-[1.03] cursor-pointer;
+  }
+
+  .card-premium {
+    @apply rounded-[28px] border border-primary-border bg-[#FDFCFF] p-10 shadow-[0_8px_40px_rgba(107,33,168,.07)];
+  }
 }

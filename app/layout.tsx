@@ -74,7 +74,7 @@ export default function RootLayout({
       lang="es-MX"
       className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} ${jakarta.variable} h-full`}
     >
-      <body className="min-h-full flex flex-col font-sans antialiased">
+      <body className="min-h-full flex flex-col font-sans antialiased text-text-main">
         {children}
       </body>
     </html>

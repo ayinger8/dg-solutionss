@@ -75,17 +75,17 @@ const faqs = [
 ];
 
 const solutions = [
-  { title: "Ordena tu negocio", text: "Creamos herramientas para controlar ingresos y gastos, gestionar clientes y organizar pedidos o servicios en un solo lugar, sin depender de Excel o notas sueltas.", icon: "layers", img: IMAGES.sol1, accent: "#7C3AED", bg: "#F5F0FF", placeholderColor: "#EDE9FE" },
-  { title: "Ahorra tiempo", text: "Configuramos automatizaciones simples como recordatorios, respuestas y procesos básicos para reducir trabajo manual y evitar errores en tu operación diaria.", icon: "clock", img: IMAGES.sol2, accent: "#059669", bg: "#ECFDF5", placeholderColor: "#D1FAE5" },
-  { title: "Trabaja más inteligente", text: "Implementamos herramientas con IA que te ayudan a generar mensajes, textos y documentos, además de darte soporte práctico para resolver tareas más rápido.", icon: "cpu", img: IMAGES.sol3, accent: "#2563EB", bg: "#EFF6FF", placeholderColor: "#DBEAFE" },
-  { title: "Haz que te encuentren", text: "Desarrollamos páginas web simples y efectivas con contacto directo por WhatsApp, para que tu negocio se vea profesional y sea fácil de contactar.", icon: "globe", img: IMAGES.sol4, accent: "#EA580C", bg: "#FFF7ED", placeholderColor: "#FED7AA" },
+  { title: "Ordena tu negocio", text: "Creamos herramientas para controlar ingresos y gastos, gestionar clientes y organizar pedidos o servicios en un solo lugar, sin depender de Excel o notas sueltas.", icon: "layers", img: IMAGES.sol1, accent: "var(--color-primary-accent)", bg: "var(--color-primary-muted)", placeholderColor: "var(--color-primary-border)" },
+  { title: "Ahorra tiempo", text: "Configuramos automatizaciones simples como recordatorios, respuestas y procesos básicos para reducir trabajo manual y evitar errores en tu operación diaria.", icon: "clock", img: IMAGES.sol2, accent: "var(--color-success)", bg: "var(--color-success-bg)", placeholderColor: "var(--color-success-border)" },
+  { title: "Trabaja más inteligente", text: "Implementamos herramientas con IA que te ayudan a generar mensajes, textos y documentos, además de darte soporte práctico para resolver tareas más rápido.", icon: "cpu", img: IMAGES.sol3, accent: "var(--color-blue-accent)", bg: "var(--color-blue-bg)", placeholderColor: "var(--color-blue-border)" },
+  { title: "Haz que te encuentren", text: "Desarrollamos páginas web simples y efectivas con contacto directo por WhatsApp, para que tu negocio se vea profesional y sea fácil de contactar.", icon: "globe", img: IMAGES.sol4, accent: "var(--color-orange-accent)", bg: "var(--color-orange-bg)", placeholderColor: "var(--color-orange-border)" },
 ];
 
 const problems = [
-  { icon: "layers", title: "Todo disperso", desc: "Información en WhatsApp, Excel y notas sueltas. Imposible saber qué pasa en tu negocio.", color: "#7C3AED", bg: "#F5F0FF" },
-  { icon: "clock", title: "Tiempo perdido", desc: "Tareas repetitivas que consumen horas que podrías dedicar a crecer o descansar.", color: "#059669", bg: "#ECFDF5" },
-  { icon: "users", title: "Clientes perdidos", desc: "Sin seguimiento claro, las oportunidades de venta se escapan sin que te des cuenta.", color: "#2563EB", bg: "#EFF6FF" },
-  { icon: "globe", title: "Sin presencia digital", desc: "Tus clientes no te encuentran en línea, y los que llegan no saben cómo contactarte.", color: "#EA580C", bg: "#FFF7ED" },
+  { icon: "layers", title: "Todo disperso", desc: "Información en WhatsApp, Excel y notas sueltas. Imposible saber qué pasa en tu negocio.", color: "var(--color-primary-accent)", bg: "var(--color-primary-muted)" },
+  { icon: "clock", title: "Tiempo perdido", desc: "Tareas repetitivas que consumen horas que podrías dedicar a crecer o descansar.", color: "var(--color-success)", bg: "var(--color-success-bg)" },
+  { icon: "users", title: "Clientes perdidos", desc: "Sin seguimiento claro, las oportunidades de venta se escapan sin que te des cuenta.", color: "var(--color-blue-accent)", bg: "var(--color-blue-bg)" },
+  { icon: "globe", title: "Sin presencia digital", desc: "Tus clientes no te encuentran en línea, y los que llegan no saben cómo contactarte.", color: "var(--color-orange-accent)", bg: "var(--color-orange-bg)" },
 ];
 
 const steps = [
@@ -171,8 +171,8 @@ function Logo() {
     <Link href="/#home" className="flex items-center gap-3 cursor-pointer" aria-label="DG Solutions">
       <Image src="/IMAGES/LOGO1.png" alt="DG Solutions" width={48} height={48} className="object-contain" />
       <div className="leading-none">
-        <p className="text-[20px] font-black tracking-[-0.08em] text-[#5F24D6] md:text-[24px]">DG SOLUTIONS</p>
-        <p className="mt-[3px] text-[7.5px] font-bold tracking-[0.12em] uppercase text-[#7C3AED]/60 md:text-[8.5px]">Hazlo Simple. Hazlo Inteligente.</p>
+        <p className="text-[20px] font-black tracking-[-0.08em] text-[var(--color-primary-logo)] md:text-[24px]">DG SOLUTIONS</p>
+        <p className="mt-[3px] text-[7.5px] font-bold tracking-[0.12em] uppercase text-[var(--color-primary-accent)]/60 md:text-[8.5px]">Hazlo Simple. Hazlo Inteligente.</p>
       </div>
     </Link>
   );
@@ -198,31 +198,31 @@ function Header() {
         <Logo />
         <nav className="hidden items-center gap-8 md:flex">
           {links.map(({ href, label }) => (
-            <Link key={href} href={href} className="text-[12.5px] font-bold uppercase tracking-[0.1em] text-[#374151] transition-colors hover:text-[#6B21A8] cursor-pointer">{label}</Link>
+            <Link key={href} href={href} className="text-[12.5px] font-bold uppercase tracking-[0.1em] text-[var(--color-text-body)] transition-colors hover:text-[var(--color-primary)] cursor-pointer">{label}</Link>
           ))}
-          <Link href="/plantillas" className="inline-flex items-center gap-1.5 rounded-full border border-[#EDE9FE] bg-[#F5F0FF] px-3.5 py-1.5 text-[11px] font-black uppercase tracking-[0.08em] text-[#7C3AED] transition-all hover:bg-[#EDE9FE] cursor-pointer">
+          <Link href="/plantillas" className="inline-flex items-center gap-1.5 rounded-full border border-[var(--color-primary-border)] bg-[var(--color-primary-muted)] px-3.5 py-1.5 text-[11px] font-black uppercase tracking-[0.08em] text-[var(--color-primary-accent)] transition-all hover:bg-[var(--color-primary-border)] cursor-pointer">
             <Icon name="layout" size={11} /> Plantillas
           </Link>
         </nav>
         <div className="hidden md:flex">
           <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 rounded-full bg-[#6B21A8] px-7 py-3.5 text-[14px] font-black text-white transition-all hover:bg-[#5B1A9A] hover:scale-[1.03] hover:shadow-[0_8px_24px_rgba(107,33,168,.3)] cursor-pointer">
+            className="btn-primary !px-7 !py-3.5 !text-[14px]">
             <Icon name="whatsapp" size={16} /> WhatsApp
           </a>
         </div>
-        <button onClick={() => setOpen(!open)} className="grid h-10 w-10 place-items-center rounded-full bg-[#6B21A8] text-white md:hidden cursor-pointer" aria-label="Menú">
+        <button onClick={() => setOpen(!open)} className="grid h-10 w-10 place-items-center rounded-full bg-[var(--color-primary)] text-white md:hidden cursor-pointer" aria-label="Menú">
           <Icon name={open ? "x" : "menu"} size={18} />
         </button>
       </div>
       <AnimatePresence>
         {open && (
-          <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} className="overflow-hidden border-t border-[#F0EAFB] bg-white md:hidden">
+          <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} className="overflow-hidden border-t border-[var(--color-section-border)] bg-white md:hidden">
             <div className="flex flex-col gap-1 px-6 py-5">
               {links.map(({ href, label }) => (
-                <Link key={href} href={href} onClick={() => setOpen(false)} className="rounded-xl px-4 py-3 text-[14px] font-bold text-[#111318] hover:bg-[#F5F0FF] hover:text-[#6B21A8] cursor-pointer">{label}</Link>
+                <Link key={href} href={href} onClick={() => setOpen(false)} className="rounded-xl px-4 py-3 text-[14px] font-bold text-[var(--color-text-main)] hover:bg-[var(--color-primary-muted)] hover:text-[var(--color-primary)] cursor-pointer">{label}</Link>
               ))}
-              <Link href="/plantillas" onClick={() => setOpen(false)} className="rounded-xl px-4 py-3 text-[14px] font-bold text-[#7C3AED] hover:bg-[#F5F0FF] cursor-pointer">Plantillas →</Link>
-              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center justify-center gap-3 rounded-full bg-[#6B21A8] px-6 py-4 text-[14px] font-black text-white cursor-pointer">
+              <Link href="/plantillas" onClick={() => setOpen(false)} className="rounded-xl px-4 py-3 text-[14px] font-bold text-[var(--color-primary-accent)] hover:bg-[var(--color-primary-muted)] cursor-pointer">Plantillas →</Link>
+              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center justify-center gap-3 rounded-full bg-[var(--color-primary)] px-6 py-4 text-[14px] font-black text-white cursor-pointer">
                 <Icon name="whatsapp" size={16} /> WhatsApp
               </a>
             </div>
@@ -236,7 +236,7 @@ function Header() {
 function Hero() {
   return (
     <section id="home" className="relative overflow-hidden min-h-screen flex items-center justify-center"
-      style={{ background: "linear-gradient(135deg,#ddd6fe 0%,#bfdbfe 38%,#c7d2fe 65%,#e9d5ff 100%)" }}>
+      style={{ background: "linear-gradient(135deg,var(--gradient-1) 0%,var(--gradient-2) 38%,var(--gradient-3) 65%,var(--gradient-4) 100%)" }}>
       <style>{WAVE_CSS}</style>
       <div className="absolute inset-0 overflow-hidden">
         <div className="dw dw4" /><div className="dw dw5" />
@@ -252,15 +252,15 @@ function Hero() {
       {/* Floating card izquierda */}
       <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.8, duration: 0.7 }}
         className="float-a pointer-events-none absolute left-[2%] top-[30%] hidden w-[190px] select-none rounded-[16px] border border-white/60 bg-white/80 p-4 shadow-[0_8px_32px_rgba(107,33,168,.12)] backdrop-blur-sm lg:block">
-        <p className="text-[10px] font-black uppercase tracking-[0.12em] text-[#9CA3AF]">Pedidos hoy</p>
-        <p className="mt-1 text-[28px] font-black leading-none text-[#6B21A8]">24</p>
+        <p className="text-[10px] font-black uppercase tracking-[0.12em] text-[var(--color-text-muted)]">Pedidos hoy</p>
+        <p className="mt-1 text-[28px] font-black leading-none text-[var(--color-primary)]">24</p>
         <div className="mt-2 flex items-center gap-1.5">
-          <span className="h-1.5 w-1.5 rounded-full bg-[#059669]" />
-          <p className="text-[11px] font-semibold text-[#059669]">+12% vs ayer</p>
+          <span className="h-1.5 w-1.5 rounded-full bg-[var(--color-success)]" />
+          <p className="text-[11px] font-semibold text-[var(--color-success)]">+12% vs ayer</p>
         </div>
         <div className="mt-3 flex items-end gap-1">
           {[40, 65, 45, 80, 55, 90, 70].map((h, i) => (
-            <div key={i} className="flex-1 rounded-sm bg-[#EDE9FE]" style={{ height: `${h * 0.28}px` }} />
+            <div key={i} className="flex-1 rounded-sm bg-[var(--color-primary-border)]" style={{ height: `${h * 0.28}px` }} />
           ))}
         </div>
       </motion.div>
@@ -269,25 +269,25 @@ function Hero() {
       <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1.0, duration: 0.7 }}
         className="float-b pointer-events-none absolute right-[2%] top-[34%] hidden w-[188px] select-none rounded-[16px] border border-white/60 bg-white/80 p-4 shadow-[0_8px_32px_rgba(107,33,168,.12)] backdrop-blur-sm lg:block">
         <div className="flex items-center gap-2.5">
-          <div className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[#EDE9FE] text-[#7C3AED]">
+          <div className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[var(--color-primary-border)] text-[var(--color-primary-accent)]">
             <Icon name="users" size={14} />
           </div>
           <div>
-            <p className="text-[11px] font-black text-[#111318]">Cliente nuevo</p>
-            <p className="text-[10px] text-[#9CA3AF]">hace 2 min</p>
+            <p className="text-[11px] font-black text-[var(--color-text-main)]">Cliente nuevo</p>
+            <p className="text-[10px] text-[var(--color-text-muted)]">hace 2 min</p>
           </div>
         </div>
-        <div className="mt-3 rounded-[10px] bg-[#F5F0FF] px-3 py-2">
-          <p className="text-[11px] font-semibold text-[#6B21A8]">IA respondió automáticamente ✓</p>
+        <div className="mt-3 rounded-[10px] bg-[var(--color-primary-muted)] px-3 py-2">
+          <p className="text-[11px] font-semibold text-[var(--color-primary)]">IA respondió automáticamente ✓</p>
         </div>
       </motion.div>
 
       {/* Floating card abajo izquierda */}
       <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.2, duration: 0.7 }}
         className="float-a pointer-events-none absolute bottom-[22%] left-[3%] hidden w-[172px] select-none rounded-[16px] border border-white/60 bg-white/80 p-4 shadow-[0_8px_32px_rgba(107,33,168,.12)] backdrop-blur-sm lg:block">
-        <p className="text-[10px] font-black uppercase tracking-[0.12em] text-[#9CA3AF]">Ingresos mes</p>
-        <p className="mt-1 text-[20px] font-black leading-none text-[#111318]">$48,200</p>
-        <p className="mt-1.5 text-[11px] font-semibold text-[#059669]">↑ Todo organizado</p>
+        <p className="text-[10px] font-black uppercase tracking-[0.12em] text-[var(--color-text-muted)]">Ingresos mes</p>
+        <p className="mt-1 text-[20px] font-black leading-none text-[var(--color-text-main)]">$48,200</p>
+        <p className="mt-1.5 text-[11px] font-semibold text-[var(--color-success)]">↑ Todo organizado</p>
       </motion.div>
 
       <div className="relative z-10 mx-auto max-w-[1500px] px-6 md:px-12 lg:px-20 pt-28 pb-20 text-center">
@@ -304,18 +304,18 @@ function Hero() {
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <a href="/#contact"
-              className="inline-flex items-center gap-3 rounded-full bg-[#6B21A8] px-9 py-[1.1rem] text-[16px] font-black text-white transition-all hover:bg-[#5B1A9A] hover:scale-[1.03] hover:shadow-[0_12px_32px_rgba(107,33,168,.4)] cursor-pointer">
+              className="btn-primary !px-9 !py-[1.1rem] !text-[16px]">
               Solicitar Diagnóstico <Icon name="arrow" size={17} />
             </a>
             <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"
-              className="inline-flex items-center gap-2.5 rounded-full border border-[#6B21A8]/30 bg-white/60 px-8 py-[1.1rem] text-[16px] font-bold text-[#6B21A8] backdrop-blur-sm transition-all hover:bg-white hover:scale-[1.03] cursor-pointer">
+              className="btn-secondary">
               <Icon name="whatsapp" size={17} /> WhatsApp
             </a>
           </div>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-6 text-[13px] text-[#4338ca]/80">
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-6 text-[13px] text-[var(--color-text-body)]/80">
             {["Primera consulta gratis", "Sin contratos largos", "Todo México"].map(t => (
               <span key={t} className="flex items-center gap-1.5">
-                <span className="grid h-5 w-5 place-items-center rounded-full bg-white/60"><Icon name="check" size={11} className="text-[#6B21A8]" /></span>
+                <span className="grid h-5 w-5 place-items-center rounded-full bg-white/60"><Icon name="check" size={11} className="text-[var(--color-primary)]" /></span>
                 {t}
               </span>
             ))}
@@ -327,13 +327,13 @@ function Hero() {
             {steps.map(({ n, label, icon }, i) => (
               <React.Fragment key={n}>
                 <div className="flex flex-col items-center gap-2">
-                  <div className="grid h-10 w-10 place-items-center rounded-full border border-white/60 bg-white/50 backdrop-blur-sm text-[#6B21A8]">
+                  <div className="grid h-10 w-10 place-items-center rounded-full border border-white/60 bg-white/50 backdrop-blur-sm text-[var(--color-primary)]">
                     <Icon name={icon} size={16} />
                   </div>
-                  <p className="max-w-[68px] text-center text-[10px] font-black uppercase leading-tight tracking-[0.08em] text-[#4c1d95]">{label}</p>
+                  <p className="max-w-[68px] text-center text-[10px] font-black uppercase leading-tight tracking-[0.08em] text-[var(--color-primary-dark)]">{label}</p>
                 </div>
                 {i < steps.length - 1 && (
-                  <div className="mx-1 mb-7 h-[1px] flex-1 bg-gradient-to-r from-[#6B21A8]/30 to-[#6B21A8]/10" />
+                  <div className="mx-1 mb-7 h-[1px] flex-1 bg-gradient-to-r from-[var(--color-primary)]/30 to-[var(--color-primary)]/10" />
                 )}
               </React.Fragment>
             ))}
@@ -342,8 +342,8 @@ function Hero() {
           {/* Plantillas shortcut */}
           <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8, duration: 0.6 }}
             className="mt-7 flex items-center justify-center gap-2">
-            <span className="text-[12px] text-[#4c1d95]/70">¿Quieres empezar hoy?</span>
-            <Link href="/plantillas" className="text-[12px] font-black text-[#6B21A8] underline underline-offset-2 hover:text-[#4c1d95] cursor-pointer">
+            <span className="text-[12px] text-[var(--color-primary-dark)]/70">¿Quieres empezar hoy?</span>
+            <Link href="/plantillas" className="text-[12px] font-black text-[var(--color-primary)] underline underline-offset-2 hover:text-[var(--color-primary-dark)] cursor-pointer">
               Ver plantillas →
             </Link>
           </motion.div>
@@ -357,8 +357,8 @@ function Hero() {
 function IntegrationsStrip() {
   const brandLabels = { openai: "OpenAI", whatsapp: "WhatsApp", google: "Google", notion: "Notion", meta: "Meta", stripe: "Stripe", zapier: "Zapier", airtable: "Airtable" };
   return (
-    <section className="border-y border-[#F0EAFB] bg-white py-10 overflow-hidden">
-      <motion.p {...fadeUp} className="mb-7 text-center text-[11px] font-black uppercase tracking-[0.22em] text-[#9CA3AF]">
+    <section className="border-y border-[var(--color-section-border)] bg-white py-10 overflow-hidden">
+      <motion.p {...fadeUp} className="mb-7 text-center text-[11px] font-black uppercase tracking-[0.22em] text-[var(--color-text-muted)]">
         Integra con las herramientas que ya usas
       </motion.p>
       <div className="relative">
@@ -384,8 +384,8 @@ function ProblemSection() {
     <section className="bg-white px-6 py-24 md:px-12 lg:px-20">
       <div className="mx-auto max-w-[1500px]">
         <motion.div {...fadeUp} className="mx-auto max-w-[760px] text-center">
-          <p className="text-[12px] font-black uppercase tracking-[0.22em] text-[#059669]">El problema real</p>
-          <h2 className="mt-4 text-[38px] font-black leading-[1.08] tracking-[-0.055em] text-[#111318] md:text-[56px]">Tu negocio no necesita complicarse para crecer</h2>
+          <p className="text-[12px] font-black uppercase tracking-[0.22em] text-[var(--color-success)]">El problema real</p>
+          <h2 className="mt-4 text-[38px] font-black leading-[1.08] tracking-[-0.055em] text-[var(--color-text-main)] md:text-[56px]">Tu negocio no necesita complicarse para crecer</h2>
           <p className="mt-5 text-[19px] text-[#6B7280]">La mayoría de los negocios pequeños tienen los mismos puntos de dolor. Nosotros los resolvemos con herramientas simples.</p>
         </motion.div>
         <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -408,9 +408,9 @@ function ProblemSection() {
 
 function CTABanner() {
   return (
-    <section className="px-6 py-12 md:px-12 lg:px-20" style={{ background: "linear-gradient(135deg,#ede9fe 0%,#dbeafe 100%)" }}>
+    <section className="px-6 py-12 md:px-12 lg:px-20" style={{ background: "linear-gradient(135deg,var(--color-primary-border) 0%,var(--color-blue-border) 100%)" }}>
       <motion.div {...fadeUp} className="relative mx-auto max-w-[1350px] overflow-hidden rounded-[32px] px-8 py-20 text-center md:px-16"
-        style={{ background: "linear-gradient(135deg,#4c1d95 0%,#1e40af 100%)" }}>
+        style={{ background: "linear-gradient(135deg,var(--color-primary-dark) 0%,#1e40af 100%)" }}>
         <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 20% 50%,rgba(139,92,246,.6) 0%,transparent 50%),radial-gradient(ellipse at 85% 30%,rgba(59,130,246,.4) 0%,transparent 40%)" }} />
         {IMAGES.ctaBg && (
           <div className="absolute inset-0 opacity-10 mix-blend-luminosity">
@@ -418,11 +418,11 @@ function CTABanner() {
           </div>
         )}
         <div className="relative z-10 mx-auto max-w-[720px]">
-          <p className="mb-4 text-[12px] font-black uppercase tracking-[0.22em] text-[#c4b5fd]">Sin costo, sin compromiso</p>
+          <p className="mb-4 text-[12px] font-black uppercase tracking-[0.22em] text-[var(--color-primary-border)]">Sin costo, sin compromiso</p>
           <h2 className="text-[38px] font-black leading-[1.05] tracking-[-0.055em] text-white md:text-[56px]">Primera Consultoría Gratis</h2>
           <p className="mx-auto mt-5 max-w-[580px] text-[18px] leading-[1.65] text-white/75">Revisamos tu caso, detectamos el desorden y te orientamos sobre el siguiente paso más útil para tu negocio.</p>
           <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"
-            className="mt-9 inline-flex items-center gap-3 rounded-full border border-white/30 bg-white/15 px-9 py-[1.1rem] text-[15px] font-black text-white transition-all hover:bg-white hover:text-[#4c1d95] hover:scale-[1.03] cursor-pointer">
+            className="mt-9 inline-flex items-center gap-3 rounded-full border border-white/30 bg-white/15 px-9 py-[1.1rem] text-[15px] font-black text-white transition-all hover:bg-white hover:text-[var(--color-primary-dark)] hover:scale-[1.03] cursor-pointer">
             Agendar ahora <Icon name="arrow" size={17} />
           </a>
         </div>
@@ -436,9 +436,9 @@ function SolutionsSection() {
     <section id="soluciones" className="bg-white px-6 py-24 md:px-12 lg:px-20">
       <div className="mx-auto max-w-[1500px]">
         <motion.div {...fadeUp} className="mx-auto max-w-[760px] text-center mb-20">
-          <p className="text-[12px] font-black uppercase tracking-[0.22em] text-[#059669]">Soluciones</p>
-          <h2 className="mt-4 text-[38px] font-black leading-[1.08] tracking-[-0.055em] text-[#111318] md:text-[56px]">Formas en las que mejoramos tu negocio</h2>
-          <p className="mt-5 text-[19px] text-[#6B7280]">Soluciones simples para organizarte, ahorrar tiempo y vender más.</p>
+          <p className="text-[12px] font-black uppercase tracking-[0.22em] text-[var(--color-success)]">Soluciones</p>
+          <h2 className="mt-4 text-[38px] font-black leading-[1.08] tracking-[-0.055em] text-[var(--color-text-main)] md:text-[56px]">Formas en las que mejoramos tu negocio</h2>
+          <p className="mt-5 text-[19px] text-[var(--color-text-secondary)]">Soluciones simples para organizarte, ahorrar tiempo y vender más.</p>
         </motion.div>
         <div className="space-y-24">
           {solutions.map(({ title, text, icon, img, accent, bg, placeholderColor }, i) => (
@@ -456,8 +456,8 @@ function SolutionsSection() {
                 <div className="mb-5 inline-flex h-14 w-14 items-center justify-center rounded-[18px]" style={{ background: bg, color: accent }}>
                   <Icon name={icon} size={26} />
                 </div>
-                <h3 className="text-[32px] font-black tracking-[-0.04em] text-[#111318] md:text-[40px]">{title}</h3>
-                <p className="mt-4 text-[18px] leading-[1.75] text-[#6B7280]">{text}</p>
+                <h3 className="text-[32px] font-black tracking-[-0.04em] text-[var(--color-text-main)] md:text-[40px]">{title}</h3>
+                <p className="mt-4 text-[18px] leading-[1.75] text-[var(--color-text-secondary)]">{text}</p>
                 <Link href="/#contact"
                   className="mt-8 inline-flex items-center gap-3 rounded-full px-7 py-3.5 text-[14px] font-black text-white transition-all hover:opacity-90 hover:scale-[1.03] cursor-pointer"
                   style={{ background: accent }}>
@@ -476,29 +476,29 @@ function PricingCard({ plan, index }) {
   const g = plan.gradient;
   return (
     <motion.div {...fadeUp} transition={{ duration: 0.65, delay: index * 0.09, ease: [0.22, 1, 0.36, 1] }} whileHover={{ y: -6, scale: 1.01 }}
-      className={`relative flex flex-col rounded-[28px] border p-9 transition-all duration-300 ${g ? "border-transparent shadow-[0_28px_70px_rgba(107,33,168,.25)]" : "border-[#EDE9FE] bg-[#FDFCFF] hover:border-[#DDD6FE] hover:shadow-[0_20px_56px_rgba(107,33,168,.12)]"}`}
-      style={g ? { background: "linear-gradient(135deg,#7C3AED 0%,#4f46e5 100%)" } : {}}>
-      {plan.popular && <span className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#FFC533] px-6 py-2.5 text-[13px] font-black text-[#111318]">★ Popular</span>}
-      <h3 className={`text-[26px] font-black leading-[1.2] tracking-[-0.04em] ${g ? "text-white" : "text-[#111318]"}`}>{plan.title}</h3>
-      <p className={`mt-2 text-[14px] leading-[1.6] ${g ? "text-white/80" : "text-[#747887]"}`}>{plan.desc}</p>
+      className={`relative flex flex-col rounded-[28px] border p-9 transition-all duration-300 ${g ? "border-transparent shadow-[0_28px_70px_rgba(107,33,168,.25)]" : "border-[var(--color-primary-border)] bg-[var(--color-card-bg)] hover:border-[var(--color-primary-border)] hover:shadow-[0_20px_56px_rgba(107,33,168,.12)]"}`}
+      style={g ? { background: "linear-gradient(135deg,var(--color-primary-accent) 0%,#4f46e5 100%)" } : {}}>
+      {plan.popular && <span className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--color-yellow-popular)] px-6 py-2.5 text-[13px] font-black text-[var(--color-text-main)]">★ Popular</span>}
+      <h3 className={`text-[26px] font-black leading-[1.2] tracking-[-0.04em] ${g ? "text-white" : "text-[var(--color-text-main)]"}`}>{plan.title}</h3>
+      <p className={`mt-2 text-[14px] leading-[1.6] ${g ? "text-white/80" : "text-[var(--color-text-secondary)]"}`}>{plan.desc}</p>
       <div className="mt-7 flex items-end gap-2">
-        {plan.oldPrice && <span className={`pb-1.5 text-[22px] font-semibold line-through ${g ? "text-white/50" : "text-[#9CA3AF]"}`}>{plan.oldPrice}</span>}
-        <span className={`text-[52px] font-black leading-none tracking-[-0.06em] ${g ? "text-white" : "text-[#6B21A8]"}`}>{plan.price}</span>
-        {plan.suffix && <span className={`pb-1.5 text-[16px] font-semibold ${g ? "text-white/70" : "text-[#9CA3AF]"}`}>{plan.suffix}</span>}
+        {plan.oldPrice && <span className={`pb-1.5 text-[22px] font-semibold line-through ${g ? "text-white/50" : "text-[var(--color-text-muted)]"}`}>{plan.oldPrice}</span>}
+        <span className={`text-[52px] font-black leading-none tracking-[-0.06em] ${g ? "text-white" : "text-[var(--color-primary)]"}`}>{plan.price}</span>
+        {plan.suffix && <span className={`pb-1.5 text-[16px] font-semibold ${g ? "text-white/70" : "text-[var(--color-text-muted)]"}`}>{plan.suffix}</span>}
       </div>
-      {plan.label && <p className={`mt-1 text-[13px] font-semibold ${g ? "text-white/70" : "text-[#9CA3AF]"}`}>{plan.label}</p>}
+      {plan.label && <p className={`mt-1 text-[13px] font-semibold ${g ? "text-white/70" : "text-[var(--color-text-muted)]"}`}>{plan.label}</p>}
       <div className="mt-8 flex-1 space-y-4">
         {plan.features.map(({ icon, text }) => (
-          <div key={text} className={`flex items-center gap-3.5 text-[15px] font-medium ${g ? "text-white/90" : "text-[#374151]"}`}>
-            <span className={`grid h-8 w-8 shrink-0 place-items-center rounded-lg ${g ? "bg-white/20" : "bg-[#EDE9FE]"}`}>
-              <Icon name={icon} size={15} className={g ? "text-white" : "text-[#7C3AED]"} />
+          <div key={text} className={`flex items-center gap-3.5 text-[15px] font-medium ${g ? "text-white/90" : "text-[var(--color-text-body)]"}`}>
+            <span className={`grid h-8 w-8 shrink-0 place-items-center rounded-lg ${g ? "bg-white/20" : "bg-[var(--color-primary-border)]"}`}>
+              <Icon name={icon} size={15} className={g ? "text-white" : "text-[var(--color-primary-accent)]"} />
             </span>
             {text}
           </div>
         ))}
       </div>
       <Link href="/precios"
-        className={`mt-9 inline-flex w-full items-center justify-center gap-3 rounded-full py-4 text-[14px] font-black transition-all hover:scale-[1.02] cursor-pointer ${g ? "bg-white text-[#6B21A8] hover:bg-white/90" : "bg-[#6B21A8] text-white hover:bg-[#5B1A9A] hover:shadow-[0_8px_24px_rgba(107,33,168,.3)]"}`}>
+        className={`mt-9 inline-flex w-full items-center justify-center gap-3 rounded-full py-4 text-[14px] font-black transition-all hover:scale-[1.02] cursor-pointer ${g ? "bg-white text-[var(--color-primary)] hover:bg-white/90" : "bg-[var(--color-primary)] text-white hover:bg-[var(--color-primary-hover)] hover:shadow-[0_8px_24px_rgba(107,33,168,.3)]"}`}>
         Ver detalle <Icon name="arrow" size={15} />
       </Link>
     </motion.div>
@@ -510,9 +510,9 @@ function PricingSection() {
     <section id="pricing" className="px-6 py-24 md:px-12 lg:px-20" style={{ background: "linear-gradient(180deg,#faf5ff 0%,#eff6ff 100%)" }}>
       <motion.div {...fadeUp} className="mx-auto max-w-[1500px]">
         <div className="text-center">
-          <p className="text-[12px] font-black uppercase tracking-[0.22em] text-[#059669]">Precios</p>
-          <h2 className="mx-auto mt-4 max-w-[780px] text-[38px] font-black leading-[1.08] tracking-[-0.055em] text-[#111318] md:text-[56px]">Opciones pensadas para que preguntar no dé miedo</h2>
-          <p className="mx-auto mt-5 max-w-[600px] text-[19px] leading-[1.5] text-[#6B7280]">Te damos una referencia simple y la primera consultoría es gratis.</p>
+          <p className="text-[12px] font-black uppercase tracking-[0.22em] text-[var(--color-success)]">Precios</p>
+          <h2 className="mx-auto mt-4 max-w-[780px] text-[38px] font-black leading-[1.08] tracking-[-0.055em] text-[var(--color-text-main)] md:text-[56px]">Opciones pensadas para que preguntar no dé miedo</h2>
+          <p className="mx-auto mt-5 max-w-[600px] text-[19px] leading-[1.5] text-[var(--color-text-secondary)]">Te damos una referencia simple y la primera consultoría es gratis.</p>
         </div>
         <div className="mx-auto mt-16 grid max-w-[1200px] gap-6 md:grid-cols-3">
           {plans.map((plan, i) => <PricingCard key={plan.title} plan={plan} index={i} />)}
@@ -531,22 +531,22 @@ function FAQ() {
     <section className="bg-white px-6 py-24 md:px-12 lg:px-20">
       <motion.div {...fadeUp} className="mx-auto max-w-[860px]">
         <div className="text-center mb-14">
-          <p className="text-[12px] font-black uppercase tracking-[0.22em] text-[#059669]">FAQ</p>
-          <h2 className="mt-4 text-[38px] font-black tracking-[-0.055em] text-[#111318] md:text-[52px]">Preguntas frecuentes</h2>
+          <p className="text-[12px] font-black uppercase tracking-[0.22em] text-[var(--color-success)]">FAQ</p>
+          <h2 className="mt-4 text-[38px] font-black tracking-[-0.055em] text-[var(--color-text-main)] md:text-[52px]">Preguntas frecuentes</h2>
         </div>
         <div className="space-y-3">
           {faqs.map(({ q, a }, i) => (
             <div key={q} className={`rounded-[20px] border transition-all duration-200 ${openIndex === i ? "border-[#DDD6FE] bg-[#FDFCFF] shadow-[0_8px_32px_rgba(107,33,168,.08)]" : "border-[#EBEBEB] bg-white hover:border-[#DDD6FE] hover:shadow-[0_4px_16px_rgba(107,33,168,.06)]"}`}>
               <button onClick={() => setOpenIndex(openIndex === i ? null : i)} className="flex w-full items-center justify-between gap-6 px-7 py-5 text-left cursor-pointer">
-                <span className="text-[16px] font-bold text-[#111318]">{q}</span>
-                <span className={`grid h-8 w-8 shrink-0 place-items-center rounded-full transition-all duration-200 ${openIndex === i ? "bg-[#6B21A8] text-white rotate-180" : "bg-[#F5F0FF] text-[#6B21A8]"}`}>
+                <span className="text-[16px] font-bold text-[var(--color-text-main)]">{q}</span>
+                <span className={`grid h-8 w-8 shrink-0 place-items-center rounded-full transition-all duration-200 ${openIndex === i ? "bg-[var(--color-primary)] text-white rotate-180" : "bg-[var(--color-primary-muted)] text-[var(--color-primary)]"}`}>
                   <Icon name="chevron" size={16} />
                 </span>
               </button>
               <AnimatePresence>
                 {openIndex === i && (
                   <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} className="overflow-hidden">
-                    <p className="px-7 pb-6 text-[15px] leading-[1.8] text-[#6B7280]">{a}</p>
+                    <p className="px-7 pb-6 text-[15px] leading-[1.8] text-[var(--color-text-secondary)]">{a}</p>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -572,29 +572,29 @@ function ContactForm() {
     <section id="contact" className="px-6 py-24 md:px-12 lg:px-20" style={{ background: "linear-gradient(135deg,#faf5ff 0%,#eff6ff 100%)" }}>
       <motion.div {...fadeUp} className="mx-auto grid max-w-[1200px] gap-16 lg:grid-cols-2">
         <div>
-          <p className="text-[12px] font-black uppercase tracking-[0.22em] text-[#059669]">Contacto</p>
-          <h2 className="mt-4 text-[38px] font-black leading-[1.08] tracking-[-0.055em] text-[#111318] md:text-[52px]">Cuéntanos sobre tu negocio</h2>
-          <p className="mt-5 max-w-[520px] text-[18px] leading-[1.7] text-[#6B7280]">Te ayudamos a entender qué necesitas y cómo organizar tu negocio de forma simple. La primera asesoría es gratis y sin compromiso.</p>
+          <p className="text-[12px] font-black uppercase tracking-[0.22em] text-[var(--color-success)]">Contacto</p>
+          <h2 className="mt-4 text-[38px] font-black leading-[1.08] tracking-[-0.055em] text-[var(--color-text-main)] md:text-[52px]">Cuéntanos sobre tu negocio</h2>
+          <p className="mt-5 max-w-[520px] text-[18px] leading-[1.7] text-[var(--color-text-secondary)]">Te ayudamos a entender qué necesitas y cómo organizar tu negocio de forma simple. La primera asesoría es gratis y sin compromiso.</p>
           <div className="mt-8 overflow-hidden rounded-[24px] shadow-[0_20px_60px_rgba(107,33,168,.12)]" style={{ aspectRatio: "16/9" }}>
             {IMAGES.contact ? (
               <Image src={IMAGES.contact} alt="Equipo DG Solutions" fill className="object-cover"
                 style={{ filter: "saturate(0.8) hue-rotate(220deg) brightness(1.05)" }} />
             ) : (
-              <div className="flex h-full w-full flex-col items-center justify-center gap-3 bg-[#EDE9FE]">
-                <div className="grid h-16 w-16 place-items-center rounded-full bg-[#DDD6FE]">
-                  <Icon name="users" size={28} className="text-[#7C3AED]" />
+              <div className="flex h-full w-full flex-col items-center justify-center gap-3 bg-[var(--color-primary-border)]">
+                <div className="grid h-16 w-16 place-items-center rounded-full bg-[var(--color-primary-muted)]">
+                  <Icon name="users" size={28} className="text-[var(--color-primary-accent)]" />
                 </div>
-                <p className="text-[13px] font-semibold text-[#9CA3AF]">Foto del equipo próximamente</p>
+                <p className="text-[13px] font-semibold text-[var(--color-text-muted)]">Foto del equipo próximamente</p>
               </div>
             )}
           </div>
           <div className="mt-8 space-y-5">
             {contactItems.map(({ icon, label, value }) => (
               <div key={label} className="flex items-center gap-4">
-                <div className="grid h-11 w-11 shrink-0 place-items-center rounded-[12px] bg-[#EDE9FE] text-[#7C3AED]"><Icon name={icon} size={18} /></div>
+                <div className="grid h-11 w-11 shrink-0 place-items-center rounded-[12px] bg-[var(--color-primary-border)] text-[var(--color-primary-accent)]"><Icon name={icon} size={18} /></div>
                 <div>
-                  <p className="text-[11px] font-black uppercase tracking-wider text-[#9CA3AF]">{label}</p>
-                  <p className="text-[15px] font-semibold text-[#111318]">{value}</p>
+                  <p className="text-[11px] font-black uppercase tracking-wider text-[var(--color-text-muted)]">{label}</p>
+                  <p className="text-[15px] font-semibold text-[var(--color-text-main)]">{value}</p>
                 </div>
               </div>
             ))}
@@ -604,30 +604,30 @@ function ContactForm() {
             <Icon name="whatsapp" size={17} /> Escríbenos por WhatsApp
           </a>
         </div>
-        <div className="rounded-[28px] border border-[#EDE9FE] bg-white p-8 shadow-[0_8px_40px_rgba(107,33,168,.08)] md:p-10">
+        <div className="rounded-[28px] border border-[var(--color-primary-border)] bg-white p-8 shadow-[0_8px_40px_rgba(107,33,168,.08)] md:p-10">
           {status === "sent" ? (
             <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="flex h-full flex-col items-center justify-center py-12 text-center">
-              <div className="grid h-16 w-16 place-items-center rounded-full bg-[#ECFDF5]"><Icon name="check" size={28} className="text-[#10B981]" /></div>
-              <h3 className="mt-5 text-[24px] font-black text-[#111318]">¡Mensaje enviado!</h3>
-              <p className="mt-3 text-[15px] text-[#6B7280]">Te respondemos pronto. También puedes escribirnos por WhatsApp.</p>
-              <button onClick={() => { setStatus(""); setForm({ name: "", email: "", message: "" }); }} className="mt-6 text-[13px] font-bold text-[#6B21A8] underline cursor-pointer">Enviar otro mensaje</button>
+              <div className="grid h-16 w-16 place-items-center rounded-full bg-[var(--color-success-bg)]"><Icon name="check" size={28} className="text-[var(--color-success)]" /></div>
+              <h3 className="mt-5 text-[24px] font-black text-[var(--color-text-main)]">¡Mensaje enviado!</h3>
+              <p className="mt-3 text-[15px] text-[var(--color-text-secondary)]">Te respondemos pronto. También puedes escribirnos por WhatsApp.</p>
+              <button onClick={() => { setStatus(""); setForm({ name: "", email: "", message: "" }); }} className="mt-6 text-[13px] font-bold text-[var(--color-primary)] underline cursor-pointer">Enviar otro mensaje</button>
             </motion.div>
           ) : (
             <form onSubmit={handleSubmit} noValidate>
               {[{ id: "name", label: "Nombre", type: "text", placeholder: "Tu nombre" }, { id: "email", label: "Email", type: "email", placeholder: "tu@email.com" }].map(({ id, label, type, placeholder }) => (
                 <div key={id} className="mb-5">
-                  <label className="mb-1.5 block text-[13px] font-black text-[#111318]" htmlFor={id}>{label}</label>
+                  <label className="mb-1.5 block text-[13px] font-black text-[var(--color-text-main)]" htmlFor={id}>{label}</label>
                   <input id={id} type={type} required value={form[id]} onChange={handleChange} placeholder={placeholder}
-                    className="w-full rounded-2xl border border-[#EDE9FE] bg-[#FDFCFF] px-5 py-3.5 text-[15px] text-[#111318] outline-none transition-all duration-200 focus:border-[#7C3AED] focus:shadow-[0_0_0_4px_rgba(124,58,237,.12)] focus:bg-white placeholder:text-[#C4C9D4]" />
+                    className="w-full rounded-2xl border border-[var(--color-primary-border)] bg-[var(--color-card-bg)] px-5 py-3.5 text-[15px] text-[var(--color-text-main)] outline-none transition-all duration-200 focus:border-[var(--color-primary-accent)] focus:shadow-[0_0_0_4px_rgba(124,58,237,.12)] focus:bg-white placeholder:text-[var(--color-text-light)]" />
                 </div>
               ))}
               <div className="mb-6">
-                <label className="mb-1.5 block text-[13px] font-black text-[#111318]" htmlFor="message">Mensaje</label>
+                <label className="mb-1.5 block text-[13px] font-black text-[var(--color-text-main)]" htmlFor="message">Mensaje</label>
                 <textarea id="message" required value={form.message} onChange={handleChange} rows={5} placeholder="Cuéntanos qué necesitas o cómo funciona tu negocio"
-                  className="w-full rounded-2xl border border-[#EDE9FE] bg-[#FDFCFF] px-5 py-3.5 text-[15px] text-[#111318] outline-none transition-all duration-200 focus:border-[#7C3AED] focus:shadow-[0_0_0_4px_rgba(124,58,237,.12)] focus:bg-white placeholder:text-[#C4C9D4] resize-none" />
+                  className="w-full rounded-2xl border border-[var(--color-primary-border)] bg-[var(--color-card-bg)] px-5 py-3.5 text-[15px] text-[var(--color-text-main)] outline-none transition-all duration-200 focus:border-[var(--color-primary-accent)] focus:shadow-[0_0_0_4px_rgba(124,58,237,.12)] focus:bg-white placeholder:text-[var(--color-text-light)] resize-none" />
               </div>
               <button type="submit" disabled={status === "sending"}
-                className="inline-flex w-full items-center justify-center gap-3 rounded-full bg-[#6B21A8] px-8 py-4 text-[15px] font-black text-white transition-all hover:bg-[#5B1A9A] hover:scale-[1.02] hover:shadow-[0_8px_24px_rgba(107,33,168,.3)] disabled:opacity-60 cursor-pointer">
+                className="inline-flex w-full items-center justify-center gap-3 rounded-full bg-[var(--color-primary)] px-8 py-4 text-[15px] font-black text-white transition-all hover:bg-[var(--color-primary-hover)] hover:scale-[1.02] hover:shadow-[0_8px_24px_rgba(107,33,168,.3)] disabled:opacity-60 cursor-pointer">
                 {status === "sending" ? "Enviando..." : <><span>Enviar mensaje</span><Icon name="arrow" size={16} /></>}
               </button>
             </form>
@@ -647,17 +647,17 @@ function Footer() {
     { href: "/#contact", label: "Contacto" },
   ];
   return (
-    <footer className="border-t border-[#EDE9FE] bg-white px-6 py-10 md:px-12 lg:px-20">
+    <footer className="border-t border-[var(--color-primary-border)] bg-white px-6 py-10 md:px-12 lg:px-20">
       <div className="mx-auto flex max-w-[1500px] flex-col items-center justify-between gap-8 md:flex-row">
         <Logo />
         <nav className="flex flex-wrap justify-center gap-8">
           {links.map(({ href, label }) => (
-            <Link key={href} href={href} className="text-[13px] font-bold uppercase tracking-[0.08em] text-[#6B7280] hover:text-[#6B21A8] cursor-pointer">{label}</Link>
+            <Link key={href} href={href} className="text-[13px] font-bold uppercase tracking-[0.08em] text-[var(--color-text-secondary)] hover:text-[var(--color-primary)] cursor-pointer">{label}</Link>
           ))}
         </nav>
         <div className="text-center md:text-right">
-          <p className="text-[12px] text-[#9CA3AF]">© 2026 DG Solutions. Todos los derechos reservados.</p>
-          <p className="mt-1 text-[11px] text-[#C4C9D4]">Mazatlán, Sinaloa — Todo México</p>
+          <p className="text-[12px] text-[var(--color-text-muted)]">© 2026 DG Solutions. Todos los derechos reservados.</p>
+          <p className="mt-1 text-[11px] text-[var(--color-text-light)]">Mazatlán, Sinaloa — Todo México</p>
         </div>
       </div>
     </footer>
@@ -676,7 +676,7 @@ function ScrollToTop() {
       {visible && (
         <motion.button initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }}
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="fixed bottom-8 right-8 z-50 grid h-12 w-12 place-items-center rounded-full bg-[#6B21A8] text-white shadow-[0_8px_24px_rgba(107,33,168,.35)] hover:bg-[#5B1A9A] hover:scale-[1.08] transition-all cursor-pointer"
+          className="fixed bottom-8 right-8 z-50 grid h-12 w-12 place-items-center rounded-full bg-[var(--color-primary)] text-white shadow-[0_8px_24px_rgba(107,33,168,.35)] hover:bg-[var(--color-primary-hover)] hover:scale-[1.08] transition-all cursor-pointer"
           aria-label="Volver arriba">
           <Icon name="arrowUp" size={18} />
         </motion.button>
@@ -687,7 +687,7 @@ function ScrollToTop() {
 
 export default function DGSolutionsV4() {
   return (
-    <main className="min-h-screen scroll-smooth bg-white font-sans text-[#111318] antialiased selection:bg-[#6B21A8] selection:text-white">
+    <main className="min-h-screen scroll-smooth bg-white font-sans text-[var(--color-text-main)] antialiased selection:bg-[var(--color-primary)] selection:text-white">
       <Header />
       <Hero />
       <IntegrationsStrip />
