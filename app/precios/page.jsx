@@ -242,7 +242,7 @@ const levels = [
     ],
     popular: true,
     color: "#fff",
-    bg: "linear-gradient(135deg,var(--color-primary-accent) 0%,#4f46e5 100%)",
+    bg: "linear-gradient(135deg,var(--color-primary-accent) 0%,var(--color-blue-accent) 100%)",
     border: "transparent",
     dark: true,
   },
@@ -264,7 +264,7 @@ const levels = [
 
 function PricingLevels() {
   return (
-    <section className="px-6 py-24 md:px-12 lg:px-20" style={{ background: "linear-gradient(180deg,#faf5ff 0%,#eff6ff 100%)" }}>
+    <section className="px-6 py-24 md:px-12 lg:px-20" style={{ background: "linear-gradient(180deg,var(--color-card-bg) 0%,var(--color-blue-bg) 100%)" }}>
       <div className="mx-auto max-w-[1500px]">
         <motion.div {...fadeUp} className="mx-auto max-w-[760px] text-center mb-16">
           <p className="text-[12px] font-black uppercase tracking-[0.22em] text-[var(--color-success)]">Precios</p>
@@ -351,7 +351,7 @@ function ResultsAndExamples() {
     { icon: "trending", text: "Un negocio desordenado ahora tiene claridad total de sus ingresos y operaciones." },
   ];
   return (
-    <section className="px-6 py-24 md:px-12 lg:px-20" style={{ background: "linear-gradient(135deg,#faf5ff 0%,#eff6ff 100%)" }}>
+    <section className="px-6 py-24 md:px-12 lg:px-20" style={{ background: "linear-gradient(135deg,var(--color-card-bg) 0%,var(--color-blue-bg) 100%)" }}>
       <div className="mx-auto max-w-[1500px]">
         <div className="grid gap-16 lg:grid-cols-2 lg:gap-24 items-start">
           {/* Results */}
@@ -416,7 +416,7 @@ function FinalCTA() {
   return (
     <section className="px-6 py-12 pb-24 md:px-12 lg:px-20" style={{ background: "linear-gradient(135deg,var(--color-primary-border) 0%,var(--color-blue-border) 100%)" }}>
       <motion.div {...fadeUp} className="relative mx-auto max-w-[1350px] overflow-hidden rounded-[32px] px-8 py-20 text-center md:px-16"
-        style={{ background: "linear-gradient(135deg,var(--color-primary-dark) 0%,#1e40af 100%)" }}>
+        style={{ background: "linear-gradient(135deg,var(--color-primary-dark) 0%,var(--color-blue-accent) 100%)" }}>
         <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 20% 50%,rgba(139,92,246,.6) 0%,transparent 50%),radial-gradient(ellipse at 85% 30%,rgba(59,130,246,.4) 0%,transparent 40%)" }} />
         <div className="relative z-10 mx-auto max-w-[660px]">
           <p className="mb-4 text-[12px] font-black uppercase tracking-[0.22em] text-[var(--color-primary-border)]">Sin costo, sin compromiso</p>

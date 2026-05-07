@@ -255,7 +255,7 @@ function TemplateCard({ template, index }) {
       </div>
       <div className="mt-8 flex gap-3 flex-wrap">
         <a href={`${WHATSAPP_URL}?text=${waText}`} target="_blank" rel="noopener noreferrer"
-          className="inline-flex flex-1 items-center justify-center gap-2.5 rounded-full bg-[#6B21A8] py-3.5 text-[13px] font-black text-white transition-all hover:bg-[#5B1A9A] hover:shadow-[0_8px_24px_rgba(107,33,168,.3)] cursor-pointer min-w-[140px]">
+          className="btn-primary !py-3.5 !text-[13px] !flex-1 min-w-[140px]">
           <Icon name="whatsapp" size={14} /> {cta}
         </a>
       </div>
@@ -282,7 +282,7 @@ function Templates() {
 
 function DifferentiatorBlock() {
   return (
-    <section className="px-6 py-20 md:px-12 lg:px-20" style={{ background: "linear-gradient(180deg,var(--color-card-bg) 0%,#eff6ff 100%)" }}>
+    <section className="px-6 py-20 md:px-12 lg:px-20" style={{ background: "linear-gradient(180deg,var(--color-card-bg) 0%,var(--color-blue-bg) 100%)" }}>
       <motion.div {...fadeUp} className="mx-auto max-w-[900px] rounded-[32px] border border-[var(--color-primary-border)] bg-white px-10 py-14 shadow-[0_16px_48px_rgba(107,33,168,.08)] text-center md:px-16">
         <div className="mx-auto mb-5 grid h-14 w-14 place-items-center rounded-[16px] bg-[var(--color-primary-muted)] text-[var(--color-primary-accent)]">
           <Icon name="refresh" size={26} />
@@ -315,7 +315,7 @@ function FinalCTA() {
   return (
     <section className="px-6 py-12 pb-24 md:px-12 lg:px-20" style={{ background: "linear-gradient(135deg,var(--color-primary-border) 0%,var(--color-blue-border) 100%)" }}>
       <motion.div {...fadeUp} className="relative mx-auto max-w-[1350px] overflow-hidden rounded-[32px] px-8 py-20 text-center md:px-16"
-        style={{ background: "linear-gradient(135deg,var(--color-primary-dark) 0%,#1e40af 100%)" }}>
+        style={{ background: "linear-gradient(135deg,var(--color-primary-dark) 0%,var(--color-blue-accent) 100%)" }}>
         <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 20% 50%,rgba(139,92,246,.6) 0%,transparent 50%),radial-gradient(ellipse at 85% 30%,rgba(59,130,246,.4) 0%,transparent 40%)" }} />
         <div className="relative z-10 mx-auto max-w-[620px]">
           <p className="mb-4 text-[12px] font-black uppercase tracking-[0.22em] text-[var(--color-primary-border)]">Sin costo, sin compromiso</p>
