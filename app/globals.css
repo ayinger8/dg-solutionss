@@ -119,6 +119,15 @@ body {
   border-radius: 4px;
 }
 
+section[id] {
+  scroll-margin-top: 80px;
+}
+
+button, a, [role="button"] {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
 /* Hero wave animations */
 @keyframes waveA { 0%,100%{transform:translateX(0) scaleY(1)} 50%{transform:translateX(-5%) scaleY(1.07)} }
 @keyframes waveB { 0%,100%{transform:translateX(0) scaleY(1)} 50%{transform:translateX(5%) scaleY(0.94)} }

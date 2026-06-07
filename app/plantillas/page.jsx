@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, MotionConfig } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -75,24 +75,24 @@ function Header() {
             <Icon name="whatsapp" size={16} /> WhatsApp
           </a>
         </div>
-        <button onClick={() => setOpen(!open)} className="grid h-10 w-10 place-items-center rounded-full bg-[var(--color-primary)] text-white md:hidden cursor-pointer" aria-label="Menú">
+        <button onClick={() => setOpen(!open)} className="grid h-10 w-10 place-items-center rounded-full bg-[var(--color-primary)] text-white md:hidden cursor-pointer" aria-label="Menú" aria-expanded={open}>
           <Icon name={open ? "x" : "menu"} size={18} />
         </button>
       </div>
-      <AnimatePresence>
-        {open && (
-          <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} className="overflow-hidden border-t border-[var(--color-section-border)] bg-white md:hidden">
-            <div className="flex flex-col gap-1 px-6 py-5">
-              {links.map(({ href, label }) => (
-                <Link key={href} href={href} onClick={() => setOpen(false)} className="rounded-xl px-4 py-3 text-[14px] font-bold text-[var(--color-text-main)] hover:bg-[var(--color-primary-muted)] hover:text-[var(--color-primary)] cursor-pointer">{label}</Link>
-              ))}
-              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center justify-center gap-3 rounded-full bg-[var(--color-primary)] px-6 py-4 text-[14px] font-black text-white cursor-pointer">
-                <Icon name="whatsapp" size={16} /> WhatsApp
-              </a>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <div
+        className="border-t border-[var(--color-section-border)] bg-white md:hidden"
+        style={{ display: "grid", gridTemplateRows: open ? "1fr" : "0fr", transition: "grid-template-rows 220ms ease-out" }}>
+        <div style={{ overflow: "hidden", minHeight: 0 }}>
+          <div className="flex flex-col gap-1 px-6 py-5" style={{ opacity: open ? 1 : 0, transition: "opacity 150ms ease-out" }}>
+            {links.map(({ href, label }) => (
+              <Link key={href} href={href} onClick={() => setOpen(false)} className="rounded-xl px-4 py-3 text-[14px] font-bold text-[var(--color-text-main)] hover:bg-[var(--color-primary-muted)] hover:text-[var(--color-primary)] cursor-pointer">{label}</Link>
+            ))}
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center justify-center gap-3 rounded-full bg-[var(--color-primary)] px-6 py-4 text-[14px] font-black text-white cursor-pointer">
+              <Icon name="whatsapp" size={16} /> WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
     </header>
   );
 }
@@ -223,7 +223,7 @@ function TemplateCard({ template, index }) {
   const waText = encodeURIComponent(`Hola, me interesa la plantilla "${name}"`);
   return (
     <motion.div {...fadeUp} transition={{ duration: 0.65, delay: index * 0.07, ease: [0.22, 1, 0.36, 1] }}
-      className="flex flex-col rounded-[28px] border bg-white p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_20px_56px_rgba(107,33,168,.1)]"
+      className="flex flex-col rounded-[28px] border bg-white p-8 hover:-translate-y-1 hover:shadow-[0_20px_56px_rgba(107,33,168,.1)]" style={{ transition: "transform 300ms ease-out, box-shadow 300ms ease-out" }}
       style={{ borderColor: border }}>
       <div className="mb-5 grid h-12 w-12 place-items-center rounded-[14px]" style={{ background: bg, color }}>
         <Icon name={icon} size={22} />
@@ -306,7 +306,7 @@ function FinalCTA() {
         <div className="relative z-10 mx-auto max-w-[620px]">
           <h2 className="text-[34px] font-black leading-[1.05] tracking-[-0.055em] text-white md:text-[48px]">¿No sabes cuál elegir?</h2>
           <p className="mx-auto mt-5 max-w-[500px] text-[18px] leading-[1.65] text-white/75">Agenda tu asesoría gratis y te ayudamos a encontrar la herramienta correcta para tu negocio.</p>
-          <Link href="/#contact" className="mt-9 inline-flex items-center gap-3 rounded-full bg-white px-9 py-[1.1rem] text-[15px] font-black text-[var(--color-primary-dark)] transition-all hover:bg-white/90 hover:scale-[1.03] cursor-pointer">
+          <Link href="/#contact" className="mt-9 inline-flex items-center gap-3 rounded-full bg-white px-9 py-[1.1rem] text-[15px] font-black text-[var(--color-primary-dark)] hover:bg-white/90 hover:scale-[1.03] cursor-pointer" style={{ transition: "transform 160ms ease-out, background-color 160ms ease-out" }}>
             Agendar asesoría gratis <Icon name="arrow" size={17} />
           </Link>
         </div>
@@ -334,7 +334,8 @@ function Footer() {
 
 export default function PlantillasPage() {
   return (
-    <main className="min-h-screen scroll-smooth bg-white font-sans text-[var(--color-text-main)] antialiased selection:bg-[var(--color-primary)] selection:text-white">
+    <MotionConfig reducedMotion="user">
+    <main className="min-h-[100dvh] scroll-smooth bg-white font-sans text-[var(--color-text-main)] antialiased selection:bg-[var(--color-primary)] selection:text-white overflow-x-hidden">
       <Header />
       <Hero />
       <Templates />
@@ -342,5 +343,6 @@ export default function PlantillasPage() {
       <FinalCTA />
       <Footer />
     </main>
+    </MotionConfig>
   );
 }

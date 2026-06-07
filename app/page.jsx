@@ -291,18 +291,18 @@ function Hero() {
             <Icon name="zap" size={13} className="text-[var(--color-primary)]" />
             Herramientas digitales para negocios reales
           </div>
-          <h1 className="mx-auto max-w-[780px] text-[52px] font-black leading-[.92] tracking-[-0.06em] text-[var(--color-text-main)] md:text-[76px] lg:text-[96px]">
+          <h1 className="mx-auto max-w-[780px] text-[52px] font-black leading-[.92] tracking-[-0.06em] text-[var(--color-text-main)] md:text-[76px] lg:text-[96px]" style={{ textWrap: "balance" }}>
             Organiza tu negocio y vende más fácil
           </h1>
           <p className="mx-auto mt-7 max-w-[560px] text-[18px] leading-[1.7] text-[var(--color-text-body)]/80">
             Creamos herramientas simples y personalizadas para que tengas claridad, control y más clientes, sin complicaciones técnicas.
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
-            <a href="/#contact"
+            <Link href="/#contact"
               className="btn-primary !px-9 !py-[1.1rem] !text-[16px]">
               Solicitar Asesoría Gratis
               <span className="grid h-7 w-7 place-items-center rounded-full bg-white/20"><Icon name="arrow" size={15} /></span>
-            </a>
+            </Link>
             <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"
               className="btn-secondary">
               <Icon name="whatsapp" size={17} /> WhatsApp
@@ -500,7 +500,7 @@ function TestimonialsSection() {
           {testimonials.map(({ quote, name, business }, i) => (
             <motion.div key={name} {...fadeUp} transition={{ duration: 0.5, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
               className="flex flex-col rounded-[24px] border border-[var(--color-primary-border)] bg-white p-8">
-              <p className="flex-1 text-[16px] leading-[1.8] text-[var(--color-text-body)]">"{quote}"</p>
+              <p className="flex-1 text-[16px] leading-[1.8] text-[var(--color-text-body)]">&#x201C;{quote}&#x201D;</p>
               <div className="mt-6 flex items-center gap-3 border-t border-[var(--color-primary-border)] pt-5">
                 <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[var(--color-primary)] text-[14px] font-black text-white">
                   {name[0]}
@@ -531,7 +531,7 @@ function PricingCard({ plan, index }) {
       <p className={`mt-2 text-[14px] leading-[1.6] ${g ? "text-white/80" : "text-[var(--color-text-secondary)]"}`}>{plan.desc}</p>
       <div className="mt-7 flex items-end gap-2">
         {plan.oldPrice && <span className={`pb-1.5 text-[22px] font-semibold line-through ${g ? "text-white/50" : "text-[var(--color-text-muted)]"}`}>{plan.oldPrice}</span>}
-        <span className={`text-[52px] font-black leading-none tracking-[-0.06em] ${g ? "text-white" : "text-[var(--color-primary)]"}`}>{plan.price}</span>
+        <span className={`text-[52px] font-black leading-none tracking-[-0.06em] tabular-nums ${g ? "text-white" : "text-[var(--color-primary)]"}`}>{plan.price}</span>
         {plan.suffix && <span className={`pb-1.5 text-[16px] font-semibold ${g ? "text-white/70" : "text-[var(--color-text-muted)]"}`}>{plan.suffix}</span>}
       </div>
       {plan.label && <p className={`mt-1 text-[13px] font-semibold ${g ? "text-white/70" : "text-[var(--color-text-muted)]"}`}>{plan.label}</p>}
@@ -696,7 +696,7 @@ function ContactForm() {
                     {label}<span aria-hidden="true" className="ml-0.5 text-[var(--color-orange-accent)]">*</span>
                   </label>
                   <div className="p-0.5 rounded-2xl ring-1 ring-[var(--color-primary-border)] bg-[var(--color-card-bg)] focus-within:ring-2 focus-within:ring-[var(--color-primary-accent)]/50 transition duration-200" style={{ boxShadow: "inset 0 1px 2px rgba(0,0,0,.04)" }}>
-                    <input id={id} type={type} required autoComplete={autoComplete} value={form[id]} onChange={handleChange} placeholder={placeholder}
+                    <input id={id} name={id} type={type} required autoComplete={autoComplete} spellCheck={id === "email" ? false : undefined} value={form[id]} onChange={handleChange} placeholder={placeholder}
                       className="w-full rounded-[14px] bg-transparent px-5 py-3.5 text-[15px] text-[var(--color-text-main)] outline-none focus:bg-white transition-colors duration-200 placeholder:text-[var(--color-text-light)]" />
                   </div>
                 </div>
@@ -706,14 +706,14 @@ function ContactForm() {
                   Mensaje<span aria-hidden="true" className="ml-0.5 text-[var(--color-orange-accent)]">*</span>
                 </label>
                 <div className="p-0.5 rounded-2xl ring-1 ring-[var(--color-primary-border)] bg-[var(--color-card-bg)] focus-within:ring-2 focus-within:ring-[var(--color-primary-accent)]/50 transition duration-200" style={{ boxShadow: "inset 0 1px 2px rgba(0,0,0,.04)" }}>
-                  <textarea id="message" required autoComplete="off" value={form.message} onChange={handleChange} rows={5} placeholder="Cuéntanos qué necesitas o cómo funciona tu negocio"
+                  <textarea id="message" name="message" required autoComplete="off" value={form.message} onChange={handleChange} rows={5} placeholder="Cuéntanos qué necesitas o cómo funciona tu negocio…"
                     className="w-full rounded-[14px] bg-transparent px-5 py-3.5 text-[15px] text-[var(--color-text-main)] outline-none focus:bg-white transition-colors duration-200 placeholder:text-[var(--color-text-light)] resize-none" />
                 </div>
               </div>
               <motion.button type="submit" disabled={status === "sending"} whileTap={{ scale: 0.97 }}
                 className="inline-flex w-full items-center justify-center gap-3 rounded-full bg-[var(--color-primary)] px-8 py-4 text-[15px] font-black text-white hover:bg-[var(--color-primary-hover)] hover:scale-[1.02] hover:shadow-[0_8px_24px_rgba(107,33,168,.3)] disabled:opacity-60 cursor-pointer"
                 style={{ transition: "transform 160ms ease-out, background-color 160ms ease-out, box-shadow 200ms ease-out" }}>
-                {status === "sending" ? "Enviando..." : <><span>Enviar mensaje</span><span className="grid h-7 w-7 place-items-center rounded-full bg-white/20"><Icon name="arrow" size={15} /></span></>}
+                {status === "sending" ? "Enviando…" : <><span>Enviar mensaje</span><span className="grid h-7 w-7 place-items-center rounded-full bg-white/20"><Icon name="arrow" size={15} /></span></>}
               </motion.button>
             </form>
           )}

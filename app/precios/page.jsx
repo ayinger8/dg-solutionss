@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, MotionConfig } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -77,7 +77,7 @@ function Header() {
             <Icon name="whatsapp" size={16} /> WhatsApp
           </a>
         </div>
-        <button onClick={() => setOpen(!open)} className="grid h-10 w-10 place-items-center rounded-full bg-[var(--color-primary)] text-white md:hidden cursor-pointer" aria-label="Menú">
+        <button onClick={() => setOpen(!open)} className="grid h-10 w-10 place-items-center rounded-full bg-[var(--color-primary)] text-white md:hidden cursor-pointer" aria-label="Menú" aria-expanded={open}>
           <Icon name={open ? "x" : "menu"} size={18} />
         </button>
       </div>
@@ -188,7 +188,7 @@ function SolutionTypes() {
         <div className="grid gap-6 md:grid-cols-3">
           {solutionTypes.map(({ icon, title, desc, color, bg }, i) => (
             <motion.div key={title} {...fadeUp} transition={{ duration: 0.65, delay: i * 0.09, ease: [0.22, 1, 0.36, 1] }}
-              className="group rounded-[24px] border border-transparent p-8 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_48px_rgba(107,33,168,.1)]"
+              className="group rounded-[24px] border border-transparent p-8 hover:-translate-y-1 hover:shadow-[0_16px_48px_rgba(107,33,168,.1)]" style={{ transition: "transform 300ms ease-out, box-shadow 300ms ease-out" }}
               style={{ background: bg + "55", borderColor: bg }}>
               <div className="mb-5 grid h-13 w-13 place-items-center rounded-[16px]" style={{ background: bg, color }}>
                 <Icon name={icon} size={24} />
@@ -261,7 +261,7 @@ function PricingLevels() {
         <div className="mx-auto grid max-w-[1100px] gap-6 md:grid-cols-3">
           {levels.map(({ number, title, price, desc, features, popular, color, bg, border, dark }, i) => (
             <motion.div key={title} {...fadeUp} transition={{ duration: 0.65, delay: i * 0.09, ease: [0.22, 1, 0.36, 1] }} whileHover={{ y: -5 }}
-              className={`relative flex flex-col rounded-[28px] border p-9 transition-all duration-300 ${dark ? "shadow-[0_28px_70px_rgba(107,33,168,.25)]" : "hover:shadow-[0_16px_48px_rgba(107,33,168,.08)]"}`}
+              className={`relative flex flex-col rounded-[28px] border p-9 ${dark ? "shadow-[0_28px_70px_rgba(107,33,168,.25)]" : "hover:shadow-[0_16px_48px_rgba(107,33,168,.08)]"}`} style={{ transition: "transform 300ms ease-out, box-shadow 300ms ease-out" }}
               style={{ background: bg, borderColor: border }}>
               {popular && (
                 <span className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--color-yellow-popular)] px-6 py-2.5 text-[13px] font-black text-[var(--color-text-main)]">★ Popular</span>
@@ -279,7 +279,7 @@ function PricingLevels() {
                   </div>
                 ))}
               </div>
-              <Link href="/#contact" className={`mt-9 inline-flex w-full items-center justify-center gap-3 rounded-full py-4 text-[14px] font-black transition-all cursor-pointer ${dark ? "bg-white text-[var(--color-primary)] hover:bg-white/90" : "bg-[var(--color-primary)] text-white hover:bg-[var(--color-primary-hover)] hover:shadow-[0_8px_24px_rgba(107,33,168,.3)]"}`}>
+              <Link href="/#contact" className={`mt-9 inline-flex w-full items-center justify-center gap-3 rounded-full py-4 text-[14px] font-black cursor-pointer ${dark ? "bg-white text-[var(--color-primary)] hover:bg-white/90" : "bg-[var(--color-primary)] text-white hover:bg-[var(--color-primary-hover)] hover:shadow-[0_8px_24px_rgba(107,33,168,.3)]"}`} style={{ transition: "background-color 160ms ease-out, box-shadow 200ms ease-out" }}>
                 Agendar asesoría gratis <Icon name="arrow" size={15} />
               </Link>
             </motion.div>
@@ -310,7 +310,7 @@ function WhatYouGet() {
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {includes.map(({ icon, title, desc }, i) => (
             <motion.div key={title} {...fadeUp} transition={{ duration: 0.65, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-              className="rounded-[22px] border border-[var(--color-primary-border)] bg-[var(--color-card-bg)] p-7 transition-all duration-300 hover:-translate-y-1 hover:border-[var(--color-primary-border)] hover:shadow-[0_16px_48px_rgba(107,33,168,.08)]">
+              className="rounded-[22px] border border-[var(--color-primary-border)] bg-[var(--color-card-bg)] p-7 hover:-translate-y-1 hover:shadow-[0_16px_48px_rgba(107,33,168,.08)]" style={{ transition: "transform 300ms ease-out, box-shadow 300ms ease-out" }}>
               <div className="mb-5 grid h-12 w-12 place-items-center rounded-[14px] bg-[var(--color-primary-muted)] text-[var(--color-primary-accent)]">
                 <Icon name={icon} size={22} />
               </div>
@@ -404,7 +404,7 @@ function FinalCTA() {
         <div className="relative z-10 mx-auto max-w-[660px]">
           <h2 className="text-[36px] font-black leading-[1.05] tracking-[-0.055em] text-white md:text-[52px]">¿No estás seguro qué necesitas?</h2>
           <p className="mx-auto mt-5 max-w-[520px] text-[18px] leading-[1.65] text-white/75">Agenda tu asesoría gratis y te orientamos sin compromiso.</p>
-          <Link href="/#contact" className="mt-9 inline-flex items-center gap-3 rounded-full bg-white px-9 py-[1.1rem] text-[15px] font-black text-[var(--color-primary-dark)] transition-all hover:bg-white/90 hover:scale-[1.03] cursor-pointer">
+          <Link href="/#contact" className="mt-9 inline-flex items-center gap-3 rounded-full bg-white px-9 py-[1.1rem] text-[15px] font-black text-[var(--color-primary-dark)] hover:bg-white/90 hover:scale-[1.03] cursor-pointer" style={{ transition: "transform 160ms ease-out, background-color 160ms ease-out" }}>
             Agendar asesoría gratis <Icon name="arrow" size={17} />
           </Link>
         </div>
@@ -432,7 +432,8 @@ function Footer() {
 
 export default function PreciosPage() {
   return (
-    <main className="min-h-screen scroll-smooth bg-white font-sans text-[var(--color-text-main)] antialiased selection:bg-[var(--color-primary)] selection:text-white">
+    <MotionConfig reducedMotion="user">
+    <main className="min-h-[100dvh] scroll-smooth bg-white font-sans text-[var(--color-text-main)] antialiased selection:bg-[var(--color-primary)] selection:text-white overflow-x-hidden">
       <Header />
       <Hero />
       <ContextBlock />
@@ -444,5 +445,6 @@ export default function PreciosPage() {
       <FinalCTA />
       <Footer />
     </main>
+    </MotionConfig>
   );
 }
