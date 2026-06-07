@@ -28,6 +28,7 @@ const jakarta = Plus_Jakarta_Sans({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://dg-solutions-web.vercel.app"),
+  themeColor: "#4D2FBF",
   title: {
     default: "DG Solutions - Automatización e IA para negocios en México",
     template: "%s | DG Solutions",

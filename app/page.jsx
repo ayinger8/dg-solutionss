@@ -715,6 +715,7 @@ function ContactForm() {
                 style={{ transition: "transform 160ms ease-out, background-color 160ms ease-out, box-shadow 200ms ease-out" }}>
                 {status === "sending" ? "Enviando…" : <><span>Enviar mensaje</span><span className="grid h-7 w-7 place-items-center rounded-full bg-white/20"><Icon name="arrow" size={15} /></span></>}
               </motion.button>
+              <p className="mt-3 text-center text-[12px] text-[var(--color-text-muted)]">Te respondemos por WhatsApp o email en menos de 24&nbsp;h.</p>
             </form>
           )}
         </div>
