@@ -322,12 +322,12 @@ function IntegrationsStrip() {
       <p className="text-center text-[11px] font-black uppercase tracking-[0.2em] text-[var(--color-text-muted)] mb-6 px-6">
         Herramientas que conectamos para tu negocio
       </p>
-      <div className="relative">
-        <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-24 bg-gradient-to-r from-white to-transparent" />
-        <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-24 bg-gradient-to-l from-white to-transparent" />
-        <div className="flex">
+      <div className="relative w-full overflow-hidden">
+        <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-12 sm:w-24 bg-gradient-to-r from-white to-transparent" />
+        <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-12 sm:w-24 bg-gradient-to-l from-white to-transparent" />
+        <div className="flex w-max">
           <div className="marquee-track flex shrink-0 items-center gap-14 px-6" aria-hidden="true">
-            {[...BRAND_NAMES, ...BRAND_NAMES].map((name, i) => (
+            {[...BRAND_NAMES, ...BRAND_NAMES, ...BRAND_NAMES, ...BRAND_NAMES].map((name, i) => (
               <div key={`${name}-${i}`} className="flex shrink-0 flex-col items-center gap-2 text-[var(--color-text-muted)] transition-colors duration-200 hover:text-[var(--color-text-secondary)]">
                 <BrandLogo name={name} size={24} />
                 <span className="text-[10px] font-bold tracking-[0.05em]">{BRAND_LABELS[name]}</span>
@@ -617,7 +617,7 @@ function FAQ() {
 
 function ContactForm() {
   const [status, setStatus] = useState("");
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
   const handleChange = (e) => setForm({ ...form, [e.target.id]: e.target.value });
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -633,83 +633,73 @@ function ContactForm() {
     { icon: "globe", label: "Cobertura", value: "Todo México, atendemos en línea" },
   ];
   return (
-    <section id="contact" className="px-6 py-32 md:px-12 lg:px-20" style={{ background: "linear-gradient(135deg,var(--color-card-bg) 0%,var(--color-blue-bg) 100%)" }} aria-label="Contacto">
-      <motion.div {...fadeUp} className="mx-auto grid max-w-[1200px] gap-16 lg:grid-cols-2">
+    <section id="contact" className="px-6 py-20 md:px-12 md:py-24 lg:px-20" style={{ background: "linear-gradient(135deg,var(--color-card-bg) 0%,var(--color-blue-bg) 100%)" }} aria-label="Contacto">
+      <motion.div {...fadeUp} className="mx-auto grid max-w-[1080px] gap-10 lg:grid-cols-[0.95fr_1fr] lg:items-center">
         <div>
           <span className="inline-flex items-center rounded-full border border-[var(--color-primary-border)] bg-[var(--color-primary-muted)] px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em] text-[var(--color-primary-accent)]">Contacto</span>
-          <h2 className="mt-4 text-[38px] font-black leading-[1.08] tracking-[-0.055em] text-[var(--color-text-main)] md:text-[52px]">Cuéntanos sobre tu negocio</h2>
-          <p className="mt-5 max-w-[520px] text-[18px] leading-[1.7] text-[var(--color-text-secondary)]">Te ayudamos a entender qué necesitas y cómo organizar tu negocio de forma simple. La primera asesoría es gratis y sin compromiso.</p>
-          <div className="mt-8 overflow-hidden rounded-[24px] shadow-[0_20px_60px_rgba(107,33,168,.12)]" style={{ aspectRatio: "16/9" }}>
-            {IMAGES.contact ? (
-              <Image src={IMAGES.contact} alt="Equipo DG Solutions" fill className="object-cover"
-                style={{ filter: "saturate(0.8) hue-rotate(220deg) brightness(1.05)" }} />
-            ) : (
-              <div className="flex h-full w-full flex-col items-center justify-center gap-5 px-8 text-center"
-                style={{ background: "linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 100%)" }}>
-                <Image src="/IMAGES/LOGO1.png" alt="DG Solutions" width={64} height={64} className="object-contain opacity-90" />
-                <div>
-                  <p className="text-[20px] font-black tracking-[-0.04em] text-white">DG Solutions</p>
-                  <p className="mt-2 text-[14px] leading-[1.6] text-white/65">Mazatlán, Sinaloa · Atendemos a todo México en línea</p>
-                </div>
-                <div className="flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-5 py-2">
-                  <span className="h-2 w-2 rounded-full bg-[var(--color-success)]" />
-                  <p className="text-[12px] font-bold text-white/80">Respondemos el mismo día</p>
-                </div>
-              </div>
-            )}
-          </div>
-          <div className="mt-8 space-y-5">
+          <h2 className="mt-4 text-[34px] font-black leading-[1.08] tracking-[-0.055em] text-[var(--color-text-main)] md:text-[44px]">Cuéntanos sobre tu negocio</h2>
+          <p className="mt-4 max-w-[480px] text-[16px] leading-[1.7] text-[var(--color-text-secondary)]">Te ayudamos a entender qué necesitas y cómo organizar tu negocio de forma simple. La primera asesoría es gratis y sin compromiso.</p>
+          <div className="mt-6 space-y-3">
             {contactItems.map(({ icon, label, value }) => (
-              <div key={label} className="flex items-center gap-4">
-                <div className="grid h-11 w-11 shrink-0 place-items-center rounded-[12px] bg-[var(--color-primary-border)] text-[var(--color-primary-accent)]"><Icon name={icon} size={18} /></div>
-                <div>
-                  <p className="text-[11px] font-black uppercase tracking-wider text-[var(--color-text-muted)]">{label}</p>
-                  <p className="text-[15px] font-semibold text-[var(--color-text-main)]">{value}</p>
+              <div key={label} className="flex items-center gap-3">
+                <div className="grid h-9 w-9 shrink-0 place-items-center rounded-[10px] bg-[var(--color-primary-border)] text-[var(--color-primary-accent)]"><Icon name={icon} size={16} /></div>
+                <div className="min-w-0">
+                  <p className="text-[10px] font-black uppercase tracking-wider text-[var(--color-text-muted)]">{label}</p>
+                  <p className="text-[14px] font-semibold text-[var(--color-text-main)] break-all">{value}</p>
                 </div>
               </div>
             ))}
           </div>
           <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"
-            className="mt-8 inline-flex items-center gap-3 rounded-full bg-[var(--color-success)] px-8 py-4 text-[14px] font-black text-white hover:bg-[var(--color-success)]/90 hover:scale-[1.03] active:scale-[0.97] hover:shadow-[0_8px_24px_rgba(37,211,102,.35)] cursor-pointer"
+            className="mt-5 inline-flex items-center gap-3 rounded-full bg-[var(--color-success)] px-7 py-3.5 text-[14px] font-black text-white hover:bg-[var(--color-success)]/90 hover:scale-[1.03] active:scale-[0.97] hover:shadow-[0_8px_24px_rgba(37,211,102,.35)] cursor-pointer"
             style={{ transition: "transform 160ms ease-out, background-color 160ms ease-out, box-shadow 200ms ease-out" }}>
-            <span className="grid h-8 w-8 place-items-center rounded-full bg-white/15"><Icon name="whatsapp" size={17} /></span> Escríbenos por WhatsApp
+            <span className="grid h-7 w-7 place-items-center rounded-full bg-white/15"><Icon name="whatsapp" size={16} /></span> Escríbenos por WhatsApp
           </a>
         </div>
-        <div className="rounded-[28px] border border-[var(--color-primary-border)] bg-white p-8 shadow-[0_8px_40px_rgba(107,33,168,.08)] md:p-10">
+        <div className="rounded-[28px] border border-[var(--color-primary-border)] bg-white p-6 shadow-[0_8px_40px_rgba(107,33,168,.08)] md:p-7">
           {status === "sent" ? (
-            <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="flex h-full flex-col items-center justify-center py-12 text-center">
-              <div className="grid h-16 w-16 place-items-center rounded-full bg-[var(--color-success-bg)]"><Icon name="check" size={28} className="text-[var(--color-success)]" /></div>
-              <h3 className="mt-5 text-[24px] font-black text-[var(--color-text-main)]">¡Mensaje enviado!</h3>
-              <p className="mt-3 text-[15px] text-[var(--color-text-secondary)]">Te respondemos pronto. También puedes escribirnos por WhatsApp.</p>
-              <button onClick={() => { setStatus(""); setForm({ name: "", email: "", message: "" }); }} className="mt-6 text-[13px] font-bold text-[var(--color-primary)] underline cursor-pointer">Enviar otro mensaje</button>
+            <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="flex h-full flex-col items-center justify-center py-10 text-center">
+              <div className="grid h-14 w-14 place-items-center rounded-full bg-[var(--color-success-bg)]"><Icon name="check" size={26} className="text-[var(--color-success)]" /></div>
+              <h3 className="mt-4 text-[22px] font-black text-[var(--color-text-main)]">¡Mensaje enviado!</h3>
+              <p className="mt-2 text-[14px] text-[var(--color-text-secondary)]">Te respondemos pronto. También puedes escribirnos por WhatsApp.</p>
+              <button onClick={() => { setStatus(""); setForm({ name: "", email: "", phone: "", message: "" }); }} className="mt-5 text-[13px] font-bold text-[var(--color-primary)] underline cursor-pointer">Enviar otro mensaje</button>
             </motion.div>
           ) : (
             <form onSubmit={handleSubmit} noValidate>
               {status === "error" && (
                 <motion.div initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} role="alert"
-                  className="mb-5 flex items-center gap-3 rounded-2xl border border-[var(--color-orange-border)] bg-[var(--color-orange-bg)] px-4 py-3 text-[13px] font-bold text-[var(--color-orange-accent)]">
+                  className="mb-4 flex items-center gap-3 rounded-2xl border border-[var(--color-orange-border)] bg-[var(--color-orange-bg)] px-4 py-3 text-[13px] font-bold text-[var(--color-orange-accent)]">
                   <Icon name="x" size={15} />
                   <span>Algo salió mal. Intenta de nuevo o escríbenos por WhatsApp.</span>
                 </motion.div>
               )}
-              {[{ id: "name", label: "Nombre", type: "text", placeholder: "Tu nombre", autoComplete: "name" }, { id: "email", label: "Email", type: "email", placeholder: "tu@email.com", autoComplete: "email" }].map(({ id, label, type, placeholder, autoComplete }) => (
-                <div key={id} className="mb-5">
+              {[{ id: "name", label: "Nombre", type: "text", placeholder: "Tu nombre", autoComplete: "name", required: true }, { id: "email", label: "Email", type: "email", placeholder: "tu@email.com", autoComplete: "email", required: true }].map(({ id, label, type, placeholder, autoComplete, required }) => (
+                <div key={id} className="mb-3">
                   <label className="mb-1.5 block text-[13px] font-black text-[var(--color-text-main)]" htmlFor={id}>
                     {label}<span aria-hidden="true" className="ml-0.5 text-[var(--color-orange-accent)]">*</span>
                   </label>
                   <div className="p-0.5 rounded-2xl ring-1 ring-[var(--color-primary-border)] bg-[var(--color-card-bg)] focus-within:ring-2 focus-within:ring-[var(--color-primary-accent)]/50 transition duration-200" style={{ boxShadow: "inset 0 1px 2px rgba(0,0,0,.04)" }}>
-                    <input id={id} name={id} type={type} required autoComplete={autoComplete} spellCheck={id === "email" ? false : undefined} value={form[id]} onChange={handleChange} placeholder={placeholder}
-                      className="w-full rounded-[14px] bg-transparent px-5 py-3.5 text-[15px] text-[var(--color-text-main)] outline-none focus:bg-white transition-colors duration-200 placeholder:text-[var(--color-text-light)]" />
+                    <input id={id} name={id} type={type} required={required} autoComplete={autoComplete} spellCheck={id === "email" ? false : undefined} value={form[id]} onChange={handleChange} placeholder={placeholder}
+                      className="w-full rounded-[14px] bg-transparent px-4 py-2.5 text-[16px] md:text-[15px] text-[var(--color-text-main)] outline-none focus:bg-white transition-colors duration-200 placeholder:text-[var(--color-text-light)]" />
                   </div>
                 </div>
               ))}
-              <div className="mb-6">
+              <div className="mb-3">
+                <label className="mb-1.5 block text-[13px] font-black text-[var(--color-text-main)]" htmlFor="phone">
+                  WhatsApp / Teléfono<span className="ml-1 text-[11px] font-normal text-[var(--color-text-muted)]">(opcional)</span>
+                </label>
+                <div className="p-0.5 rounded-2xl ring-1 ring-[var(--color-primary-border)] bg-[var(--color-card-bg)] focus-within:ring-2 focus-within:ring-[var(--color-primary-accent)]/50 transition duration-200" style={{ boxShadow: "inset 0 1px 2px rgba(0,0,0,.04)" }}>
+                  <input id="phone" name="phone" type="tel" autoComplete="tel" value={form.phone} onChange={handleChange} placeholder="Ej. 669 229 1474"
+                    className="w-full rounded-[14px] bg-transparent px-4 py-2.5 text-[16px] md:text-[15px] text-[var(--color-text-main)] outline-none focus:bg-white transition-colors duration-200 placeholder:text-[var(--color-text-light)]" />
+                </div>
+              </div>
+              <div className="mb-4">
                 <label className="mb-1.5 block text-[13px] font-black text-[var(--color-text-main)]" htmlFor="message">
                   Mensaje<span aria-hidden="true" className="ml-0.5 text-[var(--color-orange-accent)]">*</span>
                 </label>
                 <div className="p-0.5 rounded-2xl ring-1 ring-[var(--color-primary-border)] bg-[var(--color-card-bg)] focus-within:ring-2 focus-within:ring-[var(--color-primary-accent)]/50 transition duration-200" style={{ boxShadow: "inset 0 1px 2px rgba(0,0,0,.04)" }}>
-                  <textarea id="message" name="message" required autoComplete="off" value={form.message} onChange={handleChange} rows={5} placeholder="Cuéntanos qué necesitas o cómo funciona tu negocio…"
-                    className="w-full rounded-[14px] bg-transparent px-5 py-3.5 text-[15px] text-[var(--color-text-main)] outline-none focus:bg-white transition-colors duration-200 placeholder:text-[var(--color-text-light)] resize-none" />
+                  <textarea id="message" name="message" required autoComplete="off" value={form.message} onChange={handleChange} rows={4} placeholder="Cuéntanos qué necesitas o cómo funciona tu negocio…"
+                    className="w-full rounded-[14px] bg-transparent px-4 py-2.5 text-[16px] md:text-[15px] text-[var(--color-text-main)] outline-none focus:bg-white transition-colors duration-200 placeholder:text-[var(--color-text-light)] resize-none" />
                 </div>
               </div>
               <motion.button type="submit" disabled={status === "sending"} whileTap={{ scale: 0.97 }}
