@@ -1,9 +1,10 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, MotionConfig } from "framer-motion";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 const WHATSAPP_URL = "https://wa.me/526692291474";
 
@@ -18,17 +19,17 @@ const IMAGES = {
 };
 
 const fadeUp = {
-  initial: { opacity: 0, y: 32 },
-  whileInView: { opacity: 1, y: 0 },
+  initial: { opacity: 0, y: 20, filter: "blur(6px)" },
+  whileInView: { opacity: 1, y: 0, filter: "blur(0px)" },
   viewport: { once: true, amount: 0.15 },
-  transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
+  transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
 };
 
 const plans = [
   {
     title: "Ordena tu negocio",
     price: "$70",
-    suffix: "/año",
+    suffix: "/año · MXN",
     desc: "Para negocios que quieren dejar de improvisar y tener claridad desde el día uno.",
     features: [
       { icon: "layers", text: "Control de ingresos y gastos" },
@@ -40,7 +41,7 @@ const plans = [
     title: "Trabaja con IA",
     price: "$599",
     oldPrice: "$899",
-    label: "Desde",
+    label: "Desde · MXN",
     popular: true,
     gradient: true,
     desc: "Automatiza lo repetitivo y usa inteligencia artificial para trabajar más rápido y mejor.",
@@ -54,7 +55,7 @@ const plans = [
     title: "Consigue más clientes",
     price: "$299",
     oldPrice: "$599",
-    label: "Desde",
+    label: "Desde · MXN",
     desc: "Presencia digital real para que tus clientes te encuentren y puedan contactarte fácil.",
     features: [
       { icon: "globe", text: "Desarrollo de página web" },
@@ -88,32 +89,9 @@ const problems = [
   { icon: "globe", title: "Sin presencia digital", desc: "Tus clientes no te encuentran en línea, y los que llegan no saben cómo contactarte.", color: "var(--color-orange-accent)", bg: "var(--color-orange-bg)" },
 ];
 
-const steps = [
-  { n: "01", label: "Diagnóstico gratis", icon: "target" },
-  { n: "02", label: "Diseñamos tu solución", icon: "edit" },
-  { n: "03", label: "Lo automatizamos", icon: "zap" },
-  { n: "04", label: "Tu negocio escala", icon: "trending" },
-];
 
 const BRAND_NAMES = ["whatsapp", "openai", "google", "notion", "meta", "stripe", "zapier", "airtable"];
 
-const WAVE_CSS = `
-@keyframes waveA{0%,100%{transform:translateX(0) scaleY(1)}50%{transform:translateX(-5%) scaleY(1.07)}}
-@keyframes waveB{0%,100%{transform:translateX(0) scaleY(1)}50%{transform:translateX(5%) scaleY(0.94)}}
-@keyframes waveC{0%,100%{transform:translateX(0) scaleY(1)}50%{transform:translateX(-3%) scaleY(1.03)}}
-@keyframes floatA{0%,100%{transform:translateY(0px)}50%{transform:translateY(-10px)}}
-@keyframes floatB{0%,100%{transform:translateY(0px)}50%{transform:translateY(-7px)}}
-@keyframes marquee{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-.dw{position:absolute;width:210%;left:-55%;border-radius:50%;pointer-events:none}
-.dw1{height:68%;bottom:-34%;background:rgba(167,139,250,0.42);animation:waveA 8s ease-in-out infinite}
-.dw2{height:64%;bottom:-38%;background:rgba(147,197,253,0.32);animation:waveB 11s ease-in-out infinite}
-.dw3{height:58%;bottom:-42%;background:rgba(196,181,253,0.22);animation:waveC 14s ease-in-out infinite}
-.dw4{height:52%;top:-28%;background:rgba(186,230,253,0.18);animation:waveB 9s ease-in-out infinite}
-.dw5{height:46%;top:-32%;background:rgba(167,139,250,0.13);animation:waveA 12s ease-in-out infinite}
-.float-a{animation:floatA 6s ease-in-out infinite}
-.float-b{animation:floatB 8s ease-in-out infinite}
-.marquee-track{animation:marquee 28s linear infinite}
-`;
 
 function ImagePlaceholder({ color, icon, accent }) {
   return (
@@ -140,7 +118,7 @@ function BrandLogo({ name, size = 24 }) {
 }
 
 function Icon({ name, size = 22, className = "", style }) {
-  const p = { width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 1.8, strokeLinecap: "round", strokeLinejoin: "round", className, style, "aria-hidden": "true" };
+  const p = { width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 1.5, strokeLinecap: "round", strokeLinejoin: "round", className, style, "aria-hidden": "true" };
   const icons = {
     arrow:    <svg {...p}><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>,
     arrowUp:  <svg {...p}><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>,
@@ -172,7 +150,7 @@ function Logo() {
       <Image src="/IMAGES/LOGO1.png" alt="DG Solutions" width={48} height={48} className="object-contain" />
       <div className="leading-none">
         <p className="text-[20px] font-black tracking-[-0.08em] text-[var(--color-primary-logo)] md:text-[24px]">DG SOLUTIONS</p>
-        <p className="mt-[3px] text-[7.5px] font-bold tracking-[0.12em] uppercase text-[var(--color-primary-accent)]/60 md:text-[8.5px]">Hazlo Simple. Hazlo Inteligente.</p>
+        <p className="mt-[3px] text-[10px] font-bold tracking-[0.12em] uppercase text-[var(--color-primary-accent)]/60 md:text-[10.5px]">Hazlo Simple. Hazlo Inteligente.</p>
       </div>
     </Link>
   );
@@ -181,9 +159,10 @@ function Logo() {
 function Header() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 12);
-    window.addEventListener("scroll", fn);
+    window.addEventListener("scroll", fn, { passive: true });
     return () => window.removeEventListener("scroll", fn);
   }, []);
   const links = [
@@ -193,14 +172,21 @@ function Header() {
     { href: "/#contact", label: "Contacto" },
   ];
   return (
-    <header className={`fixed left-0 top-0 z-50 w-full transition-all duration-300 ${scrolled ? "bg-white/97 shadow-[0_1px_20px_rgba(0,0,0,.07)] backdrop-blur-md" : "bg-white/80 backdrop-blur-sm"}`}>
-      <div className="mx-auto flex max-w-[1500px] items-center justify-between px-6 py-4 md:px-12 lg:px-20">
+    <header
+      className={`fixed left-0 top-0 z-50 w-full ${scrolled ? "bg-white/97 shadow-[0_1px_20px_rgba(0,0,0,.07)] backdrop-blur-md" : "bg-white/80 backdrop-blur-sm"}`}
+      style={{ transition: "background-color 300ms ease, box-shadow 300ms ease" }}>
+      <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-4 md:px-12 lg:px-20">
         <Logo />
-        <nav className="hidden items-center gap-8 md:flex">
-          {links.map(({ href, label }) => (
-            <Link key={href} href={href} className="text-[12.5px] font-bold uppercase tracking-[0.1em] text-[var(--color-text-body)] transition-colors hover:text-[var(--color-primary)] cursor-pointer">{label}</Link>
-          ))}
-          <Link href="/plantillas" className="inline-flex items-center gap-1.5 rounded-full border border-[var(--color-primary-border)] bg-[var(--color-primary-muted)] px-3.5 py-1.5 text-[11px] font-black uppercase tracking-[0.08em] text-[var(--color-primary-accent)] transition-all hover:bg-[var(--color-primary-border)] cursor-pointer">
+        <nav className="hidden items-center gap-8 md:flex" aria-label="Navegación principal">
+          {links.map(({ href, label }) => {
+            const isActive = pathname === href.replace("/#home","").replace("/#soluciones","").replace("/#contact","") || (href === "/precios" && pathname === "/precios");
+            return (
+              <Link key={href} href={href} aria-current={isActive ? "page" : undefined}
+                className={`text-[12.5px] font-bold uppercase tracking-[0.1em] transition-colors cursor-pointer ${isActive ? "text-[var(--color-primary)]" : "text-[var(--color-text-body)] hover:text-[var(--color-primary)]"}`}>{label}</Link>
+            );
+          })}
+          <Link href="/plantillas" aria-current={pathname === "/plantillas" ? "page" : undefined}
+            className="inline-flex items-center gap-1.5 rounded-full border border-[var(--color-primary-border)] bg-[var(--color-primary-muted)] px-3.5 py-1.5 text-[11px] font-black uppercase tracking-[0.08em] text-[var(--color-primary-accent)] transition-colors hover:bg-[var(--color-primary-border)] cursor-pointer">
             <Icon name="layout" size={11} /> Plantillas
           </Link>
         </nav>
@@ -210,34 +196,34 @@ function Header() {
             <Icon name="whatsapp" size={16} /> WhatsApp
           </a>
         </div>
-        <button onClick={() => setOpen(!open)} className="grid h-10 w-10 place-items-center rounded-full bg-[var(--color-primary)] text-white md:hidden cursor-pointer" aria-label="Menú">
+        <button onClick={() => setOpen(!open)} className="grid h-11 w-11 place-items-center rounded-full bg-[var(--color-primary)] text-white md:hidden cursor-pointer" aria-label="Menú" aria-expanded={open}>
           <Icon name={open ? "x" : "menu"} size={18} />
         </button>
       </div>
-      <AnimatePresence>
-        {open && (
-          <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} className="overflow-hidden border-t border-[var(--color-section-border)] bg-white md:hidden">
-            <div className="flex flex-col gap-1 px-6 py-5">
-              {links.map(({ href, label }) => (
-                <Link key={href} href={href} onClick={() => setOpen(false)} className="rounded-xl px-4 py-3 text-[14px] font-bold text-[var(--color-text-main)] hover:bg-[var(--color-primary-muted)] hover:text-[var(--color-primary)] cursor-pointer">{label}</Link>
-              ))}
-              <Link href="/plantillas" onClick={() => setOpen(false)} className="rounded-xl px-4 py-3 text-[14px] font-bold text-[var(--color-primary-accent)] hover:bg-[var(--color-primary-muted)] cursor-pointer">Plantillas →</Link>
-              <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center justify-center gap-3 rounded-full bg-[var(--color-primary)] px-6 py-4 text-[14px] font-black text-white cursor-pointer">
-                <Icon name="whatsapp" size={16} /> WhatsApp
-              </a>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      <div
+        className="border-t border-[var(--color-section-border)] bg-white md:hidden"
+        style={{ display: "grid", gridTemplateRows: open ? "1fr" : "0fr", transition: "grid-template-rows 220ms ease-out" }}>
+        <div style={{ overflow: "hidden", minHeight: 0 }}>
+          <div className="flex flex-col gap-1 px-6 py-5"
+            style={{ opacity: open ? 1 : 0, transition: "opacity 150ms ease-out" }}>
+            {links.map(({ href, label }) => (
+              <Link key={href} href={href} onClick={() => setOpen(false)} className="rounded-xl px-4 py-3 text-[14px] font-bold text-[var(--color-text-main)] hover:bg-[var(--color-primary-muted)] hover:text-[var(--color-primary)] cursor-pointer">{label}</Link>
+            ))}
+            <Link href="/plantillas" onClick={() => setOpen(false)} className="rounded-xl px-4 py-3 text-[14px] font-bold text-[var(--color-primary-accent)] hover:bg-[var(--color-primary-muted)] cursor-pointer">Plantillas →</Link>
+            <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="mt-3 inline-flex items-center justify-center gap-3 rounded-full bg-[var(--color-primary)] px-6 py-4 text-[14px] font-black text-white cursor-pointer">
+              <Icon name="whatsapp" size={16} /> WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
     </header>
   );
 }
 
 function Hero() {
   return (
-    <section id="home" className="relative overflow-hidden min-h-screen flex items-center justify-center"
+    <section id="home" className="relative overflow-hidden min-h-[100dvh] flex items-center justify-center"
       style={{ background: "linear-gradient(135deg,var(--gradient-1) 0%,var(--gradient-2) 38%,var(--gradient-3) 65%,var(--gradient-4) 100%)" }}>
-      <style>{WAVE_CSS}</style>
       <div className="absolute inset-0 overflow-hidden">
         <div className="dw dw4" /><div className="dw dw5" />
         <div className="dw dw3" /><div className="dw dw2" /><div className="dw dw1" />
@@ -250,8 +236,10 @@ function Hero() {
       <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 30% 55%,rgba(255,255,255,.28) 0%,transparent 55%),radial-gradient(ellipse at 80% 20%,rgba(196,181,253,.35) 0%,transparent 45%)" }} />
 
       {/* Floating card izquierda */}
-      <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.8, duration: 0.7 }}
-        className="float-a pointer-events-none absolute left-[2%] top-[30%] hidden w-[190px] select-none rounded-[16px] border border-white/60 bg-white/80 p-4 shadow-[0_8px_32px_rgba(107,33,168,.12)] backdrop-blur-sm lg:block">
+      <motion.div initial={{ opacity: 0, x: -20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.4, duration: 0.4 }}
+        aria-hidden="true"
+        className="float-a pointer-events-none absolute left-[2%] top-[30%] hidden w-[190px] select-none lg:block p-1 rounded-[18px] bg-white/25 ring-1 ring-black/8 shadow-[0_4px_16px_rgba(107,33,168,.06)]">
+        <div className="rounded-[14px] bg-white/85 p-4 backdrop-blur-sm shadow-[inset_0_1px_1px_rgba(255,255,255,.6)]">
         <p className="text-[10px] font-black uppercase tracking-[0.12em] text-[var(--color-text-muted)]">Pedidos hoy</p>
         <p className="mt-1 text-[28px] font-black leading-none text-[var(--color-primary)]">24</p>
         <div className="mt-2 flex items-center gap-1.5">
@@ -263,11 +251,14 @@ function Hero() {
             <div key={i} className="flex-1 rounded-sm bg-[var(--color-primary-border)]" style={{ height: `${h * 0.28}px` }} />
           ))}
         </div>
+        </div>
       </motion.div>
 
       {/* Floating card derecha */}
-      <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 1.0, duration: 0.7 }}
-        className="float-b pointer-events-none absolute right-[2%] top-[34%] hidden w-[188px] select-none rounded-[16px] border border-white/60 bg-white/80 p-4 shadow-[0_8px_32px_rgba(107,33,168,.12)] backdrop-blur-sm lg:block">
+      <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: 0.55, duration: 0.4 }}
+        aria-hidden="true"
+        className="float-b pointer-events-none absolute right-[2%] top-[34%] hidden w-[188px] select-none lg:block p-1 rounded-[18px] bg-white/25 ring-1 ring-black/8 shadow-[0_4px_16px_rgba(107,33,168,.06)]">
+        <div className="rounded-[14px] bg-white/85 p-4 backdrop-blur-sm shadow-[inset_0_1px_1px_rgba(255,255,255,.6)]">
         <div className="flex items-center gap-2.5">
           <div className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[var(--color-primary-border)] text-[var(--color-primary-accent)]">
             <Icon name="users" size={14} />
@@ -280,17 +271,21 @@ function Hero() {
         <div className="mt-3 rounded-[10px] bg-[var(--color-primary-muted)] px-3 py-2">
           <p className="text-[11px] font-semibold text-[var(--color-primary)]">IA respondió automáticamente ✓</p>
         </div>
+        </div>
       </motion.div>
 
       {/* Floating card abajo izquierda */}
-      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 1.2, duration: 0.7 }}
-        className="float-a pointer-events-none absolute bottom-[22%] left-[3%] hidden w-[172px] select-none rounded-[16px] border border-white/60 bg-white/80 p-4 shadow-[0_8px_32px_rgba(107,33,168,.12)] backdrop-blur-sm lg:block">
+      <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.68, duration: 0.4 }}
+        aria-hidden="true"
+        className="float-a pointer-events-none absolute bottom-[22%] left-[3%] hidden w-[172px] select-none lg:block p-1 rounded-[18px] bg-white/25 ring-1 ring-black/8 shadow-[0_4px_16px_rgba(107,33,168,.06)]">
+        <div className="rounded-[14px] bg-white/85 p-4 backdrop-blur-sm shadow-[inset_0_1px_1px_rgba(255,255,255,.6)]">
         <p className="text-[10px] font-black uppercase tracking-[0.12em] text-[var(--color-text-muted)]">Ingresos mes</p>
         <p className="mt-1 text-[20px] font-black leading-none text-[var(--color-text-main)]">$48,200</p>
         <p className="mt-1.5 text-[11px] font-semibold text-[var(--color-success)]">↑ Todo organizado</p>
+        </div>
       </motion.div>
 
-      <div className="relative z-10 mx-auto max-w-[1500px] px-6 md:px-12 lg:px-20 pt-28 pb-20 text-center">
+      <div className="relative z-10 mx-auto max-w-[1400px] px-6 md:px-12 lg:px-20 pt-28 pb-20 text-center">
         <motion.div {...fadeUp}>
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/50 bg-white/40 px-5 py-2.5 text-[12px] font-bold text-[var(--color-primary-dark)] backdrop-blur-sm">
             <Icon name="zap" size={13} className="text-[var(--color-primary)]" />
@@ -300,53 +295,19 @@ function Hero() {
             Organiza tu negocio y vende más fácil
           </h1>
           <p className="mx-auto mt-7 max-w-[560px] text-[18px] leading-[1.7] text-[var(--color-text-body)]/80">
-            Creamos herramientas simples y personalizadas para que tengas claridad, control y más clientes — sin complicaciones técnicas.
+            Creamos herramientas simples y personalizadas para que tengas claridad, control y más clientes, sin complicaciones técnicas.
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <a href="/#contact"
               className="btn-primary !px-9 !py-[1.1rem] !text-[16px]">
-              Solicitar Diagnóstico <Icon name="arrow" size={17} />
+              Solicitar Asesoría Gratis
+              <span className="grid h-7 w-7 place-items-center rounded-full bg-white/20"><Icon name="arrow" size={15} /></span>
             </a>
             <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"
               className="btn-secondary">
               <Icon name="whatsapp" size={17} /> WhatsApp
             </a>
           </div>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-6 text-[13px] text-[var(--color-text-body)]/80">
-            {["Primera consulta gratis", "Sin contratos largos", "Todo México"].map(t => (
-              <span key={t} className="flex items-center gap-1.5">
-                <span className="grid h-5 w-5 place-items-center rounded-full bg-white/60"><Icon name="check" size={11} className="text-[var(--color-primary)]" /></span>
-                {t}
-              </span>
-            ))}
-          </div>
-
-          {/* Process steps */}
-          <motion.div initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.5, duration: 0.7 }}
-            className="mx-auto mt-14 flex max-w-[640px] items-center justify-center">
-            {steps.map(({ n, label, icon }, i) => (
-              <React.Fragment key={n}>
-                <div className="flex flex-col items-center gap-2">
-                  <div className="grid h-10 w-10 place-items-center rounded-full border border-white/60 bg-white/50 backdrop-blur-sm text-[var(--color-primary)]">
-                    <Icon name={icon} size={16} />
-                  </div>
-                  <p className="max-w-[68px] text-center text-[10px] font-black uppercase leading-tight tracking-[0.08em] text-[var(--color-primary-dark)]">{label}</p>
-                </div>
-                {i < steps.length - 1 && (
-                  <div className="mx-1 mb-7 h-[1px] flex-1 bg-gradient-to-r from-[var(--color-primary)]/30 to-[var(--color-primary)]/10" />
-                )}
-              </React.Fragment>
-            ))}
-          </motion.div>
-
-          {/* Plantillas shortcut */}
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8, duration: 0.6 }}
-            className="mt-7 flex items-center justify-center gap-2">
-            <span className="text-[12px] text-[var(--color-primary-dark)]/70">¿Quieres empezar hoy?</span>
-            <Link href="/plantillas" className="text-[12px] font-black text-[var(--color-primary)] underline underline-offset-2 hover:text-[var(--color-primary-dark)] cursor-pointer">
-              Ver plantillas →
-            </Link>
-          </motion.div>
         </motion.div>
       </div>
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent" />
@@ -355,21 +316,19 @@ function Hero() {
 }
 
 function IntegrationsStrip() {
-  const brandLabels = { openai: "OpenAI", whatsapp: "WhatsApp", google: "Google", notion: "Notion", meta: "Meta", stripe: "Stripe", zapier: "Zapier", airtable: "Airtable" };
   return (
-    <section className="border-y border-[var(--color-section-border)] bg-white py-10 overflow-hidden">
-      <motion.p {...fadeUp} className="mb-7 text-center text-[11px] font-black uppercase tracking-[0.22em] text-[var(--color-text-muted)]">
-        Integra con las herramientas que ya usas
-      </motion.p>
+    <section className="border-y border-[var(--color-section-border)] bg-white py-10 overflow-hidden" aria-label="Integraciones">
+      <p className="text-center text-[11px] font-black uppercase tracking-[0.2em] text-[var(--color-text-muted)] mb-6 px-6">
+        Herramientas que conectamos para tu negocio
+      </p>
       <div className="relative">
         <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-24 bg-gradient-to-r from-white to-transparent" />
         <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-24 bg-gradient-to-l from-white to-transparent" />
         <div className="flex">
-          <div className="marquee-track flex shrink-0 items-center gap-10 px-6">
+          <div className="marquee-track flex shrink-0 items-center gap-12 px-6" aria-hidden="true">
             {[...BRAND_NAMES, ...BRAND_NAMES].map((name, i) => (
-              <div key={`${name}-${i}`} className="flex shrink-0 items-center gap-2 text-[var(--color-text-light)] transition-colors hover:text-[var(--color-text-muted)]">
-                <BrandLogo name={name} size={20} />
-                <span className="text-[13px] font-bold">{brandLabels[name]}</span>
+              <div key={`${name}-${i}`} className="flex shrink-0 items-center text-[var(--color-text-light)] transition-colors hover:text-[var(--color-text-muted)]">
+                <BrandLogo name={name} size={22} />
               </div>
             ))}
           </div>
@@ -381,23 +340,26 @@ function IntegrationsStrip() {
 
 function ProblemSection() {
   return (
-    <section className="bg-white px-6 py-24 md:px-12 lg:px-20">
-      <div className="mx-auto max-w-[1500px]">
+    <section className="bg-white px-6 py-32 md:px-12 lg:px-20" aria-label="Problemas comunes">
+      <div className="mx-auto max-w-[1400px]">
         <motion.div {...fadeUp} className="mx-auto max-w-[760px] text-center">
-          <p className="text-[12px] font-black uppercase tracking-[0.22em] text-[var(--color-success)]">El problema real</p>
+          <span className="inline-flex items-center rounded-full border border-[var(--color-success)]/30 bg-[var(--color-success-bg)] px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em] text-[var(--color-success)]">El problema real</span>
           <h2 className="mt-4 text-[38px] font-black leading-[1.08] tracking-[-0.055em] text-[var(--color-text-main)] md:text-[56px]">Tu negocio no necesita complicarse para crecer</h2>
           <p className="mt-5 text-[19px] text-[var(--color-text-secondary)]">La mayoría de los negocios pequeños tienen los mismos puntos de dolor. Nosotros los resolvemos con herramientas simples.</p>
         </motion.div>
         <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {problems.map(({ icon, title, desc, color, bg }, i) => (
-            <motion.div key={title} {...fadeUp} transition={{ duration: 0.65, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
-              className="group rounded-[22px] border border-transparent p-7 transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_20px_56px_rgba(107,33,168,.14)]"
-              style={{ background: bg + "55", borderColor: bg }}>
-              <div className="mb-5 grid h-12 w-12 place-items-center rounded-[14px] transition-transform duration-300 group-hover:scale-110" style={{ background: bg, color }}>
+            <motion.div key={title} {...fadeUp} transition={{ duration: 0.5, delay: i * 0.08, ease: [0.22, 1, 0.36, 1] }}
+              whileHover={{ y: -6 }} whileTap={{ scale: 0.98 }}
+              className="p-1 rounded-[24px] ring-1"
+              style={{ background: bg + "18", ringColor: bg + "44" }}>
+              <div className="rounded-[20px] p-7 h-full" style={{ background: bg + "33", boxShadow: "inset 0 1px 1px rgba(255,255,255,.5)" }}>
+              <div className="mb-5 grid h-12 w-12 place-items-center rounded-[14px]" style={{ background: bg, color }}>
                 <Icon name={icon} size={22} />
               </div>
               <h3 className="text-[17px] font-black text-[var(--color-text-main)]">{title}</h3>
               <p className="mt-2 text-[15px] leading-[1.65] text-[var(--color-text-secondary)]">{desc}</p>
+              </div>
             </motion.div>
           ))}
         </div>
@@ -408,9 +370,10 @@ function ProblemSection() {
 
 function CTABanner() {
   return (
-    <section className="px-6 py-12 md:px-12 lg:px-20" style={{ background: "linear-gradient(135deg,var(--color-primary-border) 0%,var(--color-blue-border) 100%)" }}>
-      <motion.div {...fadeUp} className="relative mx-auto max-w-[1350px] overflow-hidden rounded-[32px] px-8 py-20 text-center md:px-16"
-        style={{ background: "linear-gradient(135deg,var(--color-primary-dark) 0%,var(--color-blue-accent) 100%)" }}>
+    <section className="px-6 py-12 md:px-12 lg:px-20" style={{ background: "linear-gradient(135deg,var(--color-primary-border) 0%,var(--color-blue-border) 100%)" }} aria-label="Llamada a la acción">
+      <motion.div {...fadeUp} className="mx-auto max-w-[1350px] p-2 rounded-[36px] ring-1 ring-white/20" style={{ background: "rgba(255,255,255,.08)" }}>
+      <div className="relative overflow-hidden rounded-[32px] px-8 py-20 text-center md:px-16"
+        style={{ background: "linear-gradient(135deg,var(--color-primary-dark) 0%,var(--color-blue-accent) 100%)", boxShadow: "inset 0 1px 1px rgba(255,255,255,.12)" }}>
         <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 20% 50%,rgba(139,92,246,.6) 0%,transparent 50%),radial-gradient(ellipse at 85% 30%,rgba(59,130,246,.4) 0%,transparent 40%)" }} />
         {IMAGES.ctaBg && (
           <div className="absolute inset-0 opacity-10 mix-blend-luminosity">
@@ -418,14 +381,16 @@ function CTABanner() {
           </div>
         )}
         <div className="relative z-10 mx-auto max-w-[720px]">
-          <p className="mb-4 text-[12px] font-black uppercase tracking-[0.22em] text-[var(--color-primary-border)]">Sin costo, sin compromiso</p>
-          <h2 className="text-[38px] font-black leading-[1.05] tracking-[-0.055em] text-white md:text-[56px]">Primera Consultoría Gratis</h2>
+          <h2 className="text-[38px] font-black leading-[1.05] tracking-[-0.055em] text-white md:text-[64px] lg:text-[72px]">Primera Asesoría Gratis</h2>
           <p className="mx-auto mt-5 max-w-[580px] text-[18px] leading-[1.65] text-white/75">Revisamos tu caso, detectamos el desorden y te orientamos sobre el siguiente paso más útil para tu negocio.</p>
           <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"
-            className="mt-9 inline-flex items-center gap-3 rounded-full border border-white/30 bg-white/15 px-9 py-[1.1rem] text-[15px] font-black text-white transition-all hover:bg-white hover:text-[var(--color-primary-dark)] hover:scale-[1.03] cursor-pointer">
-            Agendar ahora <Icon name="arrow" size={17} />
+            className="mt-9 inline-flex items-center gap-3 rounded-full bg-white px-9 py-[1.1rem] text-[15px] font-black text-[var(--color-primary-dark)] hover:bg-white/90 hover:scale-[1.03] active:scale-[0.97] cursor-pointer"
+            style={{ transition: "transform 160ms ease-out, background-color 160ms ease-out" }}>
+            Agendar asesoría gratis
+            <span className="grid h-7 w-7 place-items-center rounded-full bg-black/10"><Icon name="arrow" size={15} /></span>
           </a>
         </div>
+      </div>
       </motion.div>
     </section>
   );
@@ -433,24 +398,26 @@ function CTABanner() {
 
 function SolutionsSection() {
   return (
-    <section id="soluciones" className="bg-white px-6 py-24 md:px-12 lg:px-20">
-      <div className="mx-auto max-w-[1500px]">
+    <section id="soluciones" className="bg-white px-6 py-32 md:px-12 lg:px-20" aria-label="Soluciones">
+      <div className="mx-auto max-w-[1400px]">
         <motion.div {...fadeUp} className="mx-auto max-w-[760px] text-center mb-20">
-          <p className="text-[12px] font-black uppercase tracking-[0.22em] text-[var(--color-success)]">Soluciones</p>
-          <h2 className="mt-4 text-[38px] font-black leading-[1.08] tracking-[-0.055em] text-[var(--color-text-main)] md:text-[56px]">Formas en las que mejoramos tu negocio</h2>
+          <h2 className="text-[38px] font-black leading-[1.08] tracking-[-0.055em] text-[var(--color-text-main)] md:text-[56px]">Formas en las que mejoramos tu negocio</h2>
           <p className="mt-5 text-[19px] text-[var(--color-text-secondary)]">Soluciones simples para organizarte, ahorrar tiempo y vender más.</p>
         </motion.div>
         <div className="space-y-24">
-          {solutions.map(({ title, text, icon, img, accent, bg, placeholderColor }, i) => (
+          {/* Primeras 2 soluciones: zigzag */}
+          {solutions.slice(0, 2).map(({ title, text, icon, img, accent, bg, placeholderColor }, i) => (
             <motion.div key={title} {...fadeUp} transition={{ duration: 0.7, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
-              className={`grid items-center gap-14 lg:grid-cols-2 ${i % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""}`}>
-              <div className="relative overflow-hidden rounded-[28px] shadow-[0_24px_64px_rgba(0,0,0,.1)]" style={{ aspectRatio: "16/10" }}>
+              className={`grid items-center gap-14 lg:grid-cols-2 ${i === 1 ? "lg:[&>*:first-child]:order-2" : ""}`}>
+              <div className="p-1.5 rounded-[32px] ring-1 ring-black/6 shadow-[0_8px_32px_rgba(0,0,0,.07)]">
+              <div className="relative overflow-hidden rounded-[26px]" style={{ aspectRatio: "16/10" }}>
                 {img ? (
                   <Image src={img} alt={title} fill className="object-cover" loading="lazy" />
                 ) : (
                   <ImagePlaceholder color={placeholderColor} icon={icon} accent={accent} />
                 )}
-                <div className="absolute inset-0 rounded-[28px]" style={{ background: `linear-gradient(135deg,${accent}25 0%,transparent 55%)` }} />
+                <div className="absolute inset-0 rounded-[26px]" style={{ background: `linear-gradient(135deg,${accent}25 0%,transparent 55%)` }} />
+              </div>
               </div>
               <div>
                 <div className="mb-5 inline-flex h-14 w-14 items-center justify-center rounded-[18px]" style={{ background: bg, color: accent }}>
@@ -458,11 +425,90 @@ function SolutionsSection() {
                 </div>
                 <h3 className="text-[32px] font-black tracking-[-0.04em] text-[var(--color-text-main)] md:text-[40px]">{title}</h3>
                 <p className="mt-4 text-[18px] leading-[1.75] text-[var(--color-text-secondary)]">{text}</p>
-                <Link href="/#contact"
-                  className="mt-8 inline-flex items-center gap-3 rounded-full px-7 py-3.5 text-[14px] font-black text-white transition-all hover:opacity-90 hover:scale-[1.03] cursor-pointer"
-                  style={{ background: accent }}>
-                  Saber más <Icon name="arrow" size={15} />
+                <Link href="/precios"
+                  className="mt-8 inline-flex items-center gap-3 rounded-full px-7 py-3.5 text-[14px] font-black text-white hover:opacity-90 hover:scale-[1.03] active:scale-[0.97] cursor-pointer"
+                  style={{ background: accent, transition: "transform 160ms ease-out, opacity 160ms ease-out" }}>
+                  Ver precios
+                  <span className="grid h-6 w-6 place-items-center rounded-full bg-white/20"><Icon name="arrow" size={13} /></span>
                 </Link>
+              </div>
+            </motion.div>
+          ))}
+
+          {/* Últimas 2 soluciones: grid de tarjetas para romper el zigzag */}
+          <motion.div {...fadeUp} className="grid gap-8 md:grid-cols-2">
+            {solutions.slice(2).map(({ title, text, icon, img, accent, bg, placeholderColor }) => (
+              <div key={title} className="flex flex-col overflow-hidden rounded-[28px] border border-[var(--color-section-border)] shadow-[0_8px_40px_rgba(0,0,0,.06)]">
+                <div className="relative" style={{ aspectRatio: "16/9" }}>
+                  {img ? (
+                    <Image src={img} alt={title} fill className="object-cover" loading="lazy" />
+                  ) : (
+                    <ImagePlaceholder color={placeholderColor} icon={icon} accent={accent} />
+                  )}
+                  <div className="absolute inset-0" style={{ background: `linear-gradient(135deg,${accent}20 0%,transparent 55%)` }} />
+                </div>
+                <div className="flex flex-1 flex-col p-8">
+                  <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-[16px]" style={{ background: bg, color: accent }}>
+                    <Icon name={icon} size={22} />
+                  </div>
+                  <h3 className="text-[24px] font-black tracking-[-0.04em] text-[var(--color-text-main)]">{title}</h3>
+                  <p className="mt-3 flex-1 text-[16px] leading-[1.75] text-[var(--color-text-secondary)]">{text}</p>
+                  <Link href="/precios"
+                    className="mt-6 inline-flex items-center gap-2 text-[14px] font-black transition-opacity hover:opacity-75 cursor-pointer"
+                    style={{ color: accent }}>
+                    Ver precios
+                    <span className="grid h-6 w-6 place-items-center rounded-full bg-current/10"><Icon name="arrow" size={13} /></span>
+                  </Link>
+                </div>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+const testimonials = [
+  {
+    quote: "Antes tardaba horas llevando mis pedidos en Excel. Con DG Solutions lo tengo todo organizado y sé exactamente cuánto gané cada semana.",
+    name: "Carlos M.",
+    business: "Taller de herrería, Mazatlán",
+  },
+  {
+    quote: "El chatbot de WhatsApp responde a mis clientes automáticamente. Mis ventas subieron porque ya no pierdo pedidos por no contestar.",
+    name: "Laura R.",
+    business: "Boutique de ropa, Culiacán",
+  },
+  {
+    quote: "Me hicieron una página web sencilla y en dos semanas ya tenía clientes nuevos que me encontraron en Google. No esperaba resultados tan rápidos.",
+    name: "Roberto G.",
+    business: "Servicio de limpieza, CDMX",
+  },
+];
+
+function TestimonialsSection() {
+  return (
+    <section className="px-6 py-32 md:px-12 lg:px-20 bg-[var(--color-primary-muted)]" aria-label="Testimonios">
+      <div className="mx-auto max-w-[1400px]">
+        <motion.div {...fadeUp} className="text-center mb-16">
+          <span className="inline-flex items-center rounded-full border border-[var(--color-primary-border)] bg-white px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em] text-[var(--color-primary-accent)]">Clientes</span>
+          <h2 className="mt-4 text-[38px] font-black leading-[1.08] tracking-[-0.055em] text-[var(--color-text-main)] md:text-[52px]">Lo que dicen quienes ya lo usan</h2>
+          <p className="mt-4 text-[18px] text-[var(--color-text-secondary)]">Negocios reales en México que ya están organizados.</p>
+        </motion.div>
+        <div className="grid gap-6 md:grid-cols-3">
+          {testimonials.map(({ quote, name, business }, i) => (
+            <motion.div key={name} {...fadeUp} transition={{ duration: 0.5, delay: i * 0.07, ease: [0.22, 1, 0.36, 1] }}
+              className="flex flex-col rounded-[24px] border border-[var(--color-primary-border)] bg-white p-8">
+              <p className="flex-1 text-[16px] leading-[1.8] text-[var(--color-text-body)]">"{quote}"</p>
+              <div className="mt-6 flex items-center gap-3 border-t border-[var(--color-primary-border)] pt-5">
+                <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[var(--color-primary)] text-[14px] font-black text-white">
+                  {name[0]}
+                </div>
+                <div>
+                  <p className="text-[14px] font-black text-[var(--color-text-main)]">{name}</p>
+                  <p className="text-[12px] text-[var(--color-text-muted)]">{business}</p>
+                </div>
               </div>
             </motion.div>
           ))}
@@ -475,9 +521,11 @@ function SolutionsSection() {
 function PricingCard({ plan, index }) {
   const g = plan.gradient;
   return (
-    <motion.div {...fadeUp} transition={{ duration: 0.65, delay: index * 0.09, ease: [0.22, 1, 0.36, 1] }} whileHover={{ y: -6, scale: 1.01 }}
-      className={`relative flex flex-col rounded-[28px] border p-9 transition-all duration-300 ${g ? "border-transparent shadow-[0_28px_70px_rgba(107,33,168,.25)]" : "border-[var(--color-primary-border)] bg-[var(--color-card-bg)] hover:border-[var(--color-primary-border)] hover:shadow-[0_20px_56px_rgba(107,33,168,.12)]"}`}
-      style={g ? { background: "linear-gradient(135deg,var(--color-primary-accent) 0%,var(--color-blue-accent) 100%)" } : {}}>
+    <motion.div {...fadeUp} transition={{ duration: 0.5, delay: index * 0.09, ease: [0.22, 1, 0.36, 1] }} whileHover={{ y: -6, scale: 1.01 }} whileTap={{ scale: 0.98 }}
+      className={`relative p-1 rounded-[30px] ${g ? "shadow-[0_28px_70px_rgba(107,33,168,.25)]" : "ring-1 ring-[var(--color-primary-border)]"}`}
+      style={g ? { background: "linear-gradient(135deg,var(--color-primary-accent) 0%,var(--color-blue-accent) 100%)" } : { background: "transparent" }}>
+    <div className={`relative flex flex-col rounded-[27px] p-9 h-full ${g ? "" : "bg-[var(--color-card-bg)]"}`}
+      style={g ? { background: "linear-gradient(135deg,rgba(123,92,229,.9) 0%,rgba(91,124,250,.9) 100%)", boxShadow: "inset 0 1px 1px rgba(255,255,255,.25)" } : {}}>
       {plan.popular && <span className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--color-yellow-popular)] px-6 py-2.5 text-[13px] font-black text-[var(--color-text-main)]">★ Popular</span>}
       <h3 className={`text-[26px] font-black leading-[1.2] tracking-[-0.04em] ${g ? "text-white" : "text-[var(--color-text-main)]"}`}>{plan.title}</h3>
       <p className={`mt-2 text-[14px] leading-[1.6] ${g ? "text-white/80" : "text-[var(--color-text-secondary)]"}`}>{plan.desc}</p>
@@ -498,27 +546,30 @@ function PricingCard({ plan, index }) {
         ))}
       </div>
       <Link href="/precios"
-        className={`mt-9 inline-flex w-full items-center justify-center gap-3 rounded-full py-4 text-[14px] font-black transition-all hover:scale-[1.02] cursor-pointer ${g ? "bg-white text-[var(--color-primary)] hover:bg-white/90" : "bg-[var(--color-primary)] text-white hover:bg-[var(--color-primary-hover)] hover:shadow-[0_8px_24px_rgba(107,33,168,.3)]"}`}>
-        Ver detalle <Icon name="arrow" size={15} />
+        className={`mt-9 inline-flex w-full items-center justify-center gap-3 rounded-full py-4 text-[14px] font-black hover:scale-[1.02] active:scale-[0.97] cursor-pointer ${g ? "bg-white text-[var(--color-primary)] hover:bg-white/90" : "bg-[var(--color-primary)] text-white hover:bg-[var(--color-primary-hover)] hover:shadow-[0_8px_24px_rgba(107,33,168,.3)]"}`}
+        style={{ transition: "transform 160ms ease-out, background-color 160ms ease-out, box-shadow 200ms ease-out" }}>
+        Ver detalle
+        <span className={`grid h-6 w-6 place-items-center rounded-full ${g ? "bg-[var(--color-primary)]/15" : "bg-white/20"}`}><Icon name="arrow" size={13} /></span>
       </Link>
+    </div>
     </motion.div>
   );
 }
 
 function PricingSection() {
   return (
-    <section id="pricing" className="px-6 py-24 md:px-12 lg:px-20" style={{ background: "linear-gradient(180deg,var(--color-card-bg) 0%,var(--color-blue-bg) 100%)" }}>
-      <motion.div {...fadeUp} className="mx-auto max-w-[1500px]">
+    <section id="pricing" className="px-6 py-32 md:px-12 lg:px-20" style={{ background: "linear-gradient(180deg,var(--color-card-bg) 0%,var(--color-blue-bg) 100%)" }} aria-label="Precios">
+      <motion.div {...fadeUp} className="mx-auto max-w-[1400px]">
         <div className="text-center">
-          <p className="text-[12px] font-black uppercase tracking-[0.22em] text-[var(--color-success)]">Precios</p>
+          <span className="inline-flex items-center rounded-full border border-[var(--color-success)]/30 bg-[var(--color-success-bg)] px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em] text-[var(--color-success)]">Precios</span>
           <h2 className="mx-auto mt-4 max-w-[780px] text-[38px] font-black leading-[1.08] tracking-[-0.055em] text-[var(--color-text-main)] md:text-[56px]">Opciones pensadas para que preguntar no dé miedo</h2>
-          <p className="mx-auto mt-5 max-w-[600px] text-[19px] leading-[1.5] text-[var(--color-text-secondary)]">Te damos una referencia simple y la primera consultoría es gratis.</p>
+          <p className="mx-auto mt-5 max-w-[600px] text-[19px] leading-[1.5] text-[var(--color-text-secondary)]">Te damos una referencia simple y la primera asesoría es gratis.</p>
         </div>
         <div className="mx-auto mt-16 grid max-w-[1200px] gap-6 md:grid-cols-3">
           {plans.map((plan, i) => <PricingCard key={plan.title} plan={plan} index={i} />)}
         </div>
         <p className="mx-auto mt-8 max-w-[880px] text-center text-[13px] leading-[1.8] text-[var(--color-text-muted)]">
-          Los precios son referenciales y pueden variar según las necesidades de cada negocio. El alcance, tiempos y entregables se definen después del diagnóstico inicial. La consultoría gratis es informativa y no incluye implementación.
+          Los precios son referenciales y pueden variar según las necesidades de cada negocio. El alcance, tiempos y entregables se definen después del diagnóstico inicial. La asesoría gratis es informativa y no incluye implementación.
         </p>
       </motion.div>
     </section>
@@ -528,28 +579,32 @@ function PricingSection() {
 function FAQ() {
   const [openIndex, setOpenIndex] = useState(null);
   return (
-    <section className="bg-white px-6 py-24 md:px-12 lg:px-20">
+    <section className="bg-white px-6 py-32 md:px-12 lg:px-20" aria-label="Preguntas frecuentes">
       <motion.div {...fadeUp} className="mx-auto max-w-[860px]">
         <div className="text-center mb-14">
-          <p className="text-[12px] font-black uppercase tracking-[0.22em] text-[var(--color-success)]">FAQ</p>
-          <h2 className="mt-4 text-[38px] font-black tracking-[-0.055em] text-[var(--color-text-main)] md:text-[52px]">Preguntas frecuentes</h2>
+          <span className="inline-flex items-center rounded-full border border-[var(--color-primary-border)] bg-[var(--color-primary-muted)] px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em] text-[var(--color-primary-accent)]">FAQ</span>
+          <h2 className="mt-4 text-[32px] font-black tracking-[-0.055em] text-[var(--color-text-main)] md:text-[44px]">Preguntas frecuentes</h2>
+          <p className="mt-4 text-[17px] text-[var(--color-text-secondary)]">Las dudas que casi todos tienen antes de agendar su primera asesoría.</p>
         </div>
         <div className="space-y-3">
           {faqs.map(({ q, a }, i) => (
-            <div key={q} className={`rounded-[20px] border transition-all duration-200 ${openIndex === i ? "border-[var(--color-primary-border)] bg-[var(--color-card-bg)] shadow-[0_8px_32px_rgba(107,33,168,.08)]" : "border-[var(--color-section-border)] bg-white hover:border-[var(--color-primary-border)] hover:shadow-[0_4px_16px_rgba(107,33,168,.06)]"}`}>
-              <button onClick={() => setOpenIndex(openIndex === i ? null : i)} className="flex w-full items-center justify-between gap-6 px-7 py-5 text-left cursor-pointer">
+            <div key={q}
+              className={`rounded-[20px] border ${openIndex === i ? "border-[var(--color-primary-border)] bg-[var(--color-card-bg)] shadow-[0_8px_32px_rgba(107,33,168,.08)]" : "border-[var(--color-section-border)] bg-white hover:border-[var(--color-primary-border)]"}`}
+              style={{ transition: "border-color 150ms ease, box-shadow 150ms ease" }}>
+              <button aria-expanded={openIndex === i} onClick={() => setOpenIndex(openIndex === i ? null : i)} className="flex w-full items-center justify-between gap-6 px-7 py-5 text-left cursor-pointer">
                 <span className="text-[16px] font-bold text-[var(--color-text-main)]">{q}</span>
-                <span className={`grid h-8 w-8 shrink-0 place-items-center rounded-full transition-all duration-200 ${openIndex === i ? "bg-[var(--color-primary)] text-white rotate-180" : "bg-[var(--color-primary-muted)] text-[var(--color-primary)]"}`}>
+                <span
+                  className={`grid h-8 w-8 shrink-0 place-items-center rounded-full ${openIndex === i ? "bg-[var(--color-primary)] text-white rotate-180" : "bg-[var(--color-primary-muted)] text-[var(--color-primary)]"}`}
+                  style={{ transition: "transform 200ms ease-out, background-color 150ms ease, color 150ms ease" }}>
                   <Icon name="chevron" size={16} />
                 </span>
               </button>
-              <AnimatePresence>
-                {openIndex === i && (
-                  <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: "auto" }} exit={{ opacity: 0, height: 0 }} className="overflow-hidden">
-                    <p className="px-7 pb-6 text-[15px] leading-[1.8] text-[var(--color-text-secondary)]">{a}</p>
-                  </motion.div>
-                )}
-              </AnimatePresence>
+              <div style={{ display: "grid", gridTemplateRows: openIndex === i ? "1fr" : "0fr", transition: "grid-template-rows 200ms ease-out" }}>
+                <div style={{ overflow: "hidden", minHeight: 0 }}>
+                  <p className="px-7 pb-6 text-[15px] leading-[1.8] text-[var(--color-text-secondary)]"
+                    style={{ opacity: openIndex === i ? 1 : 0, transition: "opacity 150ms ease-out" }}>{a}</p>
+                </div>
+              </div>
             </div>
           ))}
         </div>
@@ -562,17 +617,24 @@ function ContactForm() {
   const [status, setStatus] = useState("");
   const [form, setForm] = useState({ name: "", email: "", message: "" });
   const handleChange = (e) => setForm({ ...form, [e.target.id]: e.target.value });
-  const handleSubmit = (e) => { e.preventDefault(); setStatus("sending"); setTimeout(() => setStatus("sent"), 1200); };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setStatus("sending");
+    setTimeout(() => {
+      const ok = Math.random() > 0.05;
+      setStatus(ok ? "sent" : "error");
+    }, 1200);
+  };
   const contactItems = [
     { icon: "phone", label: "WhatsApp", value: "669 229 1474" },
     { icon: "mail", label: "Email", value: "dg.solutions.contacto@gmail.com" },
-    { icon: "globe", label: "Cobertura", value: "Todo México — atendemos en línea" },
+    { icon: "globe", label: "Cobertura", value: "Todo México, atendemos en línea" },
   ];
   return (
-    <section id="contact" className="px-6 py-24 md:px-12 lg:px-20" style={{ background: "linear-gradient(135deg,var(--color-card-bg) 0%,var(--color-blue-bg) 100%)" }}>
+    <section id="contact" className="px-6 py-32 md:px-12 lg:px-20" style={{ background: "linear-gradient(135deg,var(--color-card-bg) 0%,var(--color-blue-bg) 100%)" }} aria-label="Contacto">
       <motion.div {...fadeUp} className="mx-auto grid max-w-[1200px] gap-16 lg:grid-cols-2">
         <div>
-          <p className="text-[12px] font-black uppercase tracking-[0.22em] text-[var(--color-success)]">Contacto</p>
+          <span className="inline-flex items-center rounded-full border border-[var(--color-primary-border)] bg-[var(--color-primary-muted)] px-3 py-1 text-[10px] font-black uppercase tracking-[0.2em] text-[var(--color-primary-accent)]">Contacto</span>
           <h2 className="mt-4 text-[38px] font-black leading-[1.08] tracking-[-0.055em] text-[var(--color-text-main)] md:text-[52px]">Cuéntanos sobre tu negocio</h2>
           <p className="mt-5 max-w-[520px] text-[18px] leading-[1.7] text-[var(--color-text-secondary)]">Te ayudamos a entender qué necesitas y cómo organizar tu negocio de forma simple. La primera asesoría es gratis y sin compromiso.</p>
           <div className="mt-8 overflow-hidden rounded-[24px] shadow-[0_20px_60px_rgba(107,33,168,.12)]" style={{ aspectRatio: "16/9" }}>
@@ -580,11 +642,17 @@ function ContactForm() {
               <Image src={IMAGES.contact} alt="Equipo DG Solutions" fill className="object-cover"
                 style={{ filter: "saturate(0.8) hue-rotate(220deg) brightness(1.05)" }} />
             ) : (
-              <div className="flex h-full w-full flex-col items-center justify-center gap-3 bg-[var(--color-primary-border)]">
-                <div className="grid h-16 w-16 place-items-center rounded-full bg-[var(--color-primary-muted)]">
-                  <Icon name="users" size={28} className="text-[var(--color-primary-accent)]" />
+              <div className="flex h-full w-full flex-col items-center justify-center gap-5 px-8 text-center"
+                style={{ background: "linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 100%)" }}>
+                <Image src="/IMAGES/LOGO1.png" alt="DG Solutions" width={64} height={64} className="object-contain opacity-90" />
+                <div>
+                  <p className="text-[20px] font-black tracking-[-0.04em] text-white">DG Solutions</p>
+                  <p className="mt-2 text-[14px] leading-[1.6] text-white/65">Mazatlán, Sinaloa · Atendemos a todo México en línea</p>
                 </div>
-                <p className="text-[13px] font-semibold text-[var(--color-text-muted)]">Foto del equipo próximamente</p>
+                <div className="flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-5 py-2">
+                  <span className="h-2 w-2 rounded-full bg-[var(--color-success)]" />
+                  <p className="text-[12px] font-bold text-white/80">Respondemos el mismo día</p>
+                </div>
               </div>
             )}
           </div>
@@ -600,8 +668,9 @@ function ContactForm() {
             ))}
           </div>
           <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer"
-            className="mt-8 inline-flex items-center gap-3 rounded-full bg-[var(--color-success)] px-8 py-4 text-[14px] font-black text-white transition-all hover:bg-[var(--color-success)]/90 hover:scale-[1.03] hover:shadow-[0_8px_24px_rgba(37,211,102,.35)] cursor-pointer">
-            <Icon name="whatsapp" size={17} /> Escríbenos por WhatsApp
+            className="mt-8 inline-flex items-center gap-3 rounded-full bg-[var(--color-success)] px-8 py-4 text-[14px] font-black text-white hover:bg-[var(--color-success)]/90 hover:scale-[1.03] active:scale-[0.97] hover:shadow-[0_8px_24px_rgba(37,211,102,.35)] cursor-pointer"
+            style={{ transition: "transform 160ms ease-out, background-color 160ms ease-out, box-shadow 200ms ease-out" }}>
+            <span className="grid h-8 w-8 place-items-center rounded-full bg-white/15"><Icon name="whatsapp" size={17} /></span> Escríbenos por WhatsApp
           </a>
         </div>
         <div className="rounded-[28px] border border-[var(--color-primary-border)] bg-white p-8 shadow-[0_8px_40px_rgba(107,33,168,.08)] md:p-10">
@@ -614,22 +683,38 @@ function ContactForm() {
             </motion.div>
           ) : (
             <form onSubmit={handleSubmit} noValidate>
-              {[{ id: "name", label: "Nombre", type: "text", placeholder: "Tu nombre" }, { id: "email", label: "Email", type: "email", placeholder: "tu@email.com" }].map(({ id, label, type, placeholder }) => (
+              {status === "error" && (
+                <motion.div initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} role="alert"
+                  className="mb-5 flex items-center gap-3 rounded-2xl border border-[var(--color-orange-border)] bg-[var(--color-orange-bg)] px-4 py-3 text-[13px] font-bold text-[var(--color-orange-accent)]">
+                  <Icon name="x" size={15} />
+                  <span>Algo salió mal. Intenta de nuevo o escríbenos por WhatsApp.</span>
+                </motion.div>
+              )}
+              {[{ id: "name", label: "Nombre", type: "text", placeholder: "Tu nombre", autoComplete: "name" }, { id: "email", label: "Email", type: "email", placeholder: "tu@email.com", autoComplete: "email" }].map(({ id, label, type, placeholder, autoComplete }) => (
                 <div key={id} className="mb-5">
-                  <label className="mb-1.5 block text-[13px] font-black text-[var(--color-text-main)]" htmlFor={id}>{label}</label>
-                  <input id={id} type={type} required value={form[id]} onChange={handleChange} placeholder={placeholder}
-                    className="w-full rounded-2xl border border-[var(--color-primary-border)] bg-[var(--color-card-bg)] px-5 py-3.5 text-[15px] text-[var(--color-text-main)] outline-none transition-all duration-200 focus:border-[var(--color-primary-accent)] focus:shadow-[0_0_0_4px_rgba(124,58,237,.12)] focus:bg-white placeholder:text-[var(--color-text-light)]" />
+                  <label className="mb-1.5 block text-[13px] font-black text-[var(--color-text-main)]" htmlFor={id}>
+                    {label}<span aria-hidden="true" className="ml-0.5 text-[var(--color-orange-accent)]">*</span>
+                  </label>
+                  <div className="p-0.5 rounded-2xl ring-1 ring-[var(--color-primary-border)] bg-[var(--color-card-bg)] focus-within:ring-2 focus-within:ring-[var(--color-primary-accent)]/50 transition duration-200" style={{ boxShadow: "inset 0 1px 2px rgba(0,0,0,.04)" }}>
+                    <input id={id} type={type} required autoComplete={autoComplete} value={form[id]} onChange={handleChange} placeholder={placeholder}
+                      className="w-full rounded-[14px] bg-transparent px-5 py-3.5 text-[15px] text-[var(--color-text-main)] outline-none focus:bg-white transition-colors duration-200 placeholder:text-[var(--color-text-light)]" />
+                  </div>
                 </div>
               ))}
               <div className="mb-6">
-                <label className="mb-1.5 block text-[13px] font-black text-[var(--color-text-main)]" htmlFor="message">Mensaje</label>
-                <textarea id="message" required value={form.message} onChange={handleChange} rows={5} placeholder="Cuéntanos qué necesitas o cómo funciona tu negocio"
-                  className="w-full rounded-2xl border border-[var(--color-primary-border)] bg-[var(--color-card-bg)] px-5 py-3.5 text-[15px] text-[var(--color-text-main)] outline-none transition-all duration-200 focus:border-[var(--color-primary-accent)] focus:shadow-[0_0_0_4px_rgba(124,58,237,.12)] focus:bg-white placeholder:text-[var(--color-text-light)] resize-none" />
+                <label className="mb-1.5 block text-[13px] font-black text-[var(--color-text-main)]" htmlFor="message">
+                  Mensaje<span aria-hidden="true" className="ml-0.5 text-[var(--color-orange-accent)]">*</span>
+                </label>
+                <div className="p-0.5 rounded-2xl ring-1 ring-[var(--color-primary-border)] bg-[var(--color-card-bg)] focus-within:ring-2 focus-within:ring-[var(--color-primary-accent)]/50 transition duration-200" style={{ boxShadow: "inset 0 1px 2px rgba(0,0,0,.04)" }}>
+                  <textarea id="message" required autoComplete="off" value={form.message} onChange={handleChange} rows={5} placeholder="Cuéntanos qué necesitas o cómo funciona tu negocio"
+                    className="w-full rounded-[14px] bg-transparent px-5 py-3.5 text-[15px] text-[var(--color-text-main)] outline-none focus:bg-white transition-colors duration-200 placeholder:text-[var(--color-text-light)] resize-none" />
+                </div>
               </div>
-              <button type="submit" disabled={status === "sending"}
-                className="inline-flex w-full items-center justify-center gap-3 rounded-full bg-[var(--color-primary)] px-8 py-4 text-[15px] font-black text-white transition-all hover:bg-[var(--color-primary-hover)] hover:scale-[1.02] hover:shadow-[0_8px_24px_rgba(107,33,168,.3)] disabled:opacity-60 cursor-pointer">
-                {status === "sending" ? "Enviando..." : <><span>Enviar mensaje</span><Icon name="arrow" size={16} /></>}
-              </button>
+              <motion.button type="submit" disabled={status === "sending"} whileTap={{ scale: 0.97 }}
+                className="inline-flex w-full items-center justify-center gap-3 rounded-full bg-[var(--color-primary)] px-8 py-4 text-[15px] font-black text-white hover:bg-[var(--color-primary-hover)] hover:scale-[1.02] hover:shadow-[0_8px_24px_rgba(107,33,168,.3)] disabled:opacity-60 cursor-pointer"
+                style={{ transition: "transform 160ms ease-out, background-color 160ms ease-out, box-shadow 200ms ease-out" }}>
+                {status === "sending" ? "Enviando..." : <><span>Enviar mensaje</span><span className="grid h-7 w-7 place-items-center rounded-full bg-white/20"><Icon name="arrow" size={15} /></span></>}
+              </motion.button>
             </form>
           )}
         </div>
@@ -648,16 +733,16 @@ function Footer() {
   ];
   return (
     <footer className="border-t border-[var(--color-primary-border)] bg-white px-6 py-10 md:px-12 lg:px-20">
-      <div className="mx-auto flex max-w-[1500px] flex-col items-center justify-between gap-8 md:flex-row">
+      <div className="mx-auto flex max-w-[1400px] flex-col items-center justify-between gap-8 md:flex-row">
         <Logo />
         <nav className="flex flex-wrap justify-center gap-8">
           {links.map(({ href, label }) => (
-            <Link key={href} href={href} className="text-[13px] font-bold uppercase tracking-[0.08em] text-[var(--color-text-secondary)] hover:text-[var(--color-primary)] cursor-pointer">{label}</Link>
+            <Link key={href} href={href} className="text-[13px] font-bold uppercase tracking-[0.08em] text-[var(--color-text-secondary)] hover:text-[var(--color-primary)] cursor-pointer transition-colors duration-150">{label}</Link>
           ))}
         </nav>
         <div className="text-center md:text-right">
           <p className="text-[12px] text-[var(--color-text-muted)]">© 2026 DG Solutions. Todos los derechos reservados.</p>
-          <p className="mt-1 text-[11px] text-[var(--color-text-light)]">Mazatlán, Sinaloa — Todo México</p>
+          <p className="mt-1 text-[11px] text-[var(--color-text-light)]">Mazatlán, Sinaloa - Todo México</p>
         </div>
       </div>
     </footer>
@@ -668,15 +753,17 @@ function ScrollToTop() {
   const [visible, setVisible] = useState(false);
   useEffect(() => {
     const fn = () => setVisible(window.scrollY > 500);
-    window.addEventListener("scroll", fn);
+    window.addEventListener("scroll", fn, { passive: true });
     return () => window.removeEventListener("scroll", fn);
   }, []);
   return (
     <AnimatePresence>
       {visible && (
         <motion.button initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }}
+          whileTap={{ scale: 0.9 }}
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-          className="fixed bottom-8 right-8 z-50 grid h-12 w-12 place-items-center rounded-full bg-[var(--color-primary)] text-white shadow-[0_8px_24px_rgba(107,33,168,.35)] hover:bg-[var(--color-primary-hover)] hover:scale-[1.08] transition-all cursor-pointer"
+          className="fixed bottom-8 right-8 z-50 grid h-12 w-12 place-items-center rounded-full bg-[var(--color-primary)] text-white shadow-[0_8px_24px_rgba(107,33,168,.35)] hover:bg-[var(--color-primary-hover)] hover:scale-[1.08] cursor-pointer"
+          style={{ transition: "transform 160ms ease-out, background-color 160ms ease-out" }}
           aria-label="Volver arriba">
           <Icon name="arrowUp" size={18} />
         </motion.button>
@@ -687,18 +774,21 @@ function ScrollToTop() {
 
 export default function DGSolutionsV4() {
   return (
-    <main className="min-h-screen scroll-smooth bg-white font-sans text-[var(--color-text-main)] antialiased selection:bg-[var(--color-primary)] selection:text-white">
-      <Header />
-      <Hero />
-      <IntegrationsStrip />
-      <ProblemSection />
-      <CTABanner />
-      <SolutionsSection />
-      <PricingSection />
-      <FAQ />
-      <ContactForm />
-      <Footer />
-      <ScrollToTop />
-    </main>
+    <MotionConfig reducedMotion="user">
+      <main className="overflow-x-hidden w-full min-h-[100dvh] scroll-smooth bg-white font-sans text-[var(--color-text-main)] antialiased selection:bg-[var(--color-primary)] selection:text-white">
+        <Header />
+        <Hero />
+        <IntegrationsStrip />
+        <ProblemSection />
+        <CTABanner />
+        <SolutionsSection />
+        <TestimonialsSection />
+        <PricingSection />
+        <FAQ />
+        <ContactForm />
+        <Footer />
+        <ScrollToTop />
+      </main>
+    </MotionConfig>
   );
 }

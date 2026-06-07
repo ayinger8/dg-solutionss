@@ -14,17 +14,6 @@ const fadeUp = {
   transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
 };
 
-const WAVE_CSS = `
-@keyframes waveA{0%,100%{transform:translateX(0) scaleY(1)}50%{transform:translateX(-5%) scaleY(1.07)}}
-@keyframes waveB{0%,100%{transform:translateX(0) scaleY(1)}50%{transform:translateX(5%) scaleY(0.94)}}
-@keyframes waveC{0%,100%{transform:translateX(0) scaleY(1)}50%{transform:translateX(-3%) scaleY(1.03)}}
-.dw{position:absolute;width:210%;left:-55%;border-radius:50%;pointer-events:none}
-.dw1{height:68%;bottom:-34%;background:rgba(167,139,250,0.42);animation:waveA 8s ease-in-out infinite}
-.dw2{height:64%;bottom:-38%;background:rgba(147,197,253,0.32);animation:waveB 11s ease-in-out infinite}
-.dw3{height:58%;bottom:-42%;background:rgba(196,181,253,0.22);animation:waveC 14s ease-in-out infinite}
-.dw4{height:52%;top:-28%;background:rgba(186,230,253,0.18);animation:waveB 9s ease-in-out infinite}
-.dw5{height:46%;top:-32%;background:rgba(167,139,250,0.13);animation:waveA 12s ease-in-out infinite}
-`;
 
 function Icon({ name, size = 22, className = "" }) {
   const p = { width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 1.8, strokeLinecap: "round", strokeLinejoin: "round", className, "aria-hidden": "true" };
@@ -57,7 +46,7 @@ function Logo() {
       <Image src="/IMAGES/LOGO1.png" alt="DG Solutions" width={48} height={48} className="object-contain md:h-12 md:w-12" />
       <div className="leading-none">
         <p className="text-[20px] font-black tracking-[-0.08em] text-[var(--color-primary-logo)] md:text-[24px]">DG SOLUTIONS</p>
-        <p className="mt-[3px] text-[7.5px] font-bold tracking-[0.12em] uppercase text-[var(--color-primary-accent)]/60 md:text-[8.5px]">Hazlo Simple. Hazlo Inteligente.</p>
+        <p className="mt-[3px] text-[10px] font-bold tracking-[0.12em] uppercase text-[var(--color-primary-accent)]/60 md:text-[10.5px]">Hazlo Simple. Hazlo Inteligente.</p>
       </div>
     </Link>
   );
@@ -73,7 +62,7 @@ function Header() {
   ];
   return (
     <header className="fixed left-0 top-0 z-50 w-full bg-white/97 shadow-[0_1px_20px_rgba(0,0,0,.07)] backdrop-blur-md">
-      <div className="mx-auto flex max-w-[1500px] items-center justify-between px-6 py-4 md:px-12 lg:px-20">
+      <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-4 md:px-12 lg:px-20">
         <Logo />
         <nav className="hidden items-center gap-10 md:flex">
           {links.map(({ href, label }) => (
@@ -112,7 +101,6 @@ function Hero() {
   return (
     <section className="relative overflow-hidden min-h-[72vh] flex items-center justify-center"
       style={{ background: "linear-gradient(135deg,var(--gradient-1) 0%,var(--gradient-2) 38%,var(--gradient-3) 65%,var(--gradient-4) 100%)" }}>
-      <style>{WAVE_CSS}</style>
       <div className="absolute inset-0 overflow-hidden">
         <div className="dw dw4" /><div className="dw dw5" />
         <div className="dw dw3" /><div className="dw dw2" /><div className="dw dw1" />
@@ -287,7 +275,6 @@ function DifferentiatorBlock() {
         <div className="mx-auto mb-5 grid h-14 w-14 place-items-center rounded-[16px] bg-[var(--color-primary-muted)] text-[var(--color-primary-accent)]">
           <Icon name="refresh" size={26} />
         </div>
-        <p className="text-[12px] font-black uppercase tracking-[0.22em] text-[var(--color-success)] mb-3">Pensado para crecer</p>
         <h3 className="text-[28px] font-black leading-[1.1] tracking-[-0.04em] text-[var(--color-text-main)] md:text-[36px]">
           De plantilla a sistema personalizado
         </h3>
@@ -301,8 +288,7 @@ function DifferentiatorBlock() {
             { step: "03", label: "Escalamos cuando lo necesitas" },
           ].map(({ step, label }) => (
             <div key={step} className="rounded-[18px] border border-[var(--color-primary-border)] bg-[var(--color-card-bg)] p-5">
-              <p className="text-[12px] font-black tracking-[0.12em] text-[var(--color-text-muted)] uppercase">Paso {step}</p>
-              <p className="mt-2 text-[15px] font-bold text-[var(--color-text-main)]">{label}</p>
+              <p className="text-[15px] font-bold text-[var(--color-text-main)]">{label}</p>
             </div>
           ))}
         </div>
@@ -318,11 +304,10 @@ function FinalCTA() {
         style={{ background: "linear-gradient(135deg,var(--color-primary-dark) 0%,var(--color-blue-accent) 100%)" }}>
         <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 20% 50%,rgba(139,92,246,.6) 0%,transparent 50%),radial-gradient(ellipse at 85% 30%,rgba(59,130,246,.4) 0%,transparent 40%)" }} />
         <div className="relative z-10 mx-auto max-w-[620px]">
-          <p className="mb-4 text-[12px] font-black uppercase tracking-[0.22em] text-[var(--color-primary-border)]">Sin costo, sin compromiso</p>
           <h2 className="text-[34px] font-black leading-[1.05] tracking-[-0.055em] text-white md:text-[48px]">¿No sabes cuál elegir?</h2>
-          <p className="mx-auto mt-5 max-w-[500px] text-[18px] leading-[1.65] text-white/75">Agenda tu diagnóstico gratis y te ayudamos a encontrar la herramienta correcta para tu negocio.</p>
-          <Link href="/#contact" className="mt-9 inline-flex items-center gap-3 rounded-full border border-white/30 bg-white/15 px-9 py-[1.1rem] text-[15px] font-black text-white transition-all hover:bg-white hover:text-[var(--color-primary-dark)] cursor-pointer">
-            Agendar diagnóstico gratis <Icon name="arrow" size={17} />
+          <p className="mx-auto mt-5 max-w-[500px] text-[18px] leading-[1.65] text-white/75">Agenda tu asesoría gratis y te ayudamos a encontrar la herramienta correcta para tu negocio.</p>
+          <Link href="/#contact" className="mt-9 inline-flex items-center gap-3 rounded-full bg-white px-9 py-[1.1rem] text-[15px] font-black text-[var(--color-primary-dark)] transition-all hover:bg-white/90 hover:scale-[1.03] cursor-pointer">
+            Agendar asesoría gratis <Icon name="arrow" size={17} />
           </Link>
         </div>
       </motion.div>

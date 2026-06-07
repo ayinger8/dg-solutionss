@@ -14,17 +14,6 @@ const fadeUp = {
   transition: { duration: 0.7, ease: [0.22, 1, 0.36, 1] },
 };
 
-const WAVE_CSS = `
-@keyframes waveA{0%,100%{transform:translateX(0) scaleY(1)}50%{transform:translateX(-5%) scaleY(1.07)}}
-@keyframes waveB{0%,100%{transform:translateX(0) scaleY(1)}50%{transform:translateX(5%) scaleY(0.94)}}
-@keyframes waveC{0%,100%{transform:translateX(0) scaleY(1)}50%{transform:translateX(-3%) scaleY(1.03)}}
-.dw{position:absolute;width:210%;left:-55%;border-radius:50%;pointer-events:none}
-.dw1{height:68%;bottom:-34%;background:rgba(167,139,250,0.42);animation:waveA 8s ease-in-out infinite}
-.dw2{height:64%;bottom:-38%;background:rgba(147,197,253,0.32);animation:waveB 11s ease-in-out infinite}
-.dw3{height:58%;bottom:-42%;background:rgba(196,181,253,0.22);animation:waveC 14s ease-in-out infinite}
-.dw4{height:52%;top:-28%;background:rgba(186,230,253,0.18);animation:waveB 9s ease-in-out infinite}
-.dw5{height:46%;top:-32%;background:rgba(167,139,250,0.13);animation:waveA 12s ease-in-out infinite}
-`;
 
 function Icon({ name, size = 22, className = "" }) {
   const p = { width: size, height: size, viewBox: "0 0 24 24", fill: "none", stroke: "currentColor", strokeWidth: 1.8, strokeLinecap: "round", strokeLinejoin: "round", className, "aria-hidden": "true" };
@@ -59,7 +48,7 @@ function Logo() {
       <Image src="/IMAGES/LOGO1.png" alt="DG Solutions" width={48} height={48} className="object-contain md:h-12 md:w-12" />
       <div className="leading-none">
         <p className="text-[20px] font-black tracking-[-0.08em] text-[var(--color-primary-logo)] md:text-[24px]">DG SOLUTIONS</p>
-        <p className="mt-[3px] text-[7.5px] font-bold tracking-[0.12em] uppercase text-[var(--color-primary-accent)]/60 md:text-[8.5px]">Hazlo Simple. Hazlo Inteligente.</p>
+        <p className="mt-[3px] text-[10px] font-bold tracking-[0.12em] uppercase text-[var(--color-primary-accent)]/60 md:text-[10.5px]">Hazlo Simple. Hazlo Inteligente.</p>
       </div>
     </Link>
   );
@@ -75,7 +64,7 @@ function Header() {
   ];
   return (
     <header className="fixed left-0 top-0 z-50 w-full bg-white/97 shadow-[0_1px_20px_rgba(0,0,0,.07)] backdrop-blur-md">
-      <div className="mx-auto flex max-w-[1500px] items-center justify-between px-6 py-4 md:px-12 lg:px-20">
+      <div className="mx-auto flex max-w-[1400px] items-center justify-between px-6 py-4 md:px-12 lg:px-20">
         <Logo />
         <nav className="hidden items-center gap-10 md:flex">
           {links.map(({ href, label }) => (
@@ -114,27 +103,26 @@ function Hero() {
   return (
     <section className="relative overflow-hidden min-h-[82vh] flex items-center justify-center"
       style={{ background: "linear-gradient(135deg,var(--gradient-1) 0%,var(--gradient-2) 38%,var(--gradient-3) 65%,var(--gradient-4) 100%)" }}>
-      <style>{WAVE_CSS}</style>
       <div className="absolute inset-0 overflow-hidden">
         <div className="dw dw4" /><div className="dw dw5" />
         <div className="dw dw3" /><div className="dw dw2" /><div className="dw dw1" />
       </div>
       <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 30% 55%,rgba(255,255,255,.28) 0%,transparent 55%),radial-gradient(ellipse at 80% 20%,rgba(196,181,253,.35) 0%,transparent 45%)" }} />
-      <div className="relative z-10 mx-auto max-w-[1500px] px-6 md:px-12 lg:px-20 pt-28 pb-20 text-center">
+      <div className="relative z-10 mx-auto max-w-[1400px] px-6 md:px-12 lg:px-20 pt-28 pb-20 text-center">
         <motion.div {...fadeUp}>
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-white/50 bg-white/40 px-5 py-2.5 text-[12px] font-bold text-[var(--color-primary-dark)] backdrop-blur-sm">
             <Icon name="star" size={13} className="text-[var(--color-primary)]" />
-            Sin compromiso — Primera consultoría gratis
+            Sin compromiso - Primera asesoría gratis
           </div>
           <h1 className="mx-auto max-w-[820px] text-[46px] font-black leading-[.92] tracking-[-0.06em] text-[var(--color-text-main)] md:text-[68px] lg:text-[86px]">
-            Tu primera consultoría es completamente gratis
+            Tu primera asesoría es completamente gratis
           </h1>
           <p className="mx-auto mt-7 max-w-[600px] text-[18px] leading-[1.7] text-[var(--color-text-body)]/80">
             Antes de hablar de precios, entendemos tu negocio y te decimos exactamente qué necesitas y qué no.
           </p>
           <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <Link href="/#contact" className="btn-primary !px-9 !py-[1.1rem] !text-[16px]">
-              Agendar diagnóstico <Icon name="arrow" size={17} />
+              Agendar asesoría gratis <Icon name="arrow" size={17} />
             </Link>
             <a href={WHATSAPP_URL} target="_blank" rel="noopener noreferrer" className="btn-secondary">
               <Icon name="whatsapp" size={17} /> Hablar por WhatsApp
@@ -219,7 +207,7 @@ const levels = [
   {
     number: "01",
     title: "Empezar a ordenar",
-    price: "Desde $400 – $700 MXN",
+    price: "Desde $400 - $700 MXN",
     desc: "Para negocios que necesitan estructura básica y control inicial.",
     features: [
       "Organización simple de información",
@@ -233,7 +221,7 @@ const levels = [
   {
     number: "02",
     title: "Crecimiento y presencia",
-    price: "Desde $700 – $1,500 MXN",
+    price: "Desde $700 - $1,500 MXN",
     desc: "Para negocios que quieren mejorar su imagen y empezar a atraer clientes.",
     features: [
       "Contenido digital",
@@ -278,8 +266,7 @@ function PricingLevels() {
               {popular && (
                 <span className="absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--color-yellow-popular)] px-6 py-2.5 text-[13px] font-black text-[var(--color-text-main)]">★ Popular</span>
               )}
-              <p className={`text-[13px] font-black tracking-[0.12em] uppercase ${dark ? "text-white/50" : "text-[var(--color-text-muted)]"}`}>Nivel {number}</p>
-              <h3 className={`mt-2 text-[24px] font-black tracking-[-0.04em] leading-[1.2] ${dark ? "text-white" : "text-[var(--color-text-main)]"}`}>{title}</h3>
+              <h3 className={`text-[24px] font-black tracking-[-0.04em] leading-[1.2] ${dark ? "text-white" : "text-[var(--color-text-main)]"}`}>{title}</h3>
               <p className={`mt-5 text-[20px] font-black tracking-[-0.03em] ${dark ? "text-white" : "text-[var(--color-primary)]"}`}>{price}</p>
               <p className={`mt-3 text-[14px] leading-[1.6] ${dark ? "text-white/75" : "text-[var(--color-text-secondary)]"}`}>{desc}</p>
               <div className="mt-7 flex-1 space-y-3.5">
@@ -293,7 +280,7 @@ function PricingLevels() {
                 ))}
               </div>
               <Link href="/#contact" className={`mt-9 inline-flex w-full items-center justify-center gap-3 rounded-full py-4 text-[14px] font-black transition-all cursor-pointer ${dark ? "bg-white text-[var(--color-primary)] hover:bg-white/90" : "bg-[var(--color-primary)] text-white hover:bg-[var(--color-primary-hover)] hover:shadow-[0_8px_24px_rgba(107,33,168,.3)]"}`}>
-                Agendar diagnóstico <Icon name="arrow" size={15} />
+                Agendar asesoría gratis <Icon name="arrow" size={15} />
               </Link>
             </motion.div>
           ))}
@@ -318,8 +305,7 @@ function WhatYouGet() {
     <section className="bg-white px-6 py-24 md:px-12 lg:px-20">
       <div className="mx-auto max-w-[1500px]">
         <motion.div {...fadeUp} className="mx-auto max-w-[760px] text-center mb-16">
-          <p className="text-[12px] font-black uppercase tracking-[0.22em] text-[var(--color-success)]">Lo que incluye</p>
-          <h2 className="mt-4 text-[38px] font-black leading-[1.08] tracking-[-0.055em] text-[var(--color-text-main)] md:text-[52px]">¿Qué incluye trabajar con nosotros?</h2>
+          <h2 className="text-[38px] font-black leading-[1.08] tracking-[-0.055em] text-[var(--color-text-main)] md:text-[52px]">¿Qué incluye trabajar con nosotros?</h2>
         </motion.div>
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {includes.map(({ icon, title, desc }, i) => (
@@ -356,8 +342,7 @@ function ResultsAndExamples() {
         <div className="grid gap-16 lg:grid-cols-2 lg:gap-24 items-start">
           {/* Results */}
           <motion.div {...fadeUp}>
-            <p className="text-[12px] font-black uppercase tracking-[0.22em] text-[var(--color-success)]">Resultados</p>
-            <h2 className="mt-4 text-[36px] font-black leading-[1.1] tracking-[-0.055em] text-[var(--color-text-main)] md:text-[46px]">Lo que puedes esperar</h2>
+            <h2 className="text-[36px] font-black leading-[1.1] tracking-[-0.055em] text-[var(--color-text-main)] md:text-[46px]">Lo que puedes esperar</h2>
             <div className="mt-10 space-y-4">
               {results.map((r, i) => (
                 <motion.div key={r} initial={{ opacity: 0, x: -16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.07, duration: 0.5 }}
@@ -372,8 +357,7 @@ function ResultsAndExamples() {
           </motion.div>
           {/* Examples */}
           <motion.div {...fadeUp} transition={{ duration: 0.7, delay: 0.1 }}>
-            <p className="text-[12px] font-black uppercase tracking-[0.22em] text-[var(--color-success)]">Ejemplos</p>
-            <h2 className="mt-4 text-[36px] font-black leading-[1.1] tracking-[-0.055em] text-[var(--color-text-main)] md:text-[46px]">Casos comunes</h2>
+            <h2 className="text-[36px] font-black leading-[1.1] tracking-[-0.055em] text-[var(--color-text-main)] md:text-[46px]">Casos comunes</h2>
             <div className="mt-10 space-y-5">
               {examples.map(({ icon, text }, i) => (
                 <motion.div key={text} initial={{ opacity: 0, x: 16 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.07, duration: 0.5 }}
@@ -399,8 +383,7 @@ function TemplatesBanner() {
         <div className="mx-auto mb-4 grid h-14 w-14 place-items-center rounded-[16px] bg-[var(--color-primary-muted)] text-[var(--color-primary-accent)]">
           <Icon name="layout" size={26} />
         </div>
-        <p className="text-[12px] font-black uppercase tracking-[0.22em] text-[var(--color-success)]">Plantillas</p>
-        <h2 className="mt-4 text-[32px] font-black leading-[1.1] tracking-[-0.055em] text-[var(--color-text-main)] md:text-[44px]">¿Quieres empezar más rápido?</h2>
+        <h2 className="text-[32px] font-black leading-[1.1] tracking-[-0.055em] text-[var(--color-text-main)] md:text-[44px]">¿Quieres empezar más rápido?</h2>
         <p className="mx-auto mt-5 max-w-[540px] text-[18px] leading-[1.7] text-[var(--color-text-secondary)]">
           Si aún no necesitas una solución personalizada, puedes comenzar con herramientas ya listas para usar.
         </p>
@@ -419,11 +402,10 @@ function FinalCTA() {
         style={{ background: "linear-gradient(135deg,var(--color-primary-dark) 0%,var(--color-blue-accent) 100%)" }}>
         <div className="absolute inset-0" style={{ background: "radial-gradient(ellipse at 20% 50%,rgba(139,92,246,.6) 0%,transparent 50%),radial-gradient(ellipse at 85% 30%,rgba(59,130,246,.4) 0%,transparent 40%)" }} />
         <div className="relative z-10 mx-auto max-w-[660px]">
-          <p className="mb-4 text-[12px] font-black uppercase tracking-[0.22em] text-[var(--color-primary-border)]">Sin costo, sin compromiso</p>
           <h2 className="text-[36px] font-black leading-[1.05] tracking-[-0.055em] text-white md:text-[52px]">¿No estás seguro qué necesitas?</h2>
-          <p className="mx-auto mt-5 max-w-[520px] text-[18px] leading-[1.65] text-white/75">Agenda tu diagnóstico gratis y te orientamos sin compromiso.</p>
-          <Link href="/#contact" className="mt-9 inline-flex items-center gap-3 rounded-full border border-white/30 bg-white/15 px-9 py-[1.1rem] text-[15px] font-black text-white transition-all hover:bg-white hover:text-[var(--color-primary-dark)] cursor-pointer">
-            Agendar diagnóstico <Icon name="arrow" size={17} />
+          <p className="mx-auto mt-5 max-w-[520px] text-[18px] leading-[1.65] text-white/75">Agenda tu asesoría gratis y te orientamos sin compromiso.</p>
+          <Link href="/#contact" className="mt-9 inline-flex items-center gap-3 rounded-full bg-white px-9 py-[1.1rem] text-[15px] font-black text-[var(--color-primary-dark)] transition-all hover:bg-white/90 hover:scale-[1.03] cursor-pointer">
+            Agendar asesoría gratis <Icon name="arrow" size={17} />
           </Link>
         </div>
       </motion.div>

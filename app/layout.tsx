@@ -29,7 +29,7 @@ const jakarta = Plus_Jakarta_Sans({
 export const metadata: Metadata = {
   metadataBase: new URL("https://dg-solutions-web.vercel.app"),
   title: {
-    default: "DG Solutions — Automatización e IA para negocios en México",
+    default: "DG Solutions - Automatización e IA para negocios en México",
     template: "%s | DG Solutions",
   },
   description:
@@ -51,14 +51,14 @@ export const metadata: Metadata = {
     locale: "es_MX",
     url: "https://dg-solutions-web.vercel.app",
     siteName: "DG Solutions",
-    title: "DG Solutions — Automatización e IA para negocios en México",
+    title: "DG Solutions - Automatización e IA para negocios en México",
     description:
       "Herramientas digitales personalizadas para organizar tu negocio, ahorrar tiempo y conseguir más clientes. Primera consultoría completamente gratis.",
     images: [{ url: "/IMAGES/LOGO1.png", width: 512, height: 512, alt: "DG Solutions" }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "DG Solutions — Automatización e IA para negocios en México",
+    title: "DG Solutions - Automatización e IA para negocios en México",
     description: "Herramientas digitales personalizadas para organizar tu negocio. Primera consultoría gratis.",
     images: ["/IMAGES/LOGO1.png"],
   },
