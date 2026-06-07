@@ -10,11 +10,12 @@ const securityHeaders = [
     key: "Content-Security-Policy",
     value: [
       "default-src 'self'",
+      // next/font self-hosts fonts; 'unsafe-inline' required for Tailwind inline styles
       "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
-      "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-      "font-src 'self' https://fonts.gstatic.com",
+      "style-src 'self' 'unsafe-inline'",
+      "font-src 'self'",
       "img-src 'self' data: https: blob:",
-      "connect-src 'self'",
+      "connect-src 'self' https://wa.me",
       "frame-ancestors 'none'",
     ].join("; "),
   },

@@ -91,6 +91,7 @@ const problems = [
 
 
 const BRAND_NAMES = ["whatsapp", "openai", "google", "notion", "meta", "stripe", "zapier", "airtable"];
+const BRAND_LABELS = { whatsapp: "WhatsApp", openai: "OpenAI", google: "Google", notion: "Notion", meta: "Meta", stripe: "Stripe", zapier: "Zapier", airtable: "Airtable" };
 
 
 function ImagePlaceholder({ color, icon, accent }) {
@@ -325,10 +326,11 @@ function IntegrationsStrip() {
         <div className="pointer-events-none absolute left-0 top-0 z-10 h-full w-24 bg-gradient-to-r from-white to-transparent" />
         <div className="pointer-events-none absolute right-0 top-0 z-10 h-full w-24 bg-gradient-to-l from-white to-transparent" />
         <div className="flex">
-          <div className="marquee-track flex shrink-0 items-center gap-12 px-6" aria-hidden="true">
+          <div className="marquee-track flex shrink-0 items-center gap-14 px-6" aria-hidden="true">
             {[...BRAND_NAMES, ...BRAND_NAMES].map((name, i) => (
-              <div key={`${name}-${i}`} className="flex shrink-0 items-center text-[var(--color-text-light)] transition-colors hover:text-[var(--color-text-muted)]">
-                <BrandLogo name={name} size={22} />
+              <div key={`${name}-${i}`} className="flex shrink-0 flex-col items-center gap-2 text-[var(--color-text-muted)] transition-colors duration-200 hover:text-[var(--color-text-secondary)]">
+                <BrandLogo name={name} size={24} />
+                <span className="text-[10px] font-bold tracking-[0.05em]">{BRAND_LABELS[name]}</span>
               </div>
             ))}
           </div>
