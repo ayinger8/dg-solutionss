@@ -775,9 +775,59 @@ function ScrollToTop() {
   );
 }
 
+const localBusinessSchema = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  name: "DG Solutions",
+  description:
+    "Automatización, inteligencia artificial y herramientas digitales para pequeños negocios en Mazatlán, Sinaloa y todo México.",
+  url: "https://dg-solutions-web.vercel.app",
+  telephone: "+526692291474",
+  email: "dg.solutions.contacto@gmail.com",
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Mazatlán",
+    addressRegion: "Sinaloa",
+    addressCountry: "MX",
+  },
+  areaServed: { "@type": "Country", name: "México" },
+  serviceType: [
+    "Automatización de negocios",
+    "Inteligencia Artificial para negocios",
+    "Herramientas digitales personalizadas",
+    "Desarrollo de páginas web",
+    "Chatbots WhatsApp",
+  ],
+  priceRange: "$$",
+  openingHoursSpecification: {
+    "@type": "OpeningHoursSpecification",
+    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+    opens: "09:00",
+    closes: "18:00",
+  },
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqs.map(({ q, a }) => ({
+    "@type": "Question",
+    name: q,
+    acceptedAnswer: { "@type": "Answer", text: a },
+  })),
+};
+
 export default function DGSolutionsV4() {
   return (
     <MotionConfig reducedMotion="user">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusinessSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <main className="overflow-x-hidden w-full min-h-[100dvh] scroll-smooth bg-white font-sans text-[var(--color-text-main)] antialiased selection:bg-[var(--color-primary)] selection:text-white">
         <Header />
         <Hero />
