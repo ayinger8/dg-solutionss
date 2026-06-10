@@ -617,15 +617,24 @@ function FAQ() {
 
 function ContactForm() {
   const [status, setStatus] = useState("");
-  const [form, setForm] = useState({ name: "", email: "", phone: "", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", phone: "", message: "", website: "" });
   const handleChange = (e) => setForm({ ...form, [e.target.id]: e.target.value });
-  const handleSubmit = (e) => {
+  const GAS_URL = process.env.NEXT_PUBLIC_GAS_URL;
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!GAS_URL) { setStatus("error"); return; }
     setStatus("sending");
-    setTimeout(() => {
-      const ok = Math.random() > 0.05;
-      setStatus(ok ? "sent" : "error");
-    }, 1200);
+    try {
+      const res = await fetch(GAS_URL, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify(form),
+      });
+      const data = await res.json();
+      setStatus(data.result === "success" ? "sent" : "error");
+    } catch {
+      setStatus("error");
+    }
   };
   const contactItems = [
     { icon: "phone", label: "WhatsApp", value: "669 229 1474" },
@@ -662,10 +671,21 @@ function ContactForm() {
               <div className="grid h-14 w-14 place-items-center rounded-full bg-[var(--color-success-bg)]"><Icon name="check" size={26} className="text-[var(--color-success)]" /></div>
               <h3 className="mt-4 text-[22px] font-black text-[var(--color-text-main)]">¡Mensaje enviado!</h3>
               <p className="mt-2 text-[14px] text-[var(--color-text-secondary)]">Te respondemos pronto. También puedes escribirnos por WhatsApp.</p>
-              <button onClick={() => { setStatus(""); setForm({ name: "", email: "", phone: "", message: "" }); }} className="mt-5 text-[13px] font-bold text-[var(--color-primary)] underline cursor-pointer">Enviar otro mensaje</button>
+              <button onClick={() => { setStatus(""); setForm({ name: "", email: "", phone: "", message: "", website: "" }); }} className="mt-5 text-[13px] font-bold text-[var(--color-primary)] underline cursor-pointer">Enviar otro mensaje</button>
             </motion.div>
           ) : (
             <form onSubmit={handleSubmit} noValidate>
+              <input
+                id="website"
+                name="website"
+                type="text"
+                tabIndex={-1}
+                autoComplete="off"
+                value={form.website}
+                onChange={handleChange}
+                aria-hidden="true"
+                style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }}
+              />
               {status === "error" && (
                 <motion.div initial={{ opacity: 0, y: -6 }} animate={{ opacity: 1, y: 0 }} role="alert"
                   className="mb-4 flex items-center gap-3 rounded-2xl border border-[var(--color-orange-border)] bg-[var(--color-orange-bg)] px-4 py-3 text-[13px] font-bold text-[var(--color-orange-accent)]">
